@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Constants {
   //---COLOR---
@@ -11,5 +10,20 @@ class Constants {
   static final tunselectedItemColor = tPrimaryColor.withOpacity(0.5);
 
   //---TEXT---
-  
+  static const textTheme = TextTheme(
+    //Product Category Title
+    headlineSmall: TextStyle(
+      fontFamily: 'Segoe UI',
+      fontSize: 15,
+      color: Color(0xff013440),
+      fontWeight: FontWeight.w600,
+    ),
+    //Product Name
+    titleLarge: TextStyle(
+      fontFamily: 'Segoe UI',
+      fontSize: 12,
+      color: Color(0xff013440),
+      fontWeight: FontWeight.w600,
+    ),
+  );
 }
