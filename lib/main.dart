@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/firebasetest/auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const AuthScreen(),
     );
   }
 }
