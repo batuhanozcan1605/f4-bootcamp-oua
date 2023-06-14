@@ -7,7 +7,7 @@ class Constants {
 
   // bottom bar
   static final tselectedItemColor = Color(0xFF4D818C);
-  static final tunselectedItemColor = tPrimaryColor.withOpacity(0.5);
+  static final tUnselectedItemColor = tPrimaryColor.withOpacity(0.5);
 
   //---TEXT---
   static const textTheme = TextTheme(
