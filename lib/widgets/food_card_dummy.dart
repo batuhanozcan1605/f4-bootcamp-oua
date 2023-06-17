@@ -1,42 +1,42 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget containerImage(ImageProvider<Object> imageProvider) => Container(
-  width: 100,
-  height: 100,
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(12),
-    image: DecorationImage(
-      image: imageProvider,
-      fit: BoxFit.cover,
-    ),
-  ),
-  child: Align(
-    alignment: Alignment.bottomCenter,
-    child: Container(
-      child: Align(
-        alignment: Alignment.center,
-        child: FittedBox(
-          fit: BoxFit.fitHeight,
-          child: Text(
-            "Milk",
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 12,
-              color: Color(0xff013440),
-              fontWeight: FontWeight.w600,
+Widget foodCard(String food_name, String food_image, bool tapped, ) => Card(
+      color: tapped ? Color(0xBB4D818C) : Colors.white,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Flexible(
+            child: Image.asset('images/${food_image}'),
+            flex: 3,
+          ),
+          Flexible(
+            flex: 1,
+            child: Container(
+              height: 25,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FittedBox(
+                    fit: BoxFit.fitHeight,
+                    child: Text(
+                      food_name,
+                      style: const TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 12,
+                        color: const Color(0xff013440),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
-      height: 25,
-      width: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(12),
-          bottomRight: Radius.circular(12),
-        ),
-        color: Colors.white.withOpacity(0.7),
-      ),
-    ),
-  ),
-);
+    );
