@@ -14,7 +14,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        backgroundColor: Color(0xFF4D818C),
         title: Container(
           padding: const EdgeInsets.all(30.0),
           child: Row(
@@ -24,13 +24,11 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
               SizedBox(width: 5),
               Text(
                 'cep mutfak',
-                style: TextStyle(fontFamily: 'VarelaRound', fontSize: 16),),
+                style: TextStyle(fontFamily: 'VarelaRound', fontSize: 16),
+              ),
             ],
-          ),),
-
-        elevation: 0,
-        toolbarHeight: 40,
-
+          ),
+        ),
       ),
       body: Center(
       ),

@@ -12,15 +12,7 @@ class _FreezerSecreenState extends State<FreezerSecreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("pekkıyak"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        ),
-      ),
+
     );
   }
 }

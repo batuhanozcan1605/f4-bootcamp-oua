@@ -1,5 +1,5 @@
 import 'package:bootcamp_oua_f4/screens/add_screen.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
 //import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
@@ -16,8 +16,8 @@ class _NavScreenState extends State<NavScreen> {
 
   int currentindex = 0;
   final screens = [
-    KitchenSecreen(),
-    //Product(),
+    KitchenScreen(),
+    Scaffold(),
     AddSecreen(),
     ShoppingCardScreen(),
     // Aşağıdaki ekranlar hazırlandıkça yukarıdaki Scaffold'ların yerine yazılacak.
@@ -68,7 +68,7 @@ class _NavScreenState extends State<NavScreen> {
                 label: 'Add',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.list_alt, size: 35),
+                icon: Icon(Icons.shopping_cart_checkout, size: 35),
                 label: 'Shopping Cart',
               ),
             ],

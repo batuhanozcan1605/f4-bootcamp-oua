@@ -12,17 +12,7 @@ class _PantrySecreenState extends State<PantrySecreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("irem"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
 
-          ],
-        ),
-      ),
     );
   }
 }
