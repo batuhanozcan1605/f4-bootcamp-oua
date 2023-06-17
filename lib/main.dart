@@ -1,3 +1,5 @@
+import 'package:bootcamp_oua_f4/screens/add_screen.dart';
+import 'package:bootcamp_oua_f4/screens/detail_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,28 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        ),
-      ),
+      home: addScreen(),
     );
   }
 }
