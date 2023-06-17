@@ -1,6 +1,6 @@
 class Foods {
 
-  final int category_id;
+  final String category_id;
   final String name;
   final String? image;
   final String place;

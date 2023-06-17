@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/screens/kitchen/freezer_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/pantry_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
+import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,13 @@ class _KitchenScreenState extends State<KitchenScreen> {
                 ],
               ),
             ),
+            // geçici log out butonu
+            actions: [
+              IconButton(
+                  onPressed: (){
+                    signOutWithGoogle();
+               }, icon: Icon(Icons.logout))
+            ],
           ),
           body: const TabBarScreen(),
         ),
