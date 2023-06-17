@@ -17,7 +17,7 @@ class _NavScreenState extends State<NavScreen> {
   int currentindex = 0;
   final screens = [
     KitchenScreen(),
-    Scaffold(),
+    RecipeSecreen(),
     AddSecreen(),
     ShoppingCardScreen(),
     // Aşağıdaki ekranlar hazırlandıkça yukarıdaki Scaffold'ların yerine yazılacak.
