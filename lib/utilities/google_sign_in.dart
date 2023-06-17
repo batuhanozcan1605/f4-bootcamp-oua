@@ -22,3 +22,4 @@ Future <void> signOutWithGoogle() async {
   await FirebaseAuth.instance.signOut();
   await GoogleSignIn().signOut();
 }
+

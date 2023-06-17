@@ -1,6 +1,6 @@
 import 'package:bootcamp_oua_f4/screens/add_screen.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen_screen.dart';
-import 'package:bootcamp_oua_f4/screens/pantry_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/pantry_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
 //import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
@@ -38,12 +38,12 @@ class _TabBarScreenState extends State<TabBarScreen> {
     tabs: [
       Tab(
           child: Text(
-            "Refrigerator",
+            "Fridge",
             style: TextStyle(fontSize: 15),
           )),
       Tab(
           child: Text(
-            "Celler",
+            "Pantry",
             style: TextStyle(fontSize: 15),
           )),
       Tab(
@@ -67,7 +67,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
             child: Column(
               children: [
                 Container(
-                  height: 30,
+                  height: 50,
                   child: TextField(
                     onChanged: (value) => {},
                     decoration: const InputDecoration(

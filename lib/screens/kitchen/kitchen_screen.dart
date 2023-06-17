@@ -1,20 +1,19 @@
-import 'package:bootcamp_oua_f4/screens/freezer_screen.dart';
-import 'package:bootcamp_oua_f4/screens/pantry_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/freezer_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/pantry_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
-import 'package:bootcamp_oua_f4/screens/tabbar_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:flutter/material.dart';
 
-class KitchenSecreen extends StatefulWidget {
-  const KitchenSecreen({Key? key}) : super(key: key);
+class KitchenScreen extends StatefulWidget {
+  const KitchenScreen({Key? key}) : super(key: key);
 
   @override
-  State<KitchenSecreen> createState() => _KitchenSecreenState();
+  State<KitchenScreen> createState() => _KitchenScreenState();
 }
 
 
-
-class _KitchenSecreenState extends State<KitchenSecreen> {
+class _KitchenScreenState extends State<KitchenScreen> {
   @override
   Widget build(BuildContext context) {
     //TabController = _tabController = TabController(length: 3, vsync: this),
@@ -24,7 +23,6 @@ class _KitchenSecreenState extends State<KitchenSecreen> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 40,
             backgroundColor: Color(0xFF4D818C),
             title: Container(
               padding: const EdgeInsets.all(30.0),
@@ -41,8 +39,7 @@ class _KitchenSecreenState extends State<KitchenSecreen> {
               ),
             ),
           ),
-          body: Container(
-              child: TabBarScreen()),
+          body: const TabBarScreen(),
         ),
       ),
     );
