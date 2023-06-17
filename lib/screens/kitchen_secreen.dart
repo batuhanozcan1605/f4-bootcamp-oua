@@ -28,7 +28,7 @@ TabBar get _tabBar => TabBar(
 
       unselectedLabelColor: Color(0xFF4D818C),
 
-      tabs: [
+      tabs: const [
         Tab(
             child: Text(
           "Fride",
@@ -36,7 +36,7 @@ TabBar get _tabBar => TabBar(
         )),
         Tab(
             child: Text(
-          "Celler",
+          "Pantry",
           style: TextStyle(fontSize: 15),
         )),
         Tab(
@@ -102,7 +102,7 @@ class _KitchenSecreenState extends State<KitchenSecreen> {
                     ),
                     Material(
                       elevation: 5,
-                      borderRadius: BorderRadius.vertical(
+                      borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(0),
                         bottom: Radius.circular(30),
                       ),
