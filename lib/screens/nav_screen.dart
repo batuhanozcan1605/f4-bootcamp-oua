@@ -1,8 +1,8 @@
-import 'package:bootcamp_oua_f4/screens/add_secreen.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen_secreen.dart';
+import 'package:bootcamp_oua_f4/screens/add_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_secreen.dart';
-import 'package:bootcamp_oua_f4/screens/shoppingcart_secreen.dart';
-import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
+import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
+//import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
 import 'package:flutter/material.dart';
 
 class NavScreen extends StatefulWidget {
@@ -17,9 +17,9 @@ class _NavScreenState extends State<NavScreen> {
   int currentindex = 0;
   final screens = [
     KitchenSecreen(),
-    Product(),
+    //Product(),
     AddSecreen(),
-    ShoppingCartSecreen(),
+    ShoppingCardScreen(),
     // Aşağıdaki ekranlar hazırlandıkça yukarıdaki Scaffold'ların yerine yazılacak.
     /*KitchenScreen(),
     AddScreen(),
@@ -30,6 +30,7 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: screens[currentindex],
       bottomNavigationBar: Container(
         height: 80,
