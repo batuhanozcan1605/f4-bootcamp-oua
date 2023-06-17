@@ -1,7 +1,7 @@
 import 'package:bootcamp_oua_f4/screens/add_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/pantry_screen.dart';
-import 'package:bootcamp_oua_f4/screens/recipe_secreen.dart';
+import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
 //import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
 import 'package:flutter/material.dart';
