@@ -11,10 +11,10 @@ Takım F4
 
 ## Ürün Açıklaması
 
-Bir mutfak takip - yemek tarifi uygulaması yapıyoruz. 
+Bir mutfak takip - yemek tarifi uygulaması yapıyoruz.
 
-Mutfakların, ilgilenilmediğinde kontrolden çıkmak gibi bir huyu var. 1 ay önceki marulla karşılaşmamak, varlığını sadece unutmakla kalmayıp artık gözünüzün bile algılamayı bıraktığı ama orada duran ürünlerle vedalaşmak ve tasarruf ederken yeni yemek tarifleri öğrenip uygulayabilmek için bu uygulamayı geliştiriyoruz. Bunu da en kullanıcı dostu şekilde sağlamayı hedefliyoruz. 
-Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatırlatmak.  
+Mutfakların, ilgilenilmediğinde kontrolden çıkmak gibi bir huyu var. 1 ay önceki marulla karşılaşmamak, varlığını sadece unutmakla kalmayıp artık gözünüzün bile algılamayı bıraktığı ama orada duran ürünlerle vedalaşmak ve tasarruf ederken yeni yemek tarifleri öğrenip uygulayabilmek için bu uygulamayı geliştiriyoruz. Bunu da en kullanıcı dostu şekilde sağlamayı hedefliyoruz.
+Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatırlatmak.
 
 
 ## Kapsam ve Ürün Özellikleri
@@ -37,11 +37,11 @@ Alternatif kolay ürün ekleme özellikleri:
 - Bir sanal market uygulaması ile senkron çalışma: Sepeti onayladığın anda ürünler uygulamada mutfağına yerleşir.
 
 ## *Kullanıcı Hikayeleri*
-🧑🏻‍💻**Tuna** bir beyaz yakalı. Çok sık yemek yapamıyor, genelde dışarıdan söylüyor. Yoğunluktan mutfağındaki şeylerin çok farkında bile değil. Tek yaşadığı için de marketten aldığı ürünleri bitirmekte biraz zorlanıyor ve israf oluyor. 
+🧑🏻‍💻**Tuna** bir beyaz yakalı. Çok sık yemek yapamıyor, genelde dışarıdan söylüyor. Yoğunluktan mutfağındaki şeylerin çok farkında bile değil. Tek yaşadığı için de marketten aldığı ürünleri bitirmekte biraz zorlanıyor ve israf oluyor.
 
 Tuna olarak, mutfağımda ne var ve bozulmasına ne kadar var bilmek için bunları gösteren bir sayfa istiyorum. Gerekirse kendim yemek uydururum. Zaten yapması kolay, hazır gıdalar almayı seviyorum. Bu beni yeterince motive edecektir.
 
- 👩🏻‍🦰**Aslı** bir öğrenci ve mutfakta çok yiyecek çeşidi olmasa da boş zamanında bunları ilginç tariflerle değerlendirmekten keyif alıyor.
+👩🏻‍🦰**Aslı** bir öğrenci ve mutfakta çok yiyecek çeşidi olmasa da boş zamanında bunları ilginç tariflerle değerlendirmekten keyif alıyor.
 
 Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, elimdekilere göre tarif öneren bir sayfa istiyorum.
 
@@ -49,8 +49,8 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 
 [Takım F4 Miro Backlog Board](https://miro.com/app/board/uXjVMAb6FEM=/)
 ## *Sprint 1*
- Sprint Review:
- Alınan kararlar:
+Sprint Review:
+Alınan kararlar:
 - Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
 - Proje yönetiminde Notion kullanılmasına karar verilmiştir
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
@@ -60,14 +60,20 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 Sprint Retrospective:
 -Akşam diğer sprint için kararları yazarız
 ### Burndown Chart
-![App Screenshot](https://cdn.discordapp.com/attachments/1114292582269333516/1118613602090365048/Screenshot_10.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120093757367394484/image.png)
 
 ### Sprint Board Screenshots
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1118256096092635176/image.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084335840727132/Screenshot_2023-06-18_at_23.02.27.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1118256095815794728/image.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084335509372959/Screenshot_2023-06-18_at_23.02.37.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1118256096411385896/image.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084335228358676/Screenshot_2023-06-18_at_23.02.53.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1118256096721780736/image.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084334834102322/Screenshot_2023-06-18_at_23.03.02.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084334142029834/Screenshot_2023-06-18_at_23.03.15.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084429180780685/Screenshot_2023-06-18_at_23.11.04.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084428807479349/Screenshot_2023-06-18_at_23.13.38.png)
