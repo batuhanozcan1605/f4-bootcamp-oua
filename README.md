@@ -14,6 +14,7 @@ Bir mutfak takip - yemek tarifi uygulaması yapıyoruz.
 Mutfakların, ilgilenilmediğinde kontrolden çıkmak gibi bir huyu var. 1 ay önceki marulla karşılaşmamak, varlığını sadece unutmakla kalmayıp artık gözünüzün bile algılamayı bıraktığı ama orada duran ürünlerle vedalaşmak ve tasarruf ederken yeni yemek tarifleri öğrenip uygulayabilmek için bu uygulamayı geliştiriyoruz. Bunu da en kullanıcı dostu şekilde sağlamayı hedefliyoruz. 
 Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatırlatmak.  
 
+
 ## Kapsam ve Ürün Özellikleri
 
 - Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
