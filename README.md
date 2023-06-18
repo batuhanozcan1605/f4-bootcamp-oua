@@ -54,6 +54,10 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 - Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
 - Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
+
+
+Sprint Retrospective:
+-Akşam diğer sprint için kararları yazarız
 ### Burndown Chart
 ![App Screenshot](https://cdn.discordapp.com/attachments/1114292582269333516/1118613602090365048/Screenshot_10.png)
 
