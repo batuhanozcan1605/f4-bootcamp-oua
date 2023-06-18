@@ -8,7 +8,9 @@ Takım F4
 - [Emirhan Can: Developer](https://www.linkedin.com/in/emirhncann/)
 - [Alperen Çelebi: Developer](https://www.linkedin.com/in/alperen-çelebi-aaa710258/)
 # Projemiz
+
 ## Ürün Açıklaması
+
 Bir mutfak takip - yemek tarifi uygulaması yapıyoruz. 
 
 Mutfakların, ilgilenilmediğinde kontrolden çıkmak gibi bir huyu var. 1 ay önceki marulla karşılaşmamak, varlığını sadece unutmakla kalmayıp artık gözünüzün bile algılamayı bıraktığı ama orada duran ürünlerle vedalaşmak ve tasarruf ederken yeni yemek tarifleri öğrenip uygulayabilmek için bu uygulamayı geliştiriyoruz. Bunu da en kullanıcı dostu şekilde sağlamayı hedefliyoruz. 
@@ -16,6 +18,15 @@ Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatır
 
 
 ## Kapsam ve Ürün Özellikleri
+
+- Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
+- Raf süresi dolmak üzere olan ürünleri gör.
+- Mutfağındaki ürünlerden yemek tarifi önerisi al.
+- Database'den istediğin ürünü aratıp mutfağına ekle.
+- Alışveriş listesi yapıp, listeden doğrudan ekle.
+
+
+## Hedef Kitle
 
 - Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
 - Raf süresi dolmak üzere olan ürünleri gör.
