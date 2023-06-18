@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="103" height="22" viewBox="0 0 103 22">
+  <g id="appbar_logo" transform="translate(-114 -9)">
+    <text id="cep_mutfak" transform="translate(145 25)" fill="#fff" font-size="14" font-family="Rockwell"><tspan x="0" y="0">cep mutfak</tspan></text>
+    <g id="Group_85" transform="translate(94)">
+      <path id="Subtraction_2" d="M18,11H4A4,4,0,0,1,0,7V0H22V2.538H17.346a1.269,1.269,0,0,0,0,2.539H22V7A4,4,0,0,1,18,11Z" transform="translate(20 20)" fill="#fff"/>
+      <path id="Rectangle_5" d="M4,0H18a4,4,0,0,1,4,4v6a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V4A4,4,0,0,1,4,0Z" transform="translate(20 9)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
