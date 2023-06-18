@@ -52,6 +52,7 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
  Sprint Review:
  Alınan kararlar:
 - Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
+- Proje yönetiminde Notion kullanılmasına karar verilmiştir
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
 - Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
 
