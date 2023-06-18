@@ -20,7 +20,7 @@ Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatır
 - Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
 - Raf süresi dolmak üzere olan ürünleri gör.
 - Mutfağındaki ürünlerden yemek tarifi önerisi al.
-- Database'den istediğin ürünü aratıp mutfağa ekle.
+- Database'den istediğin ürünü aratıp mutfağına ekle.
 - Alışveriş listesi yapıp, listeden doğrudan ekle.
 ---------- 
 Alternatif kolay ürün ekleme özellikleri:
@@ -40,6 +40,10 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 
 [Takım F4 Miro Backlog Board](https://miro.com/app/board/uXjVMAb6FEM=/)
 ## *Sprint 1*
+- Sprint Review:
+- Alınan kararlar: Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
+- Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
+- Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
 ### Burndown Chart
 ![App Screenshot](https://cdn.discordapp.com/attachments/1114292582269333516/1118613602090365048/Screenshot_10.png)
 
