@@ -40,7 +40,7 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 
 [Takım F4 Miro Backlog Board](https://miro.com/app/board/uXjVMAb6FEM=/)
 ## *Sprint 1*
-- Sprint Review:
+ Sprint Review:
 - Alınan kararlar: Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
 - Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
