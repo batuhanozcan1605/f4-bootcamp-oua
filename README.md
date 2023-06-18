@@ -14,7 +14,7 @@ Bir mutfak takip - yemek tarifi uygulaması yapıyoruz.
 Mutfakların, ilgilenilmediğinde kontrolden çıkmak gibi bir huyu var. 1 ay önceki marulla karşılaşmamak, varlığını sadece unutmakla kalmayıp artık gözünüzün bile algılamayı bıraktığı ama orada duran ürünlerle vedalaşmak ve tasarruf ederken yeni yemek tarifleri öğrenip uygulayabilmek için bu uygulamayı geliştiriyoruz. Bunu da en kullanıcı dostu şekilde sağlamayı hedefliyoruz. 
 Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatırlatmak.  
 
-## SCOPE
+## Kapsam ve Ürün Özellikleri
 
 - Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
 - Raf süresi dolmak üzere olan ürünleri gör.
@@ -24,7 +24,7 @@ Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatır
 ---------- 
 Alternatif kolay ürün ekleme özellikleri:
 - Barcode okuma
-- Bir sanal market uygulaması ile senkron çalışma
+- Bir sanal market uygulaması ile senkron çalışma: Sepeti onayladığın anda ürünler uygulamada mutfağına yerleşir.
 
 ## *Kullanıcı Hikayeleri*
 🧑🏻‍💻**Tuna** bir beyaz yakalı. Çok sık yemek yapamıyor, genelde dışarıdan söylüyor. Yoğunluktan mutfağındaki şeylerin çok farkında bile değil. Tek yaşadığı için de marketten aldığı ürünleri bitirmekte biraz zorlanıyor ve israf oluyor. 
