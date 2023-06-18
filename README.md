@@ -23,7 +23,7 @@ Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatır
 - Raf süresi dolmak üzere olan ürünleri gör.
 - Mutfağındaki ürünlerden yemek tarifi önerisi al.
 - Database'den istediğin ürünü aratıp mutfağına ekle.
-- Alışveriş listesi yapıp, listeden doğrudan ekle.
+- Alışveriş listesi yapıp, listeden doğrudan mutfağına ekle.
 
 
 ## Hedef Kitle
