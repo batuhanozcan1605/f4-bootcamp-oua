@@ -1,6 +1,11 @@
 class Category {
-  final String category_image;
-  final String category_name;
+  String category_image;
+  String category_name;
 
-  Category({required this.category_image, required this.category_name});
+  Category(this.category_image,  this.category_name);
+
+  Category.fromMap(Map<String, dynamic> m) : this(
+    m['category_image'],m['category_name']
+  );
+
 }

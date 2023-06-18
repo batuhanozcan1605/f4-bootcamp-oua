@@ -1,5 +1,8 @@
+import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'foods_bodyscreen.dart';
 
 class AddSecreen extends StatefulWidget {
   const AddSecreen({Key? key}) : super(key: key);
@@ -12,6 +15,19 @@ class _AddSecreenState extends State<AddSecreen> {
 
   String query = '';
   bool isSearching = false;
+  List categories = [];
+
+  showAllCategories() {
+
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +81,7 @@ class _AddSecreenState extends State<AddSecreen> {
                                     fontSize: 10,
                                     color: Color(0xFF4D818C),
                                   )
-                              )
+                              ),
                             ],
                           ),
                         )
@@ -73,6 +89,38 @@ class _AddSecreenState extends State<AddSecreen> {
                   ),
                 ),
               ),
+            ),
+            Expanded(
+              child: FutureBuilder<List<Category>>(
+                  future: showAllCategories(), //firebase method
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var categoryList = snapshot.data;
+                      return GridView.builder(
+                          padding: const EdgeInsets.all(20),
+                          gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 5 / 2),
+                          itemCount: categoryList!.length,
+                          itemBuilder: (context, index) {
+                            var category = categoryList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FoodsBodyScreen(
+                                          category: category,
+                                        )));
+                              },
+                              child: categoryCard(category.category_name, category.category_image),
+                            );
+                          });
+                    } else {
+                      return const Center(child: Text(""));
+                    }
+                  }),
             ),
 
           ],
@@ -125,6 +173,7 @@ class _AddSecreenState extends State<AddSecreen> {
       ),
     ),
   );
+
 
 
 }
