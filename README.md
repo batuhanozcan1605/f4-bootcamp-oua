@@ -28,11 +28,9 @@ Vizyonumuz, mutfağının potansiyelinin farkında olmayan insanlara bunu hatır
 
 ## Hedef Kitle
 
-- Mutfağındaki ürünleri, Buzdolabı-Kiler-Dondurucu tab'leri altında cebinde gör.
-- Raf süresi dolmak üzere olan ürünleri gör.
-- Mutfağındaki ürünlerden yemek tarifi önerisi al.
-- Database'den istediğin ürünü aratıp mutfağına ekle.
-- Alışveriş listesi yapıp, listeden doğrudan ekle.
+- Mutfağındaki ürünleri israf etmek istemeyenler
+- Elindeki ile yaratıcı tarif arayanlar
+- Alışveriş için kolay stok tabiki isteyenler
 ---------- 
 Alternatif kolay ürün ekleme özellikleri:
 - Barcode okuma
