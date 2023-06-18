@@ -45,12 +45,23 @@ Tuna olarak, mutfağımda ne var ve bozulmasına ne kadar var bilmek için bunla
 
 Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, elimdekilere göre tarif öneren bir sayfa istiyorum.
 
-### Product Backlog URL
+### Miro Team Board
 
-[Takım F4 Miro Backlog Board](https://miro.com/app/board/uXjVMAb6FEM=/)
+[Takım F4 UI/UX design ve web diagram](https://miro.com/app/board/uXjVMAb6FEM=/)
 ## *Sprint 1*
+İlk sprintin ilk haftasını bir UI dizayn yapıp; projenin fikir temellerini, vizyonunu ve kapsamını belirlemekle geçirdik. Başta hızlıca ve Türkçe hazırladığımız uygulamaya 'cep mutfak' ismini vermiştik ancak daha sonra global potansiyelini korumayı düşünerek uygulamayı İngilizce yazmaya karar verdik.
+
+Backlog ortaya çıktıktan sonra hiç Sprint 3 görevi yazmadık ve bütün görevleri ilk 2 sprintte bitirecek şekilde ayarladık. Bunun sebebi uygulamamızda asıl fark yaratacak kapsam dışı bazı potansiyel özellikler belirlemiş olmamızdı. Zaman kalırsa onları da ekleyerek uygulamanın kalitesini bir üst segmente taşımayı planlıyoruz.
+
+Bu yüzden de ilk Sprinte biraz fazla yüklenmiştik ve burndown chart'ın gerisinde kalmak biraz beklenen bir durumdu. Ancak arayüzde her sayfa UI'daki gibi hazır görünmüyor. Bunun sebebi, local dummy data yazmakla harcanacak emeği, Firebase üzerinde dummy data oluşturarak ve backend üzerinde çalışmalar yaparak harcayabiliriz diye düşünmemizdi.
+
+Sprint puanlama mantığı: Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 85 puanlık bir iş bitmesi gerekiyordu ve 77'si tamamlandı.
+
+
+Daily Scrum: Daily Scrum toplantılarını zamansal sebeplerden ötürü Whatsapp üzerinde gerçekleştirdik.
+[**Sprint 1 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%201/daily%20scrum)
+
 Sprint Review:
-Alınan kararlar:
 - Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
 - Proje yönetiminde Notion kullanılmasına karar verilmiştir
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
@@ -58,7 +69,9 @@ Alınan kararlar:
 
 
 Sprint Retrospective:
--Akşam diğer sprint için kararları yazarız
+-  Bir sonraki sprintlerde görev belirlerken yapılacakları daha net ayırmamız gerekiyor.
+- Takım içindeki iletişimi daha sıkı tutmamız gerekiyor.
+
 ### Burndown Chart
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120093757367394484/image.png)
 
