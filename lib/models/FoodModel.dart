@@ -1,12 +1,12 @@
-class Foods {
+class Food {
 
-  final int category_id;
+  final String category_id;
   final String name;
   final String? image;
   final String place;
   final int? shelfTime;
 
-  Foods(
+  Food(
       {required this.category_id,
       required this.name,
       this.image,
