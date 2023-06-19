@@ -1,4 +1,4 @@
-import 'package:bootcamp_oua_f4/firebasetest/category_model.dart';
+import '../models/CategoryModel.dart';
 
 class CategoriesRepo {
 

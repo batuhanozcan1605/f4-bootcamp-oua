@@ -1,4 +1,3 @@
-import 'package:bootcamp_oua_f4/firebasetest/auth.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

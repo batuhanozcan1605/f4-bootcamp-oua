@@ -1,15 +1,24 @@
-import 'package:bootcamp_oua_f4/firebasetest/category_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
+import '../models/CategoryModel.dart';
 
 class DataService {
 
   Future<List<Category>> getCategories() async {
-    final querySnapshot = await FirebaseFirestore.instance.collection('categories').get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('categories').get();
 
-    return querySnapshot.docs.map((e) => Category.fromMap(e.data())).toList();
+    List<Category> dataList = [];
+    snapshot.docs.forEach((doc) {
+      Category category = Category.fromSnapshot(doc);
+      dataList.add(category);
+    });
 
+    return dataList;
   }
+
+
+
 
   static FirebaseStorage storage = FirebaseStorage.instance;
 

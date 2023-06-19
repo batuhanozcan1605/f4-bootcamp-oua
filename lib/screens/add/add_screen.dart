@@ -1,5 +1,7 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'foods_bodyscreen.dart';
@@ -15,10 +17,18 @@ class _AddSecreenState extends State<AddSecreen> {
 
   String query = '';
   bool isSearching = false;
-  List categories = [];
 
-  showAllCategories() {
 
+
+  Future<String> getImageUrl(category_image) async {
+    final storageRef = FirebaseStorage.instance.ref();
+    String imageUrl= '';
+    imageUrl =  await storageRef.child("categories/${category_image}").getDownloadURL();
+    return imageUrl;
+  }
+
+  String gt(category_image) {
+    return getImageUrl(category_image).toString();
   }
 
 
@@ -92,10 +102,12 @@ class _AddSecreenState extends State<AddSecreen> {
             ),
             Expanded(
               child: FutureBuilder<List<Category>>(
-                  future: showAllCategories(), //firebase method
+                  future: DataService().getCategories(), //firebase method
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       var categoryList = snapshot.data;
+                      print("debug data var");
+                      print(categoryList);
                       return GridView.builder(
                           padding: const EdgeInsets.all(20),
                           gridDelegate:
@@ -105,6 +117,7 @@ class _AddSecreenState extends State<AddSecreen> {
                           itemCount: categoryList!.length,
                           itemBuilder: (context, index) {
                             var category = categoryList[index];
+                            String imageUrl = gt(category.category_image);
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -114,7 +127,7 @@ class _AddSecreenState extends State<AddSecreen> {
                                           category: category,
                                         )));
                               },
-                              child: categoryCard(category.category_name, category.category_image),
+                              child: categoryCard(category.category_name, imageUrl),
                             );
                           });
                     } else {
