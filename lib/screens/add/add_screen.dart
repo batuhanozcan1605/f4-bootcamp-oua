@@ -62,7 +62,7 @@ class _AddSecreenState extends State<AddSecreen> {
                         Align(
                             alignment: Alignment.bottomLeft,
                             child: SvgPicture.asset('assets/images/icon_ekle.svg')),
-                        Align(
+                         Align(
                           alignment: Alignment.center,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
