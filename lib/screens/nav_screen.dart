@@ -1,8 +1,16 @@
+<<<<<<< Updated upstream
 import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
 //import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
+=======
+import 'package:bootcamp_oua_f4/screens/add_secreen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen_secreen.dart';
+import 'package:bootcamp_oua_f4/screens/recipe_secreen.dart';
+import 'package:bootcamp_oua_f4/screens/shoppingcart_secreen.dart';
+import 'package:bootcamp_oua_f4/widgets/product.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
 class NavScreen extends StatefulWidget {
