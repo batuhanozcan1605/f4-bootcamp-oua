@@ -19,13 +19,6 @@ class _AddSecreenState extends State<AddSecreen> {
   bool isSearching = false;
 
 
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -125,7 +118,7 @@ class _AddSecreenState extends State<AddSecreen> {
                                             height: 56,
                                             child: FutureBuilder<String>(
                                                 future: DataService().getImageUrl(category.category_image),
-                                                builder: (context, snapshot) {
+                                                builder: (context, snapshot) { // Hata check satırı ekle.
                                                   String imageUrl = snapshot.data ?? '';
                                                   return CachedNetworkImage(imageUrl: imageUrl);
                                                 }))),
