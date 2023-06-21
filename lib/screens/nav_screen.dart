@@ -15,7 +15,7 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
 
   int currentindex = 0;
-  final screens = [
+  final screens = const [
     KitchenScreen(),
     RecipeSecreen(),
     AddSecreen(),
@@ -54,7 +54,7 @@ class _NavScreenState extends State<NavScreen> {
             unselectedItemColor: Color(0xFF4D818C).withOpacity(0.5),
             currentIndex: currentindex,
             onTap: (index) => setState(() => currentindex = index),
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.kitchen, size: 35),
                 label: 'Kitchen',

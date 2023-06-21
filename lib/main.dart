@@ -81,8 +81,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     SetOptions(merge: true),
                   );
 
-                  CollectionReference myKitchen = await FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
-                  await myKitchen.doc('first doc').set({
+                  CollectionReference kitchen = await FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
+                  await kitchen.doc('first doc').set({
                     'collection started' : true,
                   },
                   );

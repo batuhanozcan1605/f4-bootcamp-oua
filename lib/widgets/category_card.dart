@@ -17,7 +17,7 @@ Widget categoryCard(category) => Card(
                   height: 56,
                   child: FutureBuilder<String>(
                       future:
-                          DataService().getImageUrl(category.category_image),
+                          DataService().getImageUrl(category.categoryImage),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return CircularProgressIndicator(strokeWidth: 2.0, color: Constants.tPrimaryColor,);
@@ -36,7 +36,7 @@ Widget categoryCard(category) => Card(
           Align(
             alignment: Alignment(0.509, 0.0),
             child: Text(
-              category.category_name,
+              category.categoryName,
               style: const TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 12,

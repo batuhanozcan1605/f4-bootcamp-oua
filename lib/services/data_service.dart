@@ -6,7 +6,7 @@ import '../models/CategoryModel.dart';
 class DataService {
 
   Future<List<Category>> getCategories() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('categories').get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('categories').orderBy("categoryId").get();
 
     List<Category> dataList = [];
     snapshot.docs.forEach((doc) {
@@ -25,24 +25,8 @@ class DataService {
       return downloadUrl;
     } catch (e) {
       print('Error getting image URL: $e');
-      return ''; // or you can return a default URL or handle the error as desired
+      return '';
     }
   }
 
-
-
-
-  static FirebaseStorage storage = FirebaseStorage.instance;
-
-  static Future<List<String>> getImageUrls(String path) async {
-    List<String> imageUrls = [];
-    ListResult result = await storage.ref().child(path).listAll();
-
-    for (Reference ref in result.items) {
-      String url = await ref.getDownloadURL();
-      imageUrls.add(url);
-    }
-
-    return imageUrls;
-  }
 }
