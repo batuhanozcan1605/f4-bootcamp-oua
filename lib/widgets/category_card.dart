@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-Widget categoryCard(String category_name, category_image) => Card(
+Widget categoryCard(String category_name, imageUrl) => Card(
   clipBehavior: Clip.antiAlias,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -12,7 +13,9 @@ Widget categoryCard(String category_name, category_image) => Card(
           child: SizedBox(
               width: 65,
               height: 56,
-              child: Image.asset('images/kategoriler/${category_image}'))),
+              child: CachedNetworkImage(imageUrl: imageUrl)
+          )
+      ),
       Align(
         alignment: Alignment(0.509, 0.0),
         child: Text(

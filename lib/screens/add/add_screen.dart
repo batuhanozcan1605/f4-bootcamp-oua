@@ -1,5 +1,8 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'foods_bodyscreen.dart';
@@ -12,28 +15,15 @@ class AddSecreen extends StatefulWidget {
 }
 
 class _AddSecreenState extends State<AddSecreen> {
-
   String query = '';
   bool isSearching = false;
-  List categories = [];
 
-  showAllCategories() {
-
-  }
-
-
-  @override
-  void initState() {
-    super.initState();
-
-
-  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if(isSearching) {
+        if (isSearching) {
           return false;
         } else {
           return true;
@@ -48,60 +38,60 @@ class _AddSecreenState extends State<AddSecreen> {
         body: Column(
           children: [
             searchBar(),
-            isSearching ? const Center() : Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: SizedBox(
-                height: 80,
-                child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            isSearching
+                ? const Center()
+                : Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: SizedBox(
+                      height: 80,
+                      child: Card(
+                        clipBehavior: Clip.antiAlias,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Stack(children: [
+                          Align(
+                              alignment: Alignment.bottomLeft,
+                              child: SvgPicture.asset(
+                                  'assets/images/icon_ekle.svg')),
+                          const Align(
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Add Custom Food',
+                                    style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 15,
+                                      color: Color(0xff013440),
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                                Text('(First, check it from the search bar.)',
+                                    style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 10,
+                                      color: Color(0xFF4D818C),
+                                    )),
+                              ],
+                            ),
+                          )
+                        ]),
+                      ),
+                    ),
                   ),
-                  child: Stack(
-                      children: [
-                        Align(
-                            alignment: Alignment.bottomLeft,
-                            child: SvgPicture.asset('assets/images/icon_ekle.svg')),
-                         Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Add Custom Food',
-                                  style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 15,
-                                    color: Color(0xff013440),
-                                    fontWeight: FontWeight.w600,
-                                  )
-                              ),
-                              Text('(First, check it from the search bar.)',
-                                  style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 10,
-                                    color: Color(0xFF4D818C),
-                                  )
-                              ),
-                            ],
-                          ),
-                        )
-                      ]
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               child: FutureBuilder<List<Category>>(
-                  future: showAllCategories(), //firebase method
-                  builder: (context, snapshot) {
+                  future: DataService().getCategories(), //firebase method
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<Category>> snapshot) {
                     if (snapshot.hasData) {
                       var categoryList = snapshot.data;
                       return GridView.builder(
                           padding: const EdgeInsets.all(20),
                           gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 5 / 2),
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, childAspectRatio: 5 / 2),
                           itemCount: categoryList!.length,
                           itemBuilder: (context, index) {
                             var category = categoryList[index];
@@ -111,10 +101,44 @@ class _AddSecreenState extends State<AddSecreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => FoodsBodyScreen(
-                                          category: category,
-                                        )));
+                                              category: category,
+                                            )));
                               },
-                              child: categoryCard(category.category_name, category.category_image),
+                              child: Card(
+                                clipBehavior: Clip.antiAlias,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.bottomLeft,
+                                        child: SizedBox(
+                                            width: 65,
+                                            height: 56,
+                                            child: FutureBuilder<String>(
+                                                future: DataService().getImageUrl(category.category_image),
+                                                builder: (context, snapshot) { // Hata check satırı ekle.
+                                                  String imageUrl = snapshot.data ?? '';
+                                                  return CachedNetworkImage(imageUrl: imageUrl);
+                                                }))),
+                                    Align(
+                                      alignment: Alignment(0.509, 0.0),
+                                      child: Text(
+                                        category.category_name,
+                                        style: const TextStyle(
+                                          fontFamily: 'Segoe UI',
+                                          fontSize: 12,
+                                          color: Color(0xff013440),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        softWrap: false,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             );
                           });
                     } else {
@@ -122,58 +146,54 @@ class _AddSecreenState extends State<AddSecreen> {
                     }
                   }),
             ),
-
           ],
         ),
-
       ),
     );
-
   }
 
   Widget searchBar() => Container(
-    decoration: const BoxDecoration(
-      color: Colors.white,
-      boxShadow: [
-        BoxShadow(
-          color: const Color(0x1a000000),
-          offset: Offset(0, 3),
-          blurRadius: 6,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0x1a000000),
+              offset: Offset(0, 3),
+              blurRadius: 6,
+            ),
+          ],
         ),
-      ],
-    ),
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 6),
-      child: TextField(
-        decoration: InputDecoration(
-          fillColor: Color(0xFF4D818C),
-          prefixIconColor: Color(0xFF4D818C),
-          prefixIcon: const Icon(Icons.search),
-          suffix: isSearching ? IconButton(
-            icon: const Icon(Icons.cancel),
-            onPressed: (){
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 6),
+          child: TextField(
+            decoration: InputDecoration(
+              fillColor: Color(0xFF4D818C),
+              prefixIconColor: Color(0xFF4D818C),
+              prefixIcon: const Icon(Icons.search),
+              suffix: isSearching
+                  ? IconButton(
+                      icon: const Icon(Icons.cancel),
+                      onPressed: () {
+                        setState(() {
+                          isSearching = false;
+                        });
+                      },
+                    )
+                  : const Center(),
+              hintText: 'Add Food',
+            ),
+            onTap: () {
               setState(() {
-                isSearching = false;
+                isSearching = true;
               });
             },
-          ) : const Center(),
-          hintText: 'Add Food',
+            onChanged: (result) {
+              setState(() {
+                query = result;
+                print(result);
+              });
+            },
+          ),
         ),
-        onTap: (){
-          setState(() {
-            isSearching = true;
-          });
-        },
-        onChanged: (result){
-          setState(() {
-            query = result;
-            print(result);
-          });
-        },
-      ),
-    ),
-  );
-
-
-
+      );
 }
