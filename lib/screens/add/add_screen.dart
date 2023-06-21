@@ -104,41 +104,7 @@ class _AddSecreenState extends State<AddSecreen> {
                                               category: category,
                                             )));
                               },
-                              child: Card(
-                                clipBehavior: Clip.antiAlias,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Align(
-                                        alignment: Alignment.bottomLeft,
-                                        child: SizedBox(
-                                            width: 65,
-                                            height: 56,
-                                            child: FutureBuilder<String>(
-                                                future: DataService().getImageUrl(category.category_image),
-                                                builder: (context, snapshot) { // Hata check satırı ekle.
-                                                  String imageUrl = snapshot.data ?? '';
-                                                  return CachedNetworkImage(imageUrl: imageUrl);
-                                                }))),
-                                    Align(
-                                      alignment: Alignment(0.509, 0.0),
-                                      child: Text(
-                                        category.category_name,
-                                        style: const TextStyle(
-                                          fontFamily: 'Segoe UI',
-                                          fontSize: 12,
-                                          color: Color(0xff013440),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        softWrap: false,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              child: categoryCard(category),
                             );
                           });
                     } else {
