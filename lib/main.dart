@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/firebase_imagetest.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void goToNavScreen() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const NavScreen()));
+        MaterialPageRoute(builder: (context) => const NavScreen())); //Normalde NavScreen
   }
 
   @override

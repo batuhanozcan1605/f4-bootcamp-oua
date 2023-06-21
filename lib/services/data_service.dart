@@ -17,6 +17,18 @@ class DataService {
     return dataList;
   }
 
+  Future<String> getImageUrl(category_image) async {
+    try {
+      final storageRef =
+      FirebaseStorage.instance.ref().child("categories/${category_image}");
+      final downloadUrl = await storageRef.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Error getting image URL: $e');
+      return ''; // or you can return a default URL or handle the error as desired
+    }
+  }
+
 
 
 
