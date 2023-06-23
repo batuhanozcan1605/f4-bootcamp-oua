@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const kGoogleBlue = Color(0xff426d77);
 class Constants {
   //---COLOR---
   static final tPrimaryColor = Color(0xFF4D818C);

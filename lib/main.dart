@@ -1,4 +1,6 @@
 import 'package:bootcamp_oua_f4/firebasetest/auth.dart';
+import 'package:bootcamp_oua_f4/screens/landing_screen.dart';
+import 'package:bootcamp_oua_f4/screens/login_screen.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const SplashScreen(),
+      home:  LandingPage(),
     );
   }
 }
