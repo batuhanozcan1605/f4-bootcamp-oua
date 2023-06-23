@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Food {
 
-  final String categoryId;
+  final int categoryId;
   final String name;
   final String image;
   final String place;
-  final DateTime enterDate;
+  final DateTime? enterDate;
   final int shelfTime;
 
   Food(
