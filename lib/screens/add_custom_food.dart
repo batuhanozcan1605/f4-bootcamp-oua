@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class AddCustomFood extends StatefulWidget {
@@ -6,11 +7,25 @@ class AddCustomFood extends StatefulWidget {
 }
 
 class _AddCustomFoodState extends State<AddCustomFood> {
+  List<String> foodNames = [];
+  String? selectedCategory;
+  TextEditingController foodNameController = TextEditingController();
+  int _defaultValue = 0;
+  bool isSwitchOn = false;
+
+  @override
+  void dispose() {
+    foodNameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<String> categories = ['Category 1', 'Category 2', 'Category 3'];
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF4D818C),
+        backgroundColor: Constants.tPrimaryColor,
         title: Container(
           padding: const EdgeInsets.all(30.0),
           child: Row(
@@ -26,20 +41,228 @@ class _AddCustomFoodState extends State<AddCustomFood> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-        child: Container(
-          child: Column(
-            children: [
-              Center(
-                child: Image.network(
-                  'https://nationaltoday.com/wp-content/uploads/2020/06/Soul-Food-1-1.jpg',
-                  width: 150,
-                  height: 150,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+          child: Container(
+            child: Column(
+              children: [
+                Card(
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      child: Image.network(
+                        'https://nationaltoday.com/wp-content/uploads/2020/06/Soul-Food-1-1.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 25),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 20,
+                            child: TextFormField(
+                              controller: foodNameController,
+                              decoration: InputDecoration(
+                                hintText: 'Food Name',
+                                border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        CircleAvatar(
+                          backgroundColor: Constants.tPrimaryColor,
+                          radius: 20,
+                          child: IconButton(
+                            icon: Icon(Icons.add),
+                            color: Colors.white,
+                            onPressed: () {
+                              setState(() {
+                                foodNames.insert(0, foodNameController.text);
+                                foodNameController.clear();
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: List.generate(
+                        foodNames.length,
+                        (index) => Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Constants.tPrimaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                foodNames[index],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    foodNames.removeAt(index);
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Select Category:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: DropdownButton(
+                              value: selectedCategory,
+                              items: categories.map((String category) {
+                                return DropdownMenuItem(
+                                  value: category,
+                                  child: Text(category),
+                                );
+                              }).toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedCategory = value as String?;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Shelf Time',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text('(Day)', style: Constants.CategoryTitle),
+                              Switch(
+                                value: isSwitchOn,
+                                onChanged: (bool newValue) {
+                                  setState(() {
+                                    isSwitchOn = newValue;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                          visible: isSwitchOn,
+                          child: Expanded(
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.remove),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (_defaultValue > 0) {
+                                          _defaultValue--;
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    '$_defaultValue',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  IconButton(
+                                    icon: Icon(Icons.add),
+                                    onPressed: () {
+                                      setState(() {
+                                        _defaultValue++;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Constants.tPrimaryColor),
+          child: Text('Add Custom Food'),
         ),
       ),
     );
