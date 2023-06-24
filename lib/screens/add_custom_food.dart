@@ -130,14 +130,14 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                         Expanded(
                           child: Column(
                             children: [
-                              Text(
+                              const Text(
                                 'Shelf Time',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
                                 ),
                               ),
-                              Text('(Day)', style: Constants.CategoryTitle),
+                              const Text('(Day)', style: Constants.CategoryTitle),
                               Switch(
                                 value: isSwitchOn,
                                 onChanged: (bool newValue) {
