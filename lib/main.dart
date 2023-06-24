@@ -70,22 +70,24 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             ElevatedButton(
                 onPressed: () async {
+                  print("debug: pressed");
                   await signInWithGoogle();
-
+                  print("debug: signedIn");
                   String uid = FirebaseAuth.instance.currentUser!.uid;
-
+                  print("debug: uid");
                   await FirebaseFirestore.instance.collection('users').doc(uid).set({
                     'girisYaptiMi' : true,
                     'sonGirisTarihi' : FieldValue.serverTimestamp(),
                   },
                     SetOptions(merge: true),
                   );
-
-                  CollectionReference kitchen = await FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
+                  print("debug: before reference");
+                  CollectionReference kitchen = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
                   await kitchen.doc('first doc').set({
                     'collection started' : true,
                   },
                   );
+                  print("debug: before nav screen");
 
                   goToNavScreen();
                 },

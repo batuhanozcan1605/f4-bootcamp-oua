@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class FoodsScreen extends StatelessWidget {
   int categoryId;
 
-  FoodsScreen({super.key, required this.categoryId});
+  FoodsScreen({Key? key, required this.categoryId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

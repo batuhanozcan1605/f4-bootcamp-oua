@@ -18,9 +18,8 @@ class DataService {
   }
 
   Future<List<Food>> getFood(categoryId) async {
-    print("debug : getffood1");
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods').where('categoryId', isEqualTo: categoryId).get();
-    print("debug : getffood");
+
     List<Food> dataList = [];
     snapshot.docs.forEach((doc) {
       Food food = Food.fromSnapshot(doc);
