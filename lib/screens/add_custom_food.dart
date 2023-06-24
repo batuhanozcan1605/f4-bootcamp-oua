@@ -12,6 +12,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   TextEditingController foodNameController = TextEditingController();
   int _defaultValue = 0;
   bool isSwitchOn = false;
+  int? selectedStorageOption;
 
   @override
   void dispose() {
@@ -84,63 +85,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        CircleAvatar(
-                          backgroundColor: Constants.tPrimaryColor,
-                          radius: 20,
-                          child: IconButton(
-                            icon: Icon(Icons.add),
-                            color: Colors.white,
-                            onPressed: () {
-                              setState(() {
-                                foodNames.insert(0, foodNameController.text);
-                                foodNameController.clear();
-                              });
-                            },
-                          ),
-                        ),
                       ],
-                    ),
-                    SizedBox(height: 10),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: List.generate(
-                        foodNames.length,
-                        (index) => Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Constants.tPrimaryColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                foodNames[index],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    foodNames.removeAt(index);
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ),
                     SizedBox(height: 20),
                     Row(
@@ -249,6 +194,48 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                         ),
                       ],
                     ),
+                    SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Where would you like to store the food?")
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Radio<int>(
+                          value: 0,
+                          groupValue: selectedStorageOption,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedStorageOption = value;
+                            });
+                          },
+                        ),
+                        Text('Fridge'),
+                        Radio<int>(
+                          value: 1,
+                          groupValue: selectedStorageOption,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedStorageOption = value;
+                            });
+                          },
+                        ),
+                        Text('Freezer'),
+                        Radio<int>(
+                          value: 2,
+                          groupValue: selectedStorageOption,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedStorageOption = value;
+                            });
+                          },
+                        ),
+                        Text('Pantry'),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -261,7 +248,8 @@ class _AddCustomFoodState extends State<AddCustomFood> {
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-              backgroundColor: Constants.tPrimaryColor),
+            backgroundColor: Constants.tPrimaryColor,
+          ),
           child: Text('Add Custom Food'),
         ),
       ),
