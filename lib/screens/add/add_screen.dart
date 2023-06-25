@@ -80,6 +80,8 @@ class _AddSecreenState extends State<AddSecreen> {
                       ),
                     ),
                   ),
+            isSearching ? Center()
+                :
             Expanded(
               child: FutureBuilder<List<Category>>(
                   future: DataService().getCategories(), //firebase method
