@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   onPressed: () {
                     goToNavScreen();
                   },
-                  child: Text("Giriş Yapmadan Devam Et")),
+                  child: const Text("Giriş Yapmadan Devam Et")),
             ),
           ],
         )
