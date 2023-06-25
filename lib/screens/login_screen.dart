@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bootcamp_oua_f4/screens/register_screen.dart';
 
 import 'package:flutter/gestures.dart';
