@@ -11,7 +11,7 @@ class FoodsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Food>>(
-      future: DataService().getFood(categoryId),
+      future: DataService().getFoods(categoryId),
       builder: (BuildContext context,
       AsyncSnapshot<List<Food>> snapshot) {
     if (snapshot.hasData) {
