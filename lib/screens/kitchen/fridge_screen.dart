@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FridgeSecreen extends StatefulWidget {
-  const FridgeSecreen({Key? key}) : super(key: key);
+class FridgeScreen extends StatefulWidget {
+  const FridgeScreen({Key? key}) : super(key: key);
 
   @override
-  State<FridgeSecreen> createState() => _FridgeSecreenState();
+  State<FridgeScreen> createState() => _FridgeScreenState();
 }
 
-class _FridgeSecreenState extends State<FridgeSecreen> {
+class _FridgeScreenState extends State<FridgeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -72,11 +72,11 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             ElevatedButton(
                 onPressed: () async {
-                  print("debug: pressed");
+
                   await signInWithGoogle();
-                  print("debug: signedIn");
+
                   String uid = FirebaseAuth.instance.currentUser!.uid;
-                  print("debug: uid");
+
                   await FirebaseFirestore.instance.collection('users').doc(uid).set({
                     'girisYaptiMi' : true,
                     'sonGirisTarihi' : FieldValue.serverTimestamp(),
@@ -89,7 +89,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     'collection started' : true,
                   },
                   );
-                  print("debug: before nav screen");
 
                   goToNavScreen();
                 },
