@@ -1,8 +1,10 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
 import 'package:bootcamp_oua_f4/models/FoodModel.dart';
 import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -158,43 +160,48 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
 
   Widget searchFoodsWidget(String query) {
     return Expanded(
-      child: FutureBuilder<List<Food>>(
-          future: DataService().searchFoods(query),
+      child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('foods').orderBy('name').snapshots(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              var foods = snapshot.data;
-              return ListView.builder(
-                  itemCount: foods!.length, itemBuilder: (context, index) {
-                    var food = foods[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          child:
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left:  10.0),
-                                  child: Text(
-                                    food.name,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10.0),
-                                  child: IconButton(
-                                    onPressed: (){
-
-                                    },
-                                    icon: Icon(Icons.add_circle, color: Color(0xFF4D818C),),
-                                  ),
-                                ),
-                              ])
-                      ),
-                    );
-              });
+            if(snapshot.hasData) {
+            List<QueryDocumentSnapshot> filteredDocuments =
+                snapshot.data!.docs.where((doc) {
+              String searchText = query.toLowerCase();
+              String fieldValue = doc['name'].toString().toLowerCase();
+              return fieldValue.contains(searchText);
+            }).toList();
+            return ListView.builder(
+                itemCount: filteredDocuments.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot document = filteredDocuments[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              document['name'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Color(0xFF4D818C),
+                              ),
+                            ),
+                          ),
+                        ])),
+                  );
+                });
             } else {
               return Center();
             }
