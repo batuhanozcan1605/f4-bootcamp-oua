@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/CategoryModel.dart';
 import '../models/FoodModel.dart';
 
@@ -17,7 +18,7 @@ class DataService {
     return dataList;
   }
 
-  Future<List<Food>> getFood(categoryId) async {
+  Future<List<Food>> getFoods(categoryId) async {
     print("debug : getffood1");
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods').where('categoryId', isEqualTo: categoryId).get();
     print("debug : getffood");
@@ -30,10 +31,10 @@ class DataService {
     return dataList;
   }
 
-  Future<String> getImageUrl(category_image) async {
+  Future<String> getImageUrl(categoryImage) async {
     try {
       final storageRef =
-      FirebaseStorage.instance.ref().child("categories/${category_image}");
+      FirebaseStorage.instance.ref().child("categories/${categoryImage}");
       final downloadUrl = await storageRef.getDownloadURL();
       return downloadUrl;
     } catch (e) {
@@ -56,4 +57,21 @@ class DataService {
     }
   }
 
+  Future<List<Food>> searchFoods(query) async {
+
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .where('name', isLessThan: query + 'z')
+        .get();
+    List<Food> dataList = [];
+    snapshot.docs.forEach((doc) {
+      Food food = Food.fromSnapshot(doc);
+      dataList.add(food);
+    });
+
+    return dataList;
+  }
+
 }
+
+final dataServiceProvider = Provider((ref) => DataService());

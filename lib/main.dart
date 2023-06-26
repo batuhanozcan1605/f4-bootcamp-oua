@@ -1,13 +1,15 @@
 import 'package:bootcamp_oua_f4/firebase_imagetest.dart';
+import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -27,14 +29,14 @@ class MyApp extends StatelessWidget {
 }
 
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends ConsumerState<SplashScreen> {
 
   bool isFirebaseInitialized = false;
 
@@ -42,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     initializeFirebase();
+
   }
 
   Future<void> initializeFirebase() async {
@@ -49,6 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       isFirebaseInitialized = true;
     });
+
     if(FirebaseAuth.instance.currentUser != null) {
       goToNavScreen();
     }
@@ -70,6 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             ElevatedButton(
                 onPressed: () async {
+
                   await signInWithGoogle();
 
                   String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -80,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   },
                     SetOptions(merge: true),
                   );
-
+                  print("debug: before reference");
                   CollectionReference kitchen = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
                   await kitchen.doc('first doc').set({
                     'collection started' : true,
@@ -96,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   onPressed: () {
                     goToNavScreen();
                   },
-                  child: Text("Giriş Yapmadan Devam Et")),
+                  child: const Text("Giriş Yapmadan Devam Et")),
             ),
           ],
         )

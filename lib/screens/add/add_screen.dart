@@ -1,26 +1,29 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/models/FoodModel.dart';
+import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'foods_bodyscreen.dart';
 
-class AddSecreen extends StatefulWidget {
+class AddSecreen extends ConsumerStatefulWidget {
   const AddSecreen({Key? key}) : super(key: key);
 
   @override
-  State<AddSecreen> createState() => _AddSecreenState();
+  AddSecreenState createState() => AddSecreenState();
 }
 
-class _AddSecreenState extends State<AddSecreen> {
+class AddSecreenState extends ConsumerState<AddSecreen> {
   String query = '';
   bool isSearching = false;
 
-
   @override
   Widget build(BuildContext context) {
+    final categoriesRepo = ref.watch(categoriesProvider);
     return WillPopScope(
       onWillPop: () async {
         if (isSearching) {
@@ -39,7 +42,7 @@ class _AddSecreenState extends State<AddSecreen> {
           children: [
             searchBar(),
             isSearching
-                ? const Center()
+                ? Center()
                 : Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -80,40 +83,30 @@ class _AddSecreenState extends State<AddSecreen> {
                       ),
                     ),
                   ),
-            isSearching ? Center()
-                :
-            Expanded(
-              child: FutureBuilder<List<Category>>(
-                  future: DataService().getCategories(), //firebase method
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Category>> snapshot) {
-                    if (snapshot.hasData) {
-                      var categoryList = snapshot.data;
-                      return GridView.builder(
-                          padding: const EdgeInsets.all(20),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 5 / 2),
-                          itemCount: categoryList!.length,
-                          itemBuilder: (context, index) {
-                            var category = categoryList[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FoodsBodyScreen(
-                                              category: category,
-                                            )));
-                              },
-                              child: categoryCard(category),
-                            );
-                          });
-                    } else {
-                      return const Center(child: Text(""));
-                    }
-                  }),
-            ),
+            isSearching
+                ? searchFoodsWidget(query)
+                : Expanded(
+                    child: GridView.builder(
+                        padding: const EdgeInsets.all(20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, childAspectRatio: 5 / 2),
+                        itemCount: categoriesRepo.categories.length,
+                        itemBuilder: (context, index) {
+                          var category = categoriesRepo.categories[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FoodsBodyScreen(
+                                            category: category,
+                                          )));
+                            },
+                            child: categoryCard(category),
+                          );
+                        }),
+                  ),
           ],
         ),
       ),
@@ -164,4 +157,55 @@ class _AddSecreenState extends State<AddSecreen> {
           ),
         ),
       );
+
+  Widget searchFoodsWidget(String query) {
+    return Expanded(
+      child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('foods').orderBy('name').snapshots(),
+          builder: (context, snapshot) {
+            if(snapshot.hasData) {
+            List<QueryDocumentSnapshot> filteredDocuments =
+                snapshot.data!.docs.where((doc) {
+              String searchText = query.toLowerCase();
+              String fieldValue = doc['name'].toString().toLowerCase();
+              return fieldValue.contains(searchText);
+            }).toList();
+            return ListView.builder(
+                itemCount: filteredDocuments.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot document = filteredDocuments[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Text(
+                              document['name'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.add_circle,
+                                color: Color(0xFF4D818C),
+                              ),
+                            ),
+                          ),
+                        ])),
+                  );
+                });
+            } else {
+              return Center();
+            }
+          }),
+    );
+  }
 }

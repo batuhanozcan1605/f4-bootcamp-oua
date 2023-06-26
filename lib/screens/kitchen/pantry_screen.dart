@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PantrySecreen extends StatefulWidget {
-  const PantrySecreen({Key? key}) : super(key: key);
+class PantryScreen extends StatefulWidget {
+  const PantryScreen({Key? key}) : super(key: key);
 
   @override
-  State<PantrySecreen> createState() => _PantrySecreenState();
+  State<PantryScreen> createState() => _PantryScreenState();
 }
 
-class _PantrySecreenState extends State<PantrySecreen> {
+class _PantryScreenState extends State<PantryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

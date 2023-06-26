@@ -1,11 +1,6 @@
-import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/fridge_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/pantry_screen.dart';
-import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
-import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
-//import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
 import 'package:flutter/material.dart';
-
 import 'freezer_screen.dart';
 
 class TabBarScreen extends StatefulWidget {
@@ -55,7 +50,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   );
 
   TabBarView get _tabBarView => TabBarView(
-    children: [PantrySecreen(), PantrySecreen(), FreezerSecreen()],
+    children: [FridgeScreen(), PantryScreen(), FreezerScreen()],
   );
   @override
   Widget build(BuildContext context) {
