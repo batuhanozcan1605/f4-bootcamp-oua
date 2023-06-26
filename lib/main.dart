@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/firebase_imagetest.dart';
+import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,14 +29,14 @@ class MyApp extends StatelessWidget {
 }
 
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends ConsumerState<SplashScreen> {
 
   bool isFirebaseInitialized = false;
 
@@ -51,6 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() {
       isFirebaseInitialized = true;
     });
+
     if(FirebaseAuth.instance.currentUser != null) {
       goToNavScreen();
     }

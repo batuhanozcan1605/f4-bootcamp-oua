@@ -11,7 +11,7 @@ class CategoriesRepo extends ChangeNotifier {
   CategoriesRepo(this.dataService);
 
   Future<void> fetchCategories() async {
-    categories = await DataService().getCategories();
+    categories = await dataService.getCategories();
     notifyListeners();
   }
 }

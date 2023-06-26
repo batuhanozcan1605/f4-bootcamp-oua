@@ -1,8 +1,6 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'foods_bodyscreen.dart';
@@ -35,12 +33,10 @@ class _AddSecreenState extends State<AddSecreen> {
           title: SvgPicture.asset('assets/images/appbar_logo.svg'),
           centerTitle: true,
         ),
-        body: Column(
+        body: isSearching ? Center() : Column(
           children: [
             searchBar(),
-            isSearching
-                ? const Center()
-                : Padding(
+            Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: SizedBox(
