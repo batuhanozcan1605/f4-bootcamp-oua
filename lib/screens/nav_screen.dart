@@ -24,11 +24,6 @@ class NavScreenState extends ConsumerState<NavScreen> {
     RecipeSecreen(),
     AddSecreen(),
     ShoppingCardScreen(),
-    // Aşağıdaki ekranlar hazırlandıkça yukarıdaki Scaffold'ların yerine yazılacak.
-    /*KitchenScreen(),
-    AddScreen(),
-    RecipeScreen(),
-    ShoppingCartScreen(),*/
   ];
 
   @override

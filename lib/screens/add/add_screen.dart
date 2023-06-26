@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/models/FoodModel.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +34,10 @@ class _AddSecreenState extends State<AddSecreen> {
           title: SvgPicture.asset('assets/images/appbar_logo.svg'),
           centerTitle: true,
         ),
-        body: isSearching ? Center() : Column(
+        body: Column(
           children: [
             searchBar(),
-            Padding(
+            isSearching ? Center() : Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: SizedBox(
@@ -76,7 +77,7 @@ class _AddSecreenState extends State<AddSecreen> {
                       ),
                     ),
                   ),
-            Expanded(
+            isSearching ? searchFoods(query) : Expanded(
               child: FutureBuilder<List<Category>>(
                   future: DataService().getCategories(), //firebase method
                   builder: (BuildContext context,
@@ -158,4 +159,8 @@ class _AddSecreenState extends State<AddSecreen> {
           ),
         ),
       );
+
+  Widget searchFoods(String query) {
+    return Expanded(child:Center());
+  }
 }
