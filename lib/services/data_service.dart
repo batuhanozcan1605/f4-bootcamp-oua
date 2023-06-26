@@ -57,6 +57,21 @@ class DataService {
     }
   }
 
+  Future<List<Food>> searchFoods(query) async {
+
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods')
+        .where('name', isGreaterThanOrEqualTo: query)
+        .where('name', isLessThan: query + 'z')
+        .get();
+    List<Food> dataList = [];
+    snapshot.docs.forEach((doc) {
+      Food food = Food.fromSnapshot(doc);
+      dataList.add(food);
+    });
+
+    return dataList;
+  }
+
 }
 
 final dataServiceProvider = Provider((ref) => DataService());

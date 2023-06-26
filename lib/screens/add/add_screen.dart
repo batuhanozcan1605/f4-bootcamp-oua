@@ -19,7 +19,6 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
   String query = '';
   bool isSearching = false;
 
-
   @override
   Widget build(BuildContext context) {
     final categoriesRepo = ref.watch(categoriesProvider);
@@ -40,7 +39,9 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
         body: Column(
           children: [
             searchBar(),
-            isSearching ? Center() : Padding(
+            isSearching
+                ? Center()
+                : Padding(
                     padding:
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: SizedBox(
@@ -80,28 +81,29 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                       ),
                     ),
                   ),
-            isSearching ? searchFoods(query) : Expanded(
-              child: GridView.builder(
-                          padding: const EdgeInsets.all(20),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 5 / 2),
-                          itemCount: categoriesRepo.categories.length,
-                          itemBuilder: (context, index) {
-                            var category = categoriesRepo.categories[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FoodsBodyScreen(
-                                              category: category,
-                                            )));
-                              },
-                              child: categoryCard(category),
-                            );
-                          }
-                          ),
+            isSearching
+                ? searchFoodsWidget(query)
+                : Expanded(
+                    child: GridView.builder(
+                        padding: const EdgeInsets.all(20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2, childAspectRatio: 5 / 2),
+                        itemCount: categoriesRepo.categories.length,
+                        itemBuilder: (context, index) {
+                          var category = categoriesRepo.categories[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FoodsBodyScreen(
+                                            category: category,
+                                          )));
+                            },
+                            child: categoryCard(category),
+                          );
+                        }),
                   ),
           ],
         ),
@@ -154,7 +156,49 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
         ),
       );
 
-  Widget searchFoods(String query) {
-    return Expanded(child:Center());
+  Widget searchFoodsWidget(String query) {
+    return Expanded(
+      child: FutureBuilder<List<Food>>(
+          future: DataService().searchFoods(query),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var foods = snapshot.data;
+              return ListView.builder(
+                  itemCount: foods!.length, itemBuilder: (context, index) {
+                    var food = foods[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          child:
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left:  10.0),
+                                  child: Text(
+                                    food.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10.0),
+                                  child: IconButton(
+                                    onPressed: (){
+
+                                    },
+                                    icon: Icon(Icons.add_circle, color: Color(0xFF4D818C),),
+                                  ),
+                                ),
+                              ])
+                      ),
+                    );
+              });
+            } else {
+              return Center();
+            }
+          }),
+    );
   }
 }
