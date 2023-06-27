@@ -192,7 +192,23 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                           Padding(
                             padding: const EdgeInsets.only(right: 10.0),
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                DataService().addFoodToKitchen(document.id);
+                                final snackBar = SnackBar(
+                                  action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: (){
+                                        DataService().undoAdd();
+                                      }),
+                                  content: Text("${document['name']} has been added to our Kitchen.",
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  backgroundColor: Color(0xFF013440),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              },
                               icon: Icon(
                                 Icons.add_circle,
                                 color: Color(0xFF4D818C),

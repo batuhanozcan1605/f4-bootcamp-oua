@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/CategoryModel.dart';
@@ -7,7 +8,8 @@ import '../models/FoodModel.dart';
 class DataService {
 
   Future<List<Category>> getCategories() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('categories').orderBy("categoryId").get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
+        'categories').orderBy("categoryId").get();
 
     List<Category> dataList = [];
     snapshot.docs.forEach((doc) {
@@ -20,7 +22,8 @@ class DataService {
 
   Future<List<Food>> getFoods(categoryId) async {
     print("debug : getffood1");
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods').where('categoryId', isEqualTo: categoryId).get();
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
+        'foods').where('categoryId', isEqualTo: categoryId).get();
     print("debug : getffood");
     List<Food> dataList = [];
     snapshot.docs.forEach((doc) {
@@ -58,8 +61,8 @@ class DataService {
   }
 
   Future<List<Food>> searchFoods(query) async {
-
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('foods')
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
+        'foods')
         .where('name', isGreaterThanOrEqualTo: query)
         .where('name', isLessThan: query + 'z')
         .get();
@@ -72,6 +75,45 @@ class DataService {
     return dataList;
   }
 
-}
+  Future<void> addFoodToKitchen(documentId) async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
+          .collection('foods')
+          .doc(documentId)
+          .get();
 
+      if (sourceDocument.exists) {
+        DocumentReference destinationRef = FirebaseFirestore.instance
+            .collection('users').doc(uid).collection('kitchen').doc();
+
+
+        await destinationRef.set(sourceDocument.data()!);
+
+        print('Document copied');
+      } else {
+        print('No Source document');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> undoAdd() async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users').doc(uid).collection('kitchen')
+          .get();
+
+      DocumentSnapshot lastDocument = querySnapshot.docs.last;
+
+      await lastDocument.reference.delete();
+
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+}
 final dataServiceProvider = Provider((ref) => DataService());
