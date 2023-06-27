@@ -115,5 +115,24 @@ class DataService {
     }
   }
 
+  Future<List<Food>> showFoodInKitchen(categoryId, place) async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users').doc(uid).collection('kitchen')
+          .where('categoryId', isEqualTo: categoryId)
+          .where('place', isEqualTo: place)
+          .get();
+
+      List<Food> dataList = [];
+      snapshot.docs.forEach((doc) {
+        Food food = Food.fromSnapshot(doc);
+        dataList.add(food);
+      });
+      return dataList;
+
 }
+
+}
+
 final dataServiceProvider = Provider((ref) => DataService());

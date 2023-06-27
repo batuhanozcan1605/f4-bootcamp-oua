@@ -55,66 +55,61 @@ class _TabBarScreenState extends State<TabBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                Container(
-                  height: 50,
-                  child: TextField(
-                    onChanged: (value) => {},
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      filled: true,
-                      fillColor: Color(0xffffffff),
-                      labelText: 'Search',
-                      suffixIcon: Icon(Icons.search),
-                    ),
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              child: TextField(
+                onChanged: (value) => {},
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Color(0xffffffff),
+                  labelText: 'Search',
+                  suffixIcon: Icon(Icons.search),
                 ),
-                Container(
-                  height: 45.0,
-                  alignment: Alignment.center,
-                  child: _tabBar,
-                  decoration: BoxDecoration(
+              ),
+            ),
+            Container(
+              height: 45.0,
+              alignment: Alignment.center,
+              child: _tabBar,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(0),
+                  bottom: Radius.circular(30),
+                ),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 1.0,
+                    offset:
+                    Offset(0, 0), // shadow direction: bottom right
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+                child: _tabBarView
+            ),
+            /*Material(
+                    elevation: 5,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(0),
                       bottom: Radius.circular(30),
                     ),
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 1.0,
-                        offset:
-                        Offset(0, 0), // shadow direction: bottom right
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                    height: 80.0,
-                    child: _tabBarView
-                ),
-                /*Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(0),
-                          bottom: Radius.circular(30),
-                        ),
-                        color: Colors.white,
-                        child: Container(
-                          height: 45.0,
-                          alignment: Alignment.center,
-                          child: _tabBar,
-                        ),
-                      ),*/
-              ],
-            ),
-          )
-        ],
+                    child: Container(
+                      height: 45.0,
+                      alignment: Alignment.center,
+                      child: _tabBar,
+                    ),
+                  ),*/
+          ],
+        ),
       ),
     );
   }

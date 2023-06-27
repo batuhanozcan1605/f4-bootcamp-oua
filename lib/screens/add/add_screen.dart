@@ -1,7 +1,4 @@
-import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
-import 'package:bootcamp_oua_f4/models/FoodModel.dart';
 import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
-import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -200,7 +197,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                                       onPressed: (){
                                         DataService().undoAdd();
                                       }),
-                                  content: Text("${document['name']} has been added to our Kitchen.",
+                                  content: Text("${document['name']} has been added to your Kitchen.",
                                     style: TextStyle(
                                       color: Colors.white70,
                                     ),

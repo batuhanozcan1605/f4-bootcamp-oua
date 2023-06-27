@@ -15,46 +15,40 @@ class _FridgeScreenState extends State<FridgeScreen> {
       scrollDirection: Axis.vertical,
       slivers: [
         SliverToBoxAdapter(
-          child: ContentBuilder(1, "Meyveler", "b"),
+          child: ContentBuilder(1, "Fruits", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(2, "Sebzeler", "b"),
+          child: ContentBuilder(2, "Vegetables", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(3, "Fırın", "b"),
+          child: ContentBuilder(3, "Bakery", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(4, "Mandıra", "b"),
+          child: ContentBuilder(4, "Dairy", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(5, "İçecekler", "b"),
+          child: ContentBuilder(5, "Drinks", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(6, "Etler", "b"),
+          child: ContentBuilder(6, "Meats", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(7, "Atıştırmalıklar", "b"),
+          child: ContentBuilder(7, "Snacks", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(8, "Alkollü İçecekler", "b"),
+          child: ContentBuilder(8, "Oils", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(9, "Çerezler", "b"),
+          child: ContentBuilder(9, "Sea Food", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(10, "Yağlar", "b"),
+          child: ContentBuilder(10, "Legumes", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(11, "Deniz Ürünleri", "b"),
+          child: ContentBuilder(11, "Spices", "b"),
         ),
         SliverToBoxAdapter(
-          child: ContentBuilder(12, "Baklalar", "b"),
-        ),
-        SliverToBoxAdapter(
-          child: ContentBuilder(13, "Baharatlar", "b"),
-        ),
-        SliverToBoxAdapter(
-          child: ContentBuilder(14, "Soslar", "b"),
+          child: ContentBuilder(12, "Sauces", "b"),
         ),
       ],
     );
