@@ -1,16 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Food {
 
-  final String category_id;
+  final int categoryId;
   final String name;
-  final String? image;
+  final String image;
   final String place;
-  final int? shelfTime;
+  final DateTime? enterDate;
+  final int shelfTime;
 
   Food(
-      {required this.category_id,
+      {required this.categoryId,
       required this.name,
-      this.image,
+      required this.image,
       required this.place,
-      this.shelfTime}
+      required this.enterDate,
+      required  this.shelfTime
+      }
       );
+
+  factory Food.fromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+    return Food(
+      categoryId: data['categoryId'] ?? 1,
+      name: data['name'] ?? '',
+      image: data['image'],
+      place: data['place'],
+      enterDate: data['enterDate'],
+      shelfTime: data['shelfTime'],
+    );
+  }
+
 }

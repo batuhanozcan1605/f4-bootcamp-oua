@@ -1,12 +1,7 @@
-import 'package:bootcamp_oua_f4/screens/kitchen/freezer_screen.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen/pantry_screen.dart';
-import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
-import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../main.dart';
 
 class KitchenScreen extends StatefulWidget {

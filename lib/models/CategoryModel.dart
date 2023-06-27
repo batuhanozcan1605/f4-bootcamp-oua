@@ -1,11 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Category {
-  String category_image;
-  String category_name;
+  final int categoryId;
+  final String categoryImage;
+  final String categoryName;
 
-  Category(this.category_image,  this.category_name);
+  Category({ required this.categoryId, required this.categoryImage, required this.categoryName});
 
-  Category.fromMap(Map<String, dynamic> m) : this(
-    m['category_image'],m['category_name']
-  );
+  factory Category.fromSnapshot(DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+    return Category(
+      categoryId: data["categoryId"] ?? 1,
+      categoryImage: data['categoryImage'] ?? '',
+      categoryName: data['categoryName'] ?? '',
+    );
+  }
+
 
 }

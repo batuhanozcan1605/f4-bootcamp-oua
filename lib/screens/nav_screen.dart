@@ -1,36 +1,41 @@
+import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
 import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/screens/shoppingcart_screen.dart';
+import 'package:bootcamp_oua_f4/services/data_service.dart';
 //import 'package:bootcamp_oua_f4/widgets/prodcut.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NavScreen extends StatefulWidget {
+class NavScreen extends ConsumerStatefulWidget {
   const NavScreen({Key? key}) : super(key: key);
 
   @override
-  State<NavScreen> createState() => _NavScreenState();
+  NavScreenState createState() => NavScreenState();
 }
 
-class _NavScreenState extends State<NavScreen> {
+class NavScreenState extends ConsumerState<NavScreen> {
+
 
   int currentindex = 0;
-  final screens = [
+  final screens = const [
     KitchenScreen(),
     RecipeSecreen(),
     AddSecreen(),
     ShoppingCardScreen(),
-    // Aşağıdaki ekranlar hazırlandıkça yukarıdaki Scaffold'ların yerine yazılacak.
-    /*KitchenScreen(),
-    AddScreen(),
-    RecipeScreen(),
-    ShoppingCartScreen(),*/
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  void initState() {
+    super.initState();
+    ref.read(categoriesProvider).fetchCategories();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
       body: screens[currentindex],
       bottomNavigationBar: Container(
         height: 80,
@@ -54,7 +59,7 @@ class _NavScreenState extends State<NavScreen> {
             unselectedItemColor: Color(0xFF4D818C).withOpacity(0.5),
             currentIndex: currentindex,
             onTap: (index) => setState(() => currentindex = index),
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.kitchen, size: 35),
                 label: 'Kitchen',

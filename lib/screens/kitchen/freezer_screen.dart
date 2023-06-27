@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FreezerSecreen extends StatefulWidget {
-  const FreezerSecreen({Key? key}) : super(key: key);
+class FreezerScreen extends StatefulWidget {
+  const FreezerScreen({Key? key}) : super(key: key);
 
   @override
-  State<FreezerSecreen> createState() => _FreezerSecreenState();
+  State<FreezerScreen> createState() => _FreezerScreenState();
 }
 
-class _FreezerSecreenState extends State<FreezerSecreen> {
+class _FreezerScreenState extends State<FreezerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
