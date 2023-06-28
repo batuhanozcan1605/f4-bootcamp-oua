@@ -15,9 +15,22 @@ class FoodsScreen extends StatefulWidget {
 
 class _FoodsScreenState extends State<FoodsScreen> {
 
-  List selectedItems = [];
 
+  bool isSelected = false;
   List<String> _selectedDocumentIds = [];
+
+  void toggleCardSelection(food) {
+    String documentId = food.id;
+
+    setState(() {
+      if (_selectedDocumentIds.contains(documentId)) {
+        _selectedDocumentIds.remove(documentId);
+      } else {
+        _selectedDocumentIds.add(documentId);
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +50,13 @@ class _FoodsScreenState extends State<FoodsScreen> {
           itemCount: foods.length,
           itemBuilder: (context, index) {
             DocumentSnapshot food = foods[index];
+            bool isSelected = _selectedDocumentIds.contains(food.id);
+
             return GestureDetector(
                 onTap: (){
-
+                  toggleCardSelection(food);
                 },
-                child: foodCard(food));
+                child: foodCard(food, isSelected));
           }
       );
     } else {

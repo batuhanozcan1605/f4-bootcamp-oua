@@ -19,6 +19,21 @@ class ContentBuilder extends StatefulWidget {
 
 class _ContentBuilderState extends State<ContentBuilder> {
 
+  bool isSelected = false;
+  List<String> _selectedDocumentIds = [];
+
+  void toggleCardSelection(food) {
+    String documentId = food.id;
+
+    setState(() {
+      if (_selectedDocumentIds.contains(documentId)) {
+        _selectedDocumentIds.remove(documentId);
+      } else {
+        _selectedDocumentIds.add(documentId);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
@@ -53,11 +68,12 @@ class _ContentBuilderState extends State<ContentBuilder> {
                       itemCount: foods.length,
                       itemBuilder: (context, index) {
                         DocumentSnapshot food = foods[index];
+                        bool isSelected = _selectedDocumentIds.contains(food.id);
                           return GestureDetector(
                             onTap: () {
-
+                              toggleCardSelection(food);
                             },
-                            child: foodCard(food));
+                            child: foodCard(food, isSelected));
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,

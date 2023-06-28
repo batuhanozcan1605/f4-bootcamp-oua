@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 import '../services/data_service.dart';
 
-Widget foodCard(food) => Card(
+Widget foodCard(food, bool isSelected) => Card(
   clipBehavior: Clip.antiAlias,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -43,7 +43,7 @@ Widget foodCard(food) => Card(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12),
                 ),
-                color: Colors.white.withOpacity(0.7),
+                color: isSelected ? Constants.tselectedItemColor : Colors.white.withOpacity(0.7),
               ),
               child: Align(
                 alignment: Alignment.center,
