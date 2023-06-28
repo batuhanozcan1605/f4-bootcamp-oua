@@ -35,11 +35,7 @@ class FoodsScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 DocumentSnapshot food = foods[index];
 
-                return GestureDetector(
-                    onTap: () {
-                      ref.read(foodsProvider).toggleFoodSelection(food);
-                    },
-                    child: FoodCard(food: food));
+                return FoodCard(food: food);
               }
           );
         } else {

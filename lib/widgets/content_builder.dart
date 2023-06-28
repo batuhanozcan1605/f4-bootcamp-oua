@@ -20,9 +20,9 @@ class ContentBuilderState extends ConsumerState<ContentBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    print('debug: Build attempt');
+
     final foodsRepo = ref.watch(foodsProvider);
-    print("debug: build");
+
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen')

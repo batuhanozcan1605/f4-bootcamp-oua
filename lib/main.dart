@@ -8,6 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'constants/constants.dart';
+
 void main() {
   runApp(ProviderScope(child: MyApp()));
 }
@@ -77,21 +79,23 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
                 onPressed: () async {
 
                   await signInWithGoogle();
-
-                  String uid = FirebaseAuth.instance.currentUser!.uid;
-
-                  await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                  
+                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).set({
                     'girisYaptiMi' : true,
                     'sonGirisTarihi' : FieldValue.serverTimestamp(),
                   },
                     SetOptions(merge: true),
                   );
 
-                  CollectionReference kitchen = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
-                  await kitchen.doc('first doc').set({
+
+                  await Constants.kitchenRef.doc('first doc').set({
                     'collection started' : true,
-                  },
-                  );
+                  });
+
+                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).
+                  collection('shoppingCart').doc('first doc').set({
+                    'collection started' : true,
+                  });
 
                   goToSplash();
                 },
@@ -114,23 +118,3 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
 }
 
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        ),
-      ),
-    );
-  }
-}

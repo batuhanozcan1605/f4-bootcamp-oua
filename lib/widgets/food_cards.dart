@@ -26,6 +26,7 @@ class FoodCardState extends ConsumerState<FoodCard> {
     return GestureDetector(
       onTap: () {
         ref.read(foodsProvider).toggleFoodSelection(widget.food);
+        print("DOC ID: ${foodsRepo.selectedDocumentIds}");
       },
       child: Card(
         clipBehavior: Clip.antiAlias,

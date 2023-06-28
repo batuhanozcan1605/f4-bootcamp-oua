@@ -19,11 +19,11 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> fetchData () async {
-    print('debug: FETCH 1');
+
     await ref.read(categoriesProvider).fetchCategories();
-    print('debug: FETCH 2');
+
     await ref.read(imageUrlProvider).fetchImageUrls();
-    print('debug: FETCH 3');
+
     await Future.delayed(Duration(seconds: 3));
   }
 
@@ -40,7 +40,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
         future: fetchData(),
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Center(
+            return const Center(
               child: Text('Kitchen is Loading'),
             );
           } else {

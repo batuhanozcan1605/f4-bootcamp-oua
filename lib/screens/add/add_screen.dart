@@ -190,7 +190,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                             padding: const EdgeInsets.only(right: 10.0),
                             child: IconButton(
                               onPressed: () {
-                                DataService().addFoodToKitchen(document.id);
+                                DataService().addSingleFoodToKitchen(document.id);
                                 final snackBar = SnackBar(
                                   action: SnackBarAction(
                                       label: 'Undo',

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -25,4 +26,5 @@ class Constants {
   );
   //-- DATA --
   static final uid = FirebaseAuth.instance.currentUser!.uid;
+  static final kitchenRef = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
 }

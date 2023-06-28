@@ -1,16 +1,12 @@
+import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/data_service.dart';
 
 class FoodsRepo extends ChangeNotifier {
 
-  //bool isSelected = false;
   List<String> selectedDocumentIds = [];
-
-  /*Future<void> fetchFoods(categoryId) async {
-    foods[categoryId] = await dataService.getFoods(categoryId);
-    notifyListeners();
-  }  */ // kullanım dışı
 
   void toggleFoodSelection(food) {
     String documentId = food.id;
@@ -23,7 +19,50 @@ class FoodsRepo extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> addBatchToKitchen() async {
+    late bool exists;
+    try {
+      for(var docId in selectedDocumentIds) {
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
+          .collection('foods')
+          .doc(docId)
+          .get();
 
+      if (sourceDocument.exists) {
+        DocumentReference destinationRef = FirebaseFirestore.instance
+            .collection('users').doc(Constants.uid).collection('kitchen').doc();
+
+        exists = await doesNameExist(sourceDocument['name']);
+        if(!exists) {
+          print(exists);
+          await destinationRef.set(sourceDocument.data()!);
+        }
+
+
+        print('Document copied');
+      } else {
+        print('No Source document');
+      }
+      }
+      selectedDocumentIds.clear();
+    } catch (e) {
+      print('Error: $e');
+    }
+    notifyListeners();
+  }
+
+  Future<bool> doesNameExist(String name) async {
+    final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('kitchen').get();
+
+    for (final doc in querySnapshot.docs) {
+      final fieldValue = doc.data()['name'] as String?;
+      if (fieldValue != null && fieldValue == name) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
 }
 
