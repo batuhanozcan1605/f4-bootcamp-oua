@@ -17,7 +17,7 @@ class FoodsScreen extends StatelessWidget {
     if (snapshot.hasData) {
       var foodList = snapshot.data;
       return GridView.builder(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,

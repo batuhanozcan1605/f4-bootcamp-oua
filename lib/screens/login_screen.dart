@@ -204,7 +204,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => NavScreen()),
+                              builder: (context) => SplashScreen()),
                         )
                       },
                     children: <TextSpan>[

@@ -5,6 +5,8 @@ import '../constants/constants.dart';
 import '../services/data_service.dart';
 
 Widget foodCard(food) => Card(
+  margin: EdgeInsets.all(7),
+  elevation: 5,
   clipBehavior: Clip.antiAlias,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(10),
@@ -26,6 +28,7 @@ Widget foodCard(food) => Card(
                 } else {
                   String imageUrl = snapshot.data ?? '';
                   return CachedNetworkImage(
+                    fit: BoxFit.fitHeight,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) =>
@@ -37,13 +40,13 @@ Widget foodCard(food) => Card(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: 25,
-              width: 100,
+              width: 120,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(12),
                   bottomRight: Radius.circular(12),
                 ),
-                color: Colors.white.withOpacity(0.7),
+                color: Colors.white,
               ),
               child: Align(
                 alignment: Alignment.center,
@@ -53,7 +56,7 @@ Widget foodCard(food) => Card(
                     food.name,
                     style: TextStyle(
                       fontFamily: 'Segoe UI',
-                      fontSize: 12,
+                      fontSize: 15,
                       color: Color(0xff013440),
                       fontWeight: FontWeight.w600,
                     ),
