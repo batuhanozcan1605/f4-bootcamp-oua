@@ -51,6 +51,39 @@ class FoodsRepo extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> addBatchToCart() async {
+    late bool exists;
+    try {
+      for(var docId in selectedDocumentIds) {
+        DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
+            .collection('foods')
+            .doc(docId)
+            .get();
+
+        if (sourceDocument.exists) {
+          DocumentReference destinationRef = FirebaseFirestore.instance
+              .collection('users').doc(Constants.uid).collection('shoppingCart').doc();
+
+          exists = await doesNameExist(sourceDocument['name']);
+          if(!exists) {
+            print(exists);
+            await destinationRef.set(sourceDocument.data()!);
+          }
+
+          print('Document copied');
+        } else {
+          print('No Source document');
+        }
+      }
+      selectedDocumentIds.clear();
+    } catch (e) {
+      print('Error: $e');
+    }
+    notifyListeners();
+  }
+
+
+
   Future<bool> doesNameExist(String name) async {
     final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('kitchen').get();
 

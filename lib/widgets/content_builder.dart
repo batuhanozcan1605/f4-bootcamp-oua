@@ -21,8 +21,6 @@ class ContentBuilderState extends ConsumerState<ContentBuilder> {
   @override
   Widget build(BuildContext context) {
 
-    final foodsRepo = ref.watch(foodsProvider);
-
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen')
