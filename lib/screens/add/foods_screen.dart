@@ -1,21 +1,32 @@
 import 'package:bootcamp_oua_f4/models/FoodModel.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class FoodsScreen extends StatelessWidget {
+class FoodsScreen extends StatefulWidget {
   int categoryId;
 
   FoodsScreen({Key? key, required this.categoryId}) : super(key: key);
 
   @override
+  State<FoodsScreen> createState() => _FoodsScreenState();
+}
+
+class _FoodsScreenState extends State<FoodsScreen> {
+
+  List selectedItems = [];
+
+  List<String> _selectedDocumentIds = [];
+
+  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Food>>(
-      future: DataService().getFoods(categoryId),
-      builder: (BuildContext context,
-      AsyncSnapshot<List<Food>> snapshot) {
+    return FutureBuilder<QuerySnapshot>(
+      future: FirebaseFirestore.instance.collection('foods').where('categoryId', isEqualTo: widget.categoryId).get(),
+      builder: (BuildContext context, snapshot) {
     if (snapshot.hasData) {
-      var foodList = snapshot.data;
+      List<QueryDocumentSnapshot> foods = snapshot.data!.docs;
+
       return GridView.builder(
           padding: const EdgeInsets.all(10),
           shrinkWrap: true,
@@ -23,9 +34,9 @@ class FoodsScreen extends StatelessWidget {
             crossAxisCount: 3,
             childAspectRatio: 1,
           ),
-          itemCount: foodList?.length,
+          itemCount: foods.length,
           itemBuilder: (context, index) {
-            var food = foodList![index];
+            DocumentSnapshot food = foods[index];
             return GestureDetector(
                 onTap: (){
 

@@ -14,7 +14,7 @@ Widget foodCard(food) => Card(
         fit: StackFit.expand,
         children: [
           FutureBuilder<String>(
-              future: DataService().getFoodImageUrl(food.image),
+              future: DataService().getFoodImageUrl(food['image']),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return CircularProgressIndicator(
@@ -50,7 +50,7 @@ Widget foodCard(food) => Card(
                 child: FittedBox(
                   fit: BoxFit.fitHeight,
                   child: Text(
-                    food.name,
+                    food['name'],
                     style: TextStyle(
                       fontFamily: 'Segoe UI',
                       fontSize: 12,

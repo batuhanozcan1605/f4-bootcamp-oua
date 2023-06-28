@@ -162,7 +162,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
           builder: (context, snapshot) {
             if(snapshot.hasData) {
             List<QueryDocumentSnapshot> filteredDocuments =
-                snapshot.data!.docs.where((doc) {
+            snapshot.data!.docs.where((doc) {
               String searchText = query.toLowerCase();
               String fieldValue = doc['name'].toString().toLowerCase();
               return fieldValue.contains(searchText);

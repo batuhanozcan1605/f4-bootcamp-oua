@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -22,4 +23,6 @@ class Constants {
     color: Color(0xff013440),
     fontWeight: FontWeight.w600,
   );
+  //-- DATA --
+  static final uid = FirebaseAuth.instance.currentUser!.uid;
 }

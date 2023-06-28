@@ -21,10 +21,10 @@ class DataService {
   }
 
   Future<List<Food>> getFoods(categoryId) async {
-    print("debug : getffood1");
+
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
         'foods').where('categoryId', isEqualTo: categoryId).get();
-    print("debug : getffood");
+
     List<Food> dataList = [];
     snapshot.docs.forEach((doc) {
       Food food = Food.fromSnapshot(doc);
@@ -34,7 +34,8 @@ class DataService {
     return dataList;
   }
 
-  Future<String> getImageUrl(categoryImage) async {
+
+    Future<String> getImageUrl(categoryImage) async {
     try {
       final storageRef =
       FirebaseStorage.instance.ref().child("categories/${categoryImage}");
@@ -60,7 +61,7 @@ class DataService {
     }
   }
 
-  Future<List<Food>> searchFoods(query) async {
+  /*Future<List<Food>> searchFoods(query) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
         'foods')
         .where('name', isGreaterThanOrEqualTo: query)
@@ -73,7 +74,7 @@ class DataService {
     });
 
     return dataList;
-  }
+  }*/
 
   Future<void> addFoodToKitchen(documentId) async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
