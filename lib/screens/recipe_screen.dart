@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RecipeSecreen extends StatefulWidget {
   const RecipeSecreen({Key? key}) : super(key: key);
@@ -9,32 +10,16 @@ class RecipeSecreen extends StatefulWidget {
 
 class _RecipeSecreenState extends State<RecipeSecreen> {
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF4D818C),
-        title: Container(
-          padding: const EdgeInsets.all(30.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.wallet),
-              SizedBox(width: 5),
-              Text(
-                'cep mutfak',
-                style: TextStyle(fontFamily: 'VarelaRound', fontSize: 16),
-              ),
-            ],
-          ),
-        ),
+        backgroundColor: const Color(0xFF4D818C),
+        title: SvgPicture.asset('assets/images/appbar_logo.svg'),
+        centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
       ),
-
-
-
     );
   }
 }

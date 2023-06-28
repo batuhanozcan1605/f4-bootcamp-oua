@@ -31,7 +31,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF4D818C),
+          backgroundColor: const Color(0xFF4D818C),
           title: SvgPicture.asset('assets/images/appbar_logo.svg'),
           centerTitle: true,
         ),
@@ -216,7 +216,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                   );
                 });
             } else {
-              return Center();
+              return const Center();
             }
           }),
     );
