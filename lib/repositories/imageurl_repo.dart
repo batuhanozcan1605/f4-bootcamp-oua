@@ -27,7 +27,7 @@ class ImageUrlRepository extends ChangeNotifier {
     });
     // ignore: empty_catches
     }catch(e){
-      
+
     }
     notifyListeners();
   }

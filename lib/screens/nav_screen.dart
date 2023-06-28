@@ -30,7 +30,6 @@ class NavScreenState extends ConsumerState<NavScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override

@@ -24,6 +24,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     print('debug: FETCH 2');
     await ref.read(imageUrlProvider).fetchImageUrls();
     print('debug: FETCH 3');
+    await Future.delayed(Duration(seconds: 3));
   }
 
   @override
@@ -34,6 +35,19 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator();
+    return Scaffold(
+      body: FutureBuilder(
+        future: fetchData(),
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Center(
+              child: Text('Kitchen is Loading'),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
   }
 }
