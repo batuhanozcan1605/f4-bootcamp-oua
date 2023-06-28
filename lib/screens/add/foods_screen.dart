@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/main.dart';
 import 'package:bootcamp_oua_f4/models/FoodModel.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
@@ -17,7 +18,7 @@ class FoodsScreen extends StatelessWidget {
     if (snapshot.hasData) {
       var foodList = snapshot.data;
       return GridView.builder(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(5),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -28,9 +29,9 @@ class FoodsScreen extends StatelessWidget {
             var food = foodList![index];
             return GestureDetector(
                 onTap: (){
-
                 },
-                child: foodCard(food));
+                child: foodCard(food)
+            );
           }
       );
     } else {
