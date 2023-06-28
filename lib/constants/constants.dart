@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+const kGoogleBlue = Color(0xff426d77);
 
 class Constants {
   //---COLOR---

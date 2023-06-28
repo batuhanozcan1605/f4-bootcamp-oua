@@ -29,7 +29,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
         backgroundColor: Constants.tPrimaryColor,
         title: Container(
           padding: const EdgeInsets.all(30.0),
-          child: const Row(
+          child:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.wallet),
@@ -91,7 +91,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Expanded(
+                         Expanded(
                           child: Column(
                             children: [
                               Text(

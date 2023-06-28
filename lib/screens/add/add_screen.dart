@@ -55,7 +55,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                               alignment: Alignment.bottomLeft,
                               child: SvgPicture.asset(
                                   'assets/images/icon_ekle.svg')),
-                          const Align(
+                           Align(
                             alignment: Alignment.center,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
