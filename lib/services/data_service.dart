@@ -49,11 +49,11 @@ class DataService {
 
   Future<String> getFoodImageUrl(image) async {
     try {
-      print("debug : $image");
+
       final storageRef =
       FirebaseStorage.instance.ref().child("foods/$image");
       final downloadUrl = await storageRef.getDownloadURL();
-      print("debug : $downloadUrl");
+
       return downloadUrl;
     } catch (e) {
       print('Error getting image URL: $e');

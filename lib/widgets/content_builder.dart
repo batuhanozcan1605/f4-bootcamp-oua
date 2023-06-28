@@ -1,12 +1,11 @@
-import 'package:bootcamp_oua_f4/models/FoodModel.dart';
-import 'package:bootcamp_oua_f4/services/data_service.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/constants.dart';
 
-class ContentBuilder extends StatefulWidget {
+class ContentBuilder extends ConsumerStatefulWidget {
   int categoryId;
   String categoryName;
   String place;
@@ -14,28 +13,16 @@ class ContentBuilder extends StatefulWidget {
   ContentBuilder(this.categoryId, this.categoryName, this.place);
 
   @override
-  State<ContentBuilder> createState() => _ContentBuilderState();
+  ContentBuilderState createState() => ContentBuilderState();
 }
 
-class _ContentBuilderState extends State<ContentBuilder> {
-
-  bool isSelected = false;
-  List<String> _selectedDocumentIds = [];
-
-  void toggleCardSelection(food) {
-    String documentId = food.id;
-
-    setState(() {
-      if (_selectedDocumentIds.contains(documentId)) {
-        _selectedDocumentIds.remove(documentId);
-      } else {
-        _selectedDocumentIds.add(documentId);
-      }
-    });
-  }
+class ContentBuilderState extends ConsumerState<ContentBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    print('debug: Build attempt');
+    final foodsRepo = ref.watch(foodsProvider);
+    print("debug: build");
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen')
@@ -68,12 +55,8 @@ class _ContentBuilderState extends State<ContentBuilder> {
                       itemCount: foods.length,
                       itemBuilder: (context, index) {
                         DocumentSnapshot food = foods[index];
-                        bool isSelected = _selectedDocumentIds.contains(food.id);
-                          return GestureDetector(
-                            onTap: () {
-                              toggleCardSelection(food);
-                            },
-                            child: foodCard(food, isSelected));
+
+                          return FoodCard(food: food);
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,

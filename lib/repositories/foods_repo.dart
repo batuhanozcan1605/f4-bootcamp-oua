@@ -1,21 +1,30 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../models/FoodModel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/data_service.dart';
 
 class FoodsRepo extends ChangeNotifier {
 
-  Map<int, List> foods = {
-    1 : [],
-    2 : [],
-  };
+  //bool isSelected = false;
+  List<String> selectedDocumentIds = [];
 
-  final DataService dataService;
-  FoodsRepo(this.dataService);
-
-  Future<void> fetchFoods(categoryId) async {
+  /*Future<void> fetchFoods(categoryId) async {
     foods[categoryId] = await dataService.getFoods(categoryId);
+    notifyListeners();
+  }  */ // kullanım dışı
+
+  void toggleFoodSelection(food) {
+    String documentId = food.id;
+    if (selectedDocumentIds.contains(documentId)) {
+      selectedDocumentIds.remove(documentId);
+    } else {
+      selectedDocumentIds.add(documentId);
+    }
+
     notifyListeners();
   }
 
+
+
 }
+
+final foodsProvider = ChangeNotifierProvider((ref) => FoodsRepo());

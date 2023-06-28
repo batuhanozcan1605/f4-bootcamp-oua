@@ -1,6 +1,6 @@
-import 'package:bootcamp_oua_f4/firebase_imagetest.dart';
-import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
+import 'package:bootcamp_oua_f4/splash_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,20 +23,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const SplashScreen(),
+      home: const FirebaseInitPhase(),
     );
   }
 }
 
 
-class SplashScreen extends ConsumerStatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class FirebaseInitPhase extends ConsumerStatefulWidget {
+  const FirebaseInitPhase({Key? key}) : super(key: key);
 
   @override
-  SplashScreenState createState() => SplashScreenState();
+  FirebaseInitPhaseState createState() => FirebaseInitPhaseState();
 }
 
-class SplashScreenState extends ConsumerState<SplashScreen> {
+class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
 
   bool isFirebaseInitialized = false;
 
@@ -54,15 +54,16 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     });
 
     if(FirebaseAuth.instance.currentUser != null) {
-      goToNavScreen();
+      goToSplash();
     }
 
   }
 
-  void goToNavScreen() {
+  void goToSplash() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const NavScreen())); //Normalde NavScreen
+        MaterialPageRoute(builder: (context) => const SplashScreen()));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,21 +86,21 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
                   },
                     SetOptions(merge: true),
                   );
-                  print("debug: before reference");
+
                   CollectionReference kitchen = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
                   await kitchen.doc('first doc').set({
                     'collection started' : true,
                   },
                   );
 
-                  goToNavScreen();
+                  goToSplash();
                 },
                 child: const Text("Google Sign In")),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: ElevatedButton(
                   onPressed: () {
-                    goToNavScreen();
+                    goToSplash();
                   },
                   child: const Text("Giriş Yapmadan Devam Et")),
             ),
