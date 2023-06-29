@@ -14,6 +14,11 @@ class KitchenScreen extends StatefulWidget {
 
 class _KitchenScreenState extends State<KitchenScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     //TabController = _tabController = TabController(length: 3, vsync: this),
     return MaterialApp(
@@ -31,7 +36,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                   onPressed: () async {
                     await signOutWithGoogle();
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const SplashScreen()));
+                        MaterialPageRoute(builder: (context) => const FirebaseInitPhase()));
                }, icon: Icon(Icons.logout))
             ],
           ),

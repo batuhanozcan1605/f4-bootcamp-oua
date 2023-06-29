@@ -1,3 +1,5 @@
+import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,10 +23,10 @@ class DataService {
   }
 
   Future<List<Food>> getFoods(categoryId) async {
-    print("debug : getffood1");
+
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
         'foods').where('categoryId', isEqualTo: categoryId).get();
-    print("debug : getffood");
+
     List<Food> dataList = [];
     snapshot.docs.forEach((doc) {
       Food food = Food.fromSnapshot(doc);
@@ -34,7 +36,8 @@ class DataService {
     return dataList;
   }
 
-  Future<String> getImageUrl(categoryImage) async {
+
+    Future<String> getImageUrl(categoryImage) async {
     try {
       final storageRef =
       FirebaseStorage.instance.ref().child("categories/${categoryImage}");
@@ -48,11 +51,11 @@ class DataService {
 
   Future<String> getFoodImageUrl(image) async {
     try {
-      print("debug : $image");
+
       final storageRef =
       FirebaseStorage.instance.ref().child("foods/$image");
       final downloadUrl = await storageRef.getDownloadURL();
-      print("debug : $downloadUrl");
+
       return downloadUrl;
     } catch (e) {
       print('Error getting image URL: $e');
@@ -60,7 +63,7 @@ class DataService {
     }
   }
 
-  Future<List<Food>> searchFoods(query) async {
+  /*Future<List<Food>> searchFoods(query) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
         'foods')
         .where('name', isGreaterThanOrEqualTo: query)
@@ -73,10 +76,10 @@ class DataService {
     });
 
     return dataList;
-  }
+  }*/
 
-  Future<void> addFoodToKitchen(documentId) async {
-    var uid = FirebaseAuth.instance.currentUser!.uid;
+  Future<void> addSingleFoodToKitchen(documentId) async {
+    late bool exists;
     try {
       DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
           .collection('foods')
@@ -85,11 +88,12 @@ class DataService {
 
       if (sourceDocument.exists) {
         DocumentReference destinationRef = FirebaseFirestore.instance
-            .collection('users').doc(uid).collection('kitchen').doc();
+            .collection('users').doc(Constants.uid).collection('kitchen').doc();
 
-
-        await destinationRef.set(sourceDocument.data()!);
-
+        exists = await FoodsRepo().doesNameExist(sourceDocument['name']);
+        if(!exists) {
+          await destinationRef.set(sourceDocument.data()!);
+        }
         print('Document copied');
       } else {
         print('No Source document');
@@ -100,10 +104,10 @@ class DataService {
   }
 
   Future<void> undoAdd() async {
-    var uid = FirebaseAuth.instance.currentUser!.uid;
+
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users').doc(uid).collection('kitchen')
+          .collection('users').doc(Constants.uid).collection('kitchen')
           .get();
 
       DocumentSnapshot lastDocument = querySnapshot.docs.last;
@@ -115,6 +119,7 @@ class DataService {
     }
   }
 
+
   Future<List<Food>> showFoodInKitchen(categoryId, place) async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
 
@@ -125,10 +130,10 @@ class DataService {
           .get();
 
       List<Food> dataList = [];
-      snapshot.docs.forEach((doc) {
+      for (var doc in snapshot.docs) {
         Food food = Food.fromSnapshot(doc);
         dataList.add(food);
-      });
+      }
       return dataList;
 
 }

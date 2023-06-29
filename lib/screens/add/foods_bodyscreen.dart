@@ -1,18 +1,20 @@
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/screens/add/foods_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FoodsBodyScreen extends StatefulWidget {
+class FoodsBodyScreen extends ConsumerStatefulWidget {
 
   Category category;
 
   FoodsBodyScreen({super.key, required this.category});
 
   @override
-  State<FoodsBodyScreen> createState() => _FoodsBodyScreenState();
+  FoodsBodyScreenState createState() => FoodsBodyScreenState();
 }
 
-class _FoodsBodyScreenState extends State<FoodsBodyScreen> with TickerProviderStateMixin {
+class FoodsBodyScreenState extends ConsumerState<FoodsBodyScreen> with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -38,18 +40,18 @@ class _FoodsBodyScreenState extends State<FoodsBodyScreen> with TickerProviderSt
           isScrollable: true,
           controller: _tabController,
           tabs: const [
-            Tab(text: 'Meyveler'),
-            Tab(text: 'Sebzeler'),
-            Tab(text: 'Fırın'),
-            Tab(text: 'Mandıra'),
-            Tab(text: 'İçecekler'),
-            Tab(text: 'Etler'),
-            Tab(text: 'Atıştırmalıklar'),
-            Tab(text: 'Yağlar'),
-            Tab(text: 'Deniz Ürünler'),
-            Tab(text: 'Baklalar'),
-            Tab(text: 'Baharatlar'),
-            Tab(text: 'Soslar'),
+            Tab(text: 'Fruits'),
+            Tab(text: 'Vegetables'),
+            Tab(text: 'Bakery'),
+            Tab(text: 'Dairy'),
+            Tab(text: 'Drinks'),
+            Tab(text: 'Meats'),
+            Tab(text: 'Snacks'),
+            Tab(text: 'Oils'),
+            Tab(text: 'Sea Food'),
+            Tab(text: 'Legumes'),
+            Tab(text: 'Spices'),
+            Tab(text: 'Sauces'),
           ],
         ),
       ),
@@ -61,13 +63,13 @@ class _FoodsBodyScreenState extends State<FoodsBodyScreen> with TickerProviderSt
           FoodsScreen(categoryId: 3),
           FoodsScreen(categoryId: 4),
           FoodsScreen(categoryId: 5),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
-          FoodsScreen(categoryId: 1),
+          FoodsScreen(categoryId: 6),
+          FoodsScreen(categoryId: 7),
+          FoodsScreen(categoryId: 8),
+          FoodsScreen(categoryId: 9),
+          FoodsScreen(categoryId: 10),
+          FoodsScreen(categoryId: 11),
+          FoodsScreen(categoryId: 12),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -78,19 +80,17 @@ class _FoodsBodyScreenState extends State<FoodsBodyScreen> with TickerProviderSt
                     width: screenWidth * (17 / 36),
                     child: ElevatedButton(
                         onPressed: () async {
-                          print("test: pressed");
-
+                          ref.read(foodsProvider).addBatchToKitchen();
                         },
-                        child: Text("Mutfağa Ekle")),
+                        child: const Text("Add to Kitchen")),
                   ),
                   SizedBox(
                     width: screenWidth * (17 / 36),
                     child: ElevatedButton(
                         onPressed: () async {
-                          print("test: pressed");
 
                         },
-                        child: Text("Alışveriş Listesine Ekle")),
+                        child: const Text("Add To Shopping Cart")),
                   )
                 ],
               ),

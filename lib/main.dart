@@ -1,13 +1,14 @@
-import 'package:bootcamp_oua_f4/firebase_imagetest.dart';
-import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
-import 'package:bootcamp_oua_f4/screens/onboarding_screen.dart';
+import 'package:bootcamp_oua_f4/splash_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'constants/constants.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
@@ -24,20 +25,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: SplashScreen(),
+      home: const FirebaseInitPhase(),
     );
   }
 }
 
 
-class SplashScreen extends ConsumerStatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class FirebaseInitPhase extends ConsumerStatefulWidget {
+  const FirebaseInitPhase({Key? key}) : super(key: key);
 
   @override
-  SplashScreenState createState() => SplashScreenState();
+  FirebaseInitPhaseState createState() => FirebaseInitPhaseState();
 }
 
-class SplashScreenState extends ConsumerState<SplashScreen> {
+class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
 
   bool isFirebaseInitialized = false;
 
@@ -55,15 +56,16 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     });
 
     if(FirebaseAuth.instance.currentUser != null) {
-      goToNavScreen();
+      goToSplash();
     }
 
   }
 
-  void goToNavScreen() {
+  void goToSplash() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const NavScreen())); //Normalde NavScreen
+        MaterialPageRoute(builder: (context) => const SplashScreen()));
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,30 +79,32 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
                 onPressed: () async {
 
                   await signInWithGoogle();
-
-                  String uid = FirebaseAuth.instance.currentUser!.uid;
-
-                  await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                  
+                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).set({
                     'girisYaptiMi' : true,
                     'sonGirisTarihi' : FieldValue.serverTimestamp(),
                   },
                     SetOptions(merge: true),
                   );
-                  print("debug: before reference");
-                  CollectionReference kitchen = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
-                  await kitchen.doc('first doc').set({
-                    'collection started' : true,
-                  },
-                  );
 
-                  goToNavScreen();
+
+                  await Constants.kitchenRef.doc('first doc').set({
+                    'collection started' : true,
+                  });
+
+                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).
+                  collection('shoppingCart').doc('first doc').set({
+                    'collection started' : true,
+                  });
+
+                  goToSplash();
                 },
                 child: const Text("Google Sign In")),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: ElevatedButton(
                   onPressed: () {
-                    goToNavScreen();
+                    goToSplash();
                   },
                   child: const Text("Giriş Yapmadan Devam Et")),
             ),
@@ -114,23 +118,3 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 }
 
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
-        ),
-      ),
-    );
-  }
-}

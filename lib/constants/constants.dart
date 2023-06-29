@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 const kGoogleBlue = Color(0xff426d77);
 
@@ -23,4 +25,7 @@ class Constants {
     color: Color(0xff013440),
     fontWeight: FontWeight.w600,
   );
+  //-- DATA --
+  static final uid = FirebaseAuth.instance.currentUser!.uid;
+  static final kitchenRef = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
 }

@@ -1,9 +1,11 @@
-import 'package:bootcamp_oua_f4/models/FoodModel.dart';
-import 'package:bootcamp_oua_f4/services/data_service.dart';
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../constants/constants.dart';
 
-class ContentBuilder extends StatefulWidget {
+class ContentBuilder extends ConsumerStatefulWidget {
   int categoryId;
   String categoryName;
   String place;
@@ -11,18 +13,26 @@ class ContentBuilder extends StatefulWidget {
   ContentBuilder(this.categoryId, this.categoryName, this.place);
 
   @override
-  State<ContentBuilder> createState() => _ContentBuilderState();
+  ContentBuilderState createState() => ContentBuilderState();
 }
 
-class _ContentBuilderState extends State<ContentBuilder> {
+class ContentBuilderState extends ConsumerState<ContentBuilder> {
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Food>>(
-        future: DataService().showFoodInKitchen(widget.categoryId, widget.place),
+
+    final foodsRepo = ref.watch(foodsProvider);
+
+    return FutureBuilder<QuerySnapshot>(
+        future: FirebaseFirestore.instance
+            .collection('users').doc(Constants.uid).collection('kitchen')
+            .where('categoryId', isEqualTo: widget.categoryId)
+            .where('place', isEqualTo: widget.place)
+            .get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var foods = snapshot.data;
-            if (foods!.isNotEmpty) {
+            var foods = snapshot.data!.docs;
+            if (foods.isNotEmpty) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,12 +54,9 @@ class _ContentBuilderState extends State<ContentBuilder> {
                       shrinkWrap: true,
                       itemCount: foods.length,
                       itemBuilder: (context, index) {
-                        var food =  foods[index];
-                          return GestureDetector(
-                            onTap: () {
+                        DocumentSnapshot food = foods[index];
 
-                            },
-                            child: foodCard(food));
+                          return FoodCard(food: food);
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,

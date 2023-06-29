@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
 import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
@@ -29,7 +30,6 @@ class NavScreenState extends ConsumerState<NavScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(categoriesProvider).fetchCategories();
   }
 
   @override

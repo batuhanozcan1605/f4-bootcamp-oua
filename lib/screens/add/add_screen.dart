@@ -31,7 +31,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF4D818C),
+          backgroundColor: const Color(0xFF4D818C),
           title: SvgPicture.asset('assets/images/appbar_logo.svg'),
           centerTitle: true,
         ),
@@ -162,7 +162,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
           builder: (context, snapshot) {
             if(snapshot.hasData) {
             List<QueryDocumentSnapshot> filteredDocuments =
-                snapshot.data!.docs.where((doc) {
+            snapshot.data!.docs.where((doc) {
               String searchText = query.toLowerCase();
               String fieldValue = doc['name'].toString().toLowerCase();
               return fieldValue.contains(searchText);
@@ -190,7 +190,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                             padding: const EdgeInsets.only(right: 10.0),
                             child: IconButton(
                               onPressed: () {
-                                DataService().addFoodToKitchen(document.id);
+                                DataService().addSingleFoodToKitchen(document.id);
                                 final snackBar = SnackBar(
                                   action: SnackBarAction(
                                       label: 'Undo',
@@ -216,7 +216,7 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                   );
                 });
             } else {
-              return Center();
+              return const Center();
             }
           }),
     );
