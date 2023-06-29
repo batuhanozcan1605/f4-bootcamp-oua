@@ -32,7 +32,7 @@ class FoodsRepo extends ChangeNotifier {
         DocumentReference destinationRef = FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen').doc();
 
-        exists = await doesNameExist(sourceDocument['name']);
+        exists = await doesNameExists(sourceDocument['name']);
         if(!exists) {
           print(exists);
           await destinationRef.set(sourceDocument.data()!);
@@ -60,11 +60,11 @@ class FoodsRepo extends ChangeNotifier {
             .doc(docId)
             .get();
 
-        if (sourceDocument.exists) {
-          DocumentReference destinationRef = FirebaseFirestore.instance
-              .collection('users').doc(Constants.uid).collection('shoppingCart').doc();
 
-          exists = await doesNameExist(sourceDocument['name']);
+        if (sourceDocument.exists) {
+          DocumentReference destinationRef = Constants.shoppingCartRef.doc();
+
+          exists = await doesNameExistsInCart(sourceDocument['name']);
           if(!exists) {
             print(exists);
             await destinationRef.set(sourceDocument.data()!);
@@ -84,7 +84,7 @@ class FoodsRepo extends ChangeNotifier {
 
 
 
-  Future<bool> doesNameExist(String name) async {
+  Future<bool> doesNameExists(String name) async {
     final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('kitchen').get();
 
     for (final doc in querySnapshot.docs) {
@@ -96,6 +96,20 @@ class FoodsRepo extends ChangeNotifier {
 
     return false;
   }
+
+  Future<bool> doesNameExistsInCart(String name) async {
+    final querySnapshot = await Constants.shoppingCartRef.get();
+
+    for (final doc in querySnapshot.docs) {
+      final fieldValue = doc.data()['name'] as String?;
+      if (fieldValue != null && fieldValue == name) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 
 }
 

@@ -64,18 +64,21 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                               title: Text(food['name'], style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF4D818C)),),
                               trailing: Wrap(
-                                spacing: 10, // space between two icons
+                                spacing: 2, // space between two icons
                                 children: <Widget>[
                                   IconButton(
-                                      onPressed: (){
+                                      onPressed: () async {
+                                        await DataService().addFoodFromCart(food.id);
                                           setState(() {
-                                            DataService().addFoodFromCart(food.id);
+                                            DataService().deleteFoodFromCart(food.id);
                                           });
                                   },
                                       icon: Icon(Icons.add_box_outlined, size: 30,color: Color(0xFF4D818C))), // icon-1
                                   IconButton(
                                       onPressed: (){
-
+                                        setState(() {
+                                          DataService().deleteFoodFromCart(food.id);
+                                        });
                                   },
                                       icon: Icon(Icons.delete,size: 30,color: Color(0xFF4D818C),)), // icon-2
                                 ],
@@ -96,4 +99,5 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
       ),
     );
   }
+
 }

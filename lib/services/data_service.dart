@@ -90,7 +90,7 @@ class DataService {
         DocumentReference destinationRef = FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen').doc();
 
-        exists = await FoodsRepo().doesNameExist(sourceDocument['name']);
+        exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if(!exists) {
           await destinationRef.set(sourceDocument.data()!);
         }
@@ -129,10 +129,9 @@ class DataService {
       if (sourceDocument.exists) {
         DocumentReference destinationRef = Constants.kitchenRef.doc();
 
-        exists = await FoodsRepo().doesNameExist(sourceDocument['name']);
+        exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if(!exists) {
           await destinationRef.set(sourceDocument.data()!);
-          await deleteFoodFromCart(documentId);
         }
         print('Document copied');
       } else {
