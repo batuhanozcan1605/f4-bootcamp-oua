@@ -88,7 +88,7 @@ class FoodsBodyScreenState extends ConsumerState<FoodsBodyScreen> with TickerPro
                     width: screenWidth * (17 / 36),
                     child: ElevatedButton(
                         onPressed: () async {
-
+                          ref.read(foodsProvider).addBatchToCart();
                         },
                         child: const Text("Add To Shopping Cart")),
                   )

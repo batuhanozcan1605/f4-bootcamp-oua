@@ -119,24 +119,39 @@ class DataService {
     }
   }
 
-
-  Future<List<Food>> showFoodInKitchen(categoryId, place) async {
-    var uid = FirebaseAuth.instance.currentUser!.uid;
-
-      QuerySnapshot snapshot = await FirebaseFirestore.instance
-          .collection('users').doc(uid).collection('kitchen')
-          .where('categoryId', isEqualTo: categoryId)
-          .where('place', isEqualTo: place)
+  Future<void> addFoodFromCart(documentId) async {
+    late bool exists;
+    try {
+      DocumentSnapshot sourceDocument = await Constants.shoppingCartRef
+          .doc(documentId)
           .get();
 
-      List<Food> dataList = [];
-      for (var doc in snapshot.docs) {
-        Food food = Food.fromSnapshot(doc);
-        dataList.add(food);
-      }
-      return dataList;
+      if (sourceDocument.exists) {
+        DocumentReference destinationRef = Constants.kitchenRef.doc();
 
-}
+        exists = await FoodsRepo().doesNameExist(sourceDocument['name']);
+        if(!exists) {
+          await destinationRef.set(sourceDocument.data()!);
+          await deleteFoodFromCart(documentId);
+        }
+        print('Document copied');
+      } else {
+        print('No Source document');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> deleteFoodFromCart(documentId) async {
+    try {
+    await Constants.shoppingCartRef
+        .doc(documentId)
+        .delete();
+    } catch (e){
+      print(e);
+    }
+  }
 
 }
 

@@ -20,7 +20,7 @@ class NavScreenState extends ConsumerState<NavScreen> {
 
 
   int currentindex = 0;
-  final screens = const [
+  final screens = [
     KitchenScreen(),
     RecipeSecreen(),
     AddSecreen(),

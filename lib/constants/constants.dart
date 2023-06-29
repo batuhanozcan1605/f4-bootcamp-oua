@@ -27,4 +27,5 @@ class Constants {
   //-- DATA --
   static final uid = FirebaseAuth.instance.currentUser!.uid;
   static final kitchenRef = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen');
+  static final shoppingCartRef = FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('shoppingCart');
 }

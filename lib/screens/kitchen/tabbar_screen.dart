@@ -76,7 +76,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
               height: 45.0,
               alignment: Alignment.center,
               child: _tabBar,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(0),
                   bottom: Radius.circular(30),
