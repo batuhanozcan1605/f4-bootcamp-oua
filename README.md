@@ -49,6 +49,7 @@ Aslı olarak, mutfağımdaki ürünlerle yeni yemek tarifleri öğrenmek için, 
 
 [Takım F4 UI/UX design ve web diagram](https://miro.com/app/board/uXjVMAb6FEM=/)
 ## *Sprint 1*
+### Sprint notları: 
 İlk sprintin ilk haftasını bir UI dizayn yapıp; projenin fikir temellerini, vizyonunu ve kapsamını belirlemekle geçirdik. Başta hızlıca ve Türkçe hazırladığımız uygulamaya 'cep mutfak' ismini vermiştik ancak daha sonra global potansiyelini korumayı düşünerek uygulamayı İngilizce yazmaya karar verdik.
 
 Backlog ortaya çıktıktan sonra hiç Sprint 3 görevi yazmadık ve bütün görevleri ilk 2 sprintte bitirecek şekilde ayarladık. Bunun sebebi uygulamamızda asıl fark yaratacak kapsam dışı bazı potansiyel özellikler belirlemiş olmamızdı. Zaman kalırsa onları da ekleyerek uygulamanın kalitesini bir üst segmente taşımayı planlıyoruz.
@@ -58,20 +59,25 @@ Bu yüzden de ilk Sprinte biraz fazla yüklenmiştik ve burndown chart'ın geris
 Sprint puanlama mantığı: Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 85 puanlık bir iş bitmesi gerekiyordu ve 77'si tamamlandı.
 
 
-Daily Scrum: Daily Scrum toplantılarını zamansal sebeplerden ötürü Whatsapp üzerinde gerçekleştirdik.
+### Daily Scrum:
+ Daily Scrum toplantılarını zamansal sebeplerden ötürü Whatsapp üzerinde gerçekleştirdik.
+
 [**Sprint 1 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%201/daily%20scrum)
 
-Sprint Review:
+## Sprint Review:
 - Arayüz tasarımları oluşturulmuş ve kodlanmıştır,
 - Proje yönetiminde Notion kullanılmasına karar verilmiştir
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
 - Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
 
 
-Sprint Retrospective:
+## Sprint Retrospective:
 -  Bir sonraki sprintlerde görev belirlerken yapılacakları daha net ayırmamız gerekiyor.
 - Takım içindeki iletişimi daha sıkı tutmamız gerekiyor.
 
+### Product Backlog URL
+
+[Notion Backlog Board Sprint 1](https://www.notion.so/Sprint-1-7d3b0781dc754c6f873246c5b792db40)
 ### Burndown Chart
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120093757367394484/image.png)
 
@@ -90,3 +96,11 @@ Sprint Retrospective:
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084429180780685/Screenshot_2023-06-18_at_23.11.04.png)
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084428807479349/Screenshot_2023-06-18_at_23.13.38.png)
+
+###Ürün Durumu:
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415368769830982/Screenshot_5.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415369080229998/Screenshot_6.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415369424150599/Screenshot_7.png)
