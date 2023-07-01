@@ -56,7 +56,8 @@ Backlog ortaya çıktıktan sonra hiç Sprint 3 görevi yazmadık ve bütün gö
 
 Bu yüzden de ilk Sprinte biraz fazla yüklenmiştik ve burndown chart'ın gerisinde kalmak biraz beklenen bir durumdu. Ancak arayüzde her sayfa UI'daki gibi hazır görünmüyor. Bunun sebebi, local dummy data yazmakla harcanacak emeği, Firebase üzerinde dummy data oluşturarak ve backend üzerinde çalışmalar yaparak harcayabiliriz diye düşünmemizdi.
 
-Sprint puanlama mantığı: Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 85 puanlık bir iş bitmesi gerekiyordu ve 77'si tamamlandı.
+### Sprint puanlama mantığı:
+Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 85 puanlık bir iş bitmesi gerekiyordu ve 77'si tamamlandı.
 
 
 ### Daily Scrum:
