@@ -98,7 +98,7 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084428807479349/Screenshot_2023-06-18_at_23.13.38.png)
 
-###Ürün Durumu:
+### Ürün Durumu:
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415368769830982/Screenshot_5.png)
 
