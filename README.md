@@ -104,14 +104,11 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 ![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1120084428807479349/Screenshot_2023-06-18_at_23.13.38.png)
 
 ### Ürün Durumu:
+<img width="250" src ="https://cdn.discordapp.com/attachments/1118255800826212402/1125122747597598720/Screenshot_20230702_205033.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1118255800826212402/1125122747350126693/Screenshot_20230702_205106.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1118255800826212402/1125122747060736112/Screenshot_20230702_205145.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1118255800826212402/1125122746796486747/Screenshot_20230702_205152.png">
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747597598720/Screenshot_20230702_205033.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747350126693/Screenshot_20230702_205106.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747060736112/Screenshot_20230702_205145.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122746796486747/Screenshot_20230702_205152.png)
 
 
 
@@ -153,23 +150,16 @@ Görevleri ve puanları dağıtırken Sprint 2 için kendimizi çok zorlamaya ç
 
 ### Ürün Durumu:
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597044359178/onboard1.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137596469739570/onboard3.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137596775944203/onboard2.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597581246654/login.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597325398016/register.png)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014019567686/Screenshot_20230702_210535.jpg)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130013780476045/Screenshot_20230702_210559.jpg)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014527062139/Screenshot_20230702_210520.jpg)
-
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014271221820/Screenshot_20230702_210527.jpg)
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597044359178/onboard1.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596469739570/onboard3.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596775944203/onboard2.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597581246654/login.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597325398016/register.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130014019567686/Screenshot_20230702_210535.jpg">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130013780476045/Screenshot_20230702_210559.jpg">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130014527062139/Screenshot_20230702_210520.jpg">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130014271221820/Screenshot_20230702_210527.jpg">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130134496751636/Screenshot_20230702_212509.jpg">
 
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130134496751636/Screenshot_20230702_212509.jpg)
