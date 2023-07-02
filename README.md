@@ -56,8 +56,13 @@ Backlog ortaya çıktıktan sonra hiç Sprint 3 görevi yazmadık ve bütün gö
 
 Bu yüzden de ilk Sprinte biraz fazla yüklenmiştik ve burndown chart'ın gerisinde kalmak biraz beklenen bir durumdu. Ancak arayüzde her sayfa UI'daki gibi hazır görünmüyor. Bunun sebebi, local dummy data yazmakla harcanacak emeği, Firebase üzerinde dummy data oluşturarak ve backend üzerinde çalışmalar yaparak harcayabiliriz diye düşünmemizdi.
 
+
+**Toplamda proje boyunca tamamlanması gereken puan** 340 Puan
+**Sprint 1 için tamamlanması tahmin edilen puan**: 85 Puan
+
 ### Sprint puanlama mantığı:
 Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 85 puanlık bir iş bitmesi gerekiyordu ve 77'si tamamlandı.
+
 
 
 ### Daily Scrum:
@@ -70,7 +75,7 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 - Proje yönetiminde Notion kullanılmasına karar verilmiştir
 - Firebase auth servisi ve firebase database bağlantıları test edilip eklenmiştir.
 - Uygulamaya firebase datalarının nasıl görüneceği değerlendirilip çalışmalara başlanmıştır.
-
+**Sprint Review Katılımcıları**: Batuhan Özcan, İrem Pekkıyak, Alperen Çelebi
 
 ## Sprint Retrospective:
 -  Bir sonraki sprintlerde görev belirlerken yapılacakları daha net ayırmamız gerekiyor.
@@ -100,8 +105,71 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 
 ### Ürün Durumu:
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415368769830982/Screenshot_5.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747597598720/Screenshot_20230702_205033.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415369080229998/Screenshot_6.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747350126693/Screenshot_20230702_205106.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1077644326491918418/1124415369424150599/Screenshot_7.png)
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122747060736112/Screenshot_20230702_205145.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1118255800826212402/1125122746796486747/Screenshot_20230702_205152.png)
+
+
+
+## *Sprint 2*
+**Sprint 2 notları**: 
+- Bu sprintte temel amacımız bir yandan Recipe screen için API araştırması ve testleri yapılırken, bir yandan  Firebase-Riverpod ilişkisi kullanarak, Firestore'daki dummy dataları ekranlarda göstermek ve butonlara gerekli fonksiyonları aktarmaktı.
+- Firebase'den dataları direkt çekip uygulama içinde modele uygun objelere dönüştürerek gösteriyorduk. Daha sonra özellikle imageUrl'leri her seferinde indirip yükleme verimsizliğini de ortadan kaldırmak için ve dataları cok daha rahat şekilde koleksiyonlar içinde gezdirebilmek için objeye dönüştürmeden döküman olarak getirip kullanmayı daha makul bulduk. Bir splash screen kurup dataları orada Riverpod provider kullanan repository'ye fetch'ledik, daha sonra kullandık.
+- Recipe için kapsamlı araştırmalar yaptık ve uygulamamızda kullanıma uygun görünen API'ları not aldık. Daha sonra bu API'ların özelliklerini daha detaylı bir şekilde inceleyerek, ne kadar kapsamlı olduklarına ve ihtiyaçlarımızın ne kadarını karşıladığına odaklandık. Bir test uygulaması oluşturarak, bize yapabileceğimiz yemeklerin önerilerini sunmalarını denedik. Ancak bazı sorunlarla karşılaştık ve bu sorunlara çözüm üretmeye çalışıyoruz. Bu sorunlardan ilki dolabımızdaki tüm ürünleri tek bir tarifte arıyor ve sonuç bulunamıyor olmasıydı. İkinci kısmı ise bize önerdiği tariflerde eksik malzemelerin de gözükmesiydi. İki farklı API kullanarak sorunun bir kısmını çözebiliyoruz. İlk API bize yapabileceğimiz yemeklerin bir listesini oluşturacak, ikinci API ise bu listedeki yemeklerin tariflerini listeleyecektir.
+
+**Sprint 2 için tamamlanması tahmin edilen puan**: 168 Puan
+
+### Sprint puanlama mantığı:
+Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 165 puanlık bir iş bitmesi gerekiyordu ve 110'u tamamlandı.
+
+**Daily Scrum**: Daily Scrum toplantılarını zamansal sebeplerden ötürü Whatsapp üzerinden veya Discord üzerinden gerçekleştirdik.
+
+## Sprint Review:
+
+Görevleri ve puanları dağıtırken Sprint 2 için kendimizi çok zorlamaya çalıştık. O yüzden sonuç biraz eksik görünüyor. Bunun sebebi, Sprint 3'e sadece iyileştirmeler ve kapsam dışı fikirler için zaman bırakma isteğiydi. Ancak çalışmalar değerlendirildiğinde görülüyor ki kapsam dışı yeni özellikler ekleme fırsatımız olmayacak. O sebeple ilk belirlediğimiz hedefler üzerinden gidip kalan görevleri Sprint 3 e alacağız.
+**Sprint Review Katılımcıları**: Batuhan Özcan, İrem Pekkıyak, Emirhan Can
+
+## Sprint Retrospective:
+- Takım üyelerinin son sprintde projede içerisinde daha fazla rol almaları gerektiğine vurgu yapılmıştır.
+- Sprint 3 de Projenin marketting kısmına önem verilmesi gerektiği konuşulmuştur.
+
+
+### Product Backlog URL
+
+[Notion Backlog Board Sprint 2](https://www.notion.so/23a26b90fab04ffabb13d3ebbcc1acaf?v=7da549c0c0ab4c1e8830e88d225d3391)
+
+### Sprint Board Screenshots
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125138283417055242/Screenshot_2023-07-02_at_21.57.08.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125138283123458138/Screenshot_2023-07-02_at_21.57.21.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125138282813075516/Screenshot_2023-07-02_at_21.57.32.png)
+
+
+### Ürün Durumu:
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597044359178/onboard1.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137596469739570/onboard3.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137596775944203/onboard2.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597581246654/login.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125137597325398016/register.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014019567686/Screenshot_20230702_210535.jpg)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130013780476045/Screenshot_20230702_210559.jpg)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014527062139/Screenshot_20230702_210520.jpg)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130014271221820/Screenshot_20230702_210527.jpg)
+
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1123726106709737542/1125130134496751636/Screenshot_20230702_212509.jpg)
