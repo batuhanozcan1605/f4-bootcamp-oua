@@ -150,7 +150,8 @@ Görevleri ve puanları dağıtırken Sprint 2 için kendimizi çok zorlamaya ç
 ### Ürün Durumu:
 
 
-<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597044359178/onboard1.png"><img width="200" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596469739570/onboard3.png"><img width="200" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596775944203/onboard2.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597044359178/onboard1.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596469739570/onboard3.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137596775944203/onboard2.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597581246654/login.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125137597325398016/register.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130014019567686/Screenshot_20230702_210535.jpg">
