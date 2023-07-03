@@ -2,18 +2,24 @@ import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../services/data_service.dart';
 
 class FoodsRepo extends ChangeNotifier {
 
   List<String> selectedDocumentIds = [];
+  bool tapInKitchen = false;
 
-  void toggleFoodSelection(food) {
+  void toggleFoodSelection(food, inKitchen) {
     String documentId = food.id;
     if (selectedDocumentIds.contains(documentId)) {
       selectedDocumentIds.remove(documentId);
+      if(inKitchen) {
+        tapInKitchen = false;
+      }
     } else {
       selectedDocumentIds.add(documentId);
+      if(inKitchen) {
+        tapInKitchen = true;
+      }
     }
 
     notifyListeners();
@@ -85,7 +91,7 @@ class FoodsRepo extends ChangeNotifier {
 
 
   Future<bool> doesNameExists(String name) async {
-    final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('kitchen').get();
+    final querySnapshot = await Constants.kitchenRef.get();
 
     for (final doc in querySnapshot.docs) {
       final fieldValue = doc.data()['name'] as String?;

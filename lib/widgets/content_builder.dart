@@ -54,7 +54,7 @@ class ContentBuilderState extends ConsumerState<ContentBuilder> {
                       itemBuilder: (context, index) {
                         DocumentSnapshot food = foods[index];
 
-                          return FoodCard(food: food);
+                          return FoodCard(food: food, inKitchen: true);
                       },
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
