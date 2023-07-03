@@ -123,6 +123,7 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 165 puanlık bir iş bitmesi gerekiyordu ve 110'u tamamlandı.
 
 **Daily Scrum**: Daily Scrum toplantılarını zamansal sebeplerden ötürü Whatsapp üzerinden veya Discord üzerinden gerçekleştirdik.
+[**Sprint 2 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%202/daily%20scrum)
 
 ## Sprint Review:
 
