@@ -136,7 +136,7 @@ Görevleri ve puanları dağıtırken Sprint 2 için kendimizi çok zorlamaya ç
 
 ### Product Backlog URL
 
-[Notion Backlog Board Sprint 2](https://www.notion.so/23a26b90fab04ffabb13d3ebbcc1acaf?v=7da549c0c0ab4c1e8830e88d225d3391](https://mesquite-apple-3c2.notion.site/Sprint-2-8d2d12eb2e3148358565807e356a70b0))
+[Notion Backlog Board Sprint 2](https://mesquite-apple-3c2.notion.site/Sprint-2-8d2d12eb2e3148358565807e356a70b0)
 
 ### Sprint Board Screenshots
 
