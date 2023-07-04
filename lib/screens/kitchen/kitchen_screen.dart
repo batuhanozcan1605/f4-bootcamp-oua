@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
   @override
   Widget build(BuildContext context) {
     final foodsRepo = ref.watch(foodsProvider);
+    final kitchenState = ref.watch(buttonTapProvider.notifier);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,7 +38,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                 builder: (BuildContext context) {
                   return IconButton(
                       onPressed: (){
-
+                        ref.read(foodsProvider).cancelTapInKitchen();
                       },
                       icon: Icon(Icons.cancel_outlined));
                 },
@@ -44,7 +46,9 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
               actions: [
                 IconButton(
                     onPressed: () async {
-
+                      foodsRepo.tapInKitchen = false;
+                      await foodsRepo.deleteBatchFromKitchen();
+                      kitchenState.setButtonTap();
                     },
                     icon: Icon(
                       Icons.delete,

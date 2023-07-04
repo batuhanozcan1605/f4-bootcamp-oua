@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
+import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,10 @@ class ContentBuilderState extends ConsumerState<ContentBuilder> {
 
   @override
   Widget build(BuildContext context) {
-
+    ref.listen<bool>(buttonTapProvider, (bool? previousState, bool newState) {
+      setState(() {
+      });
+    });
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('users').doc(Constants.uid).collection('kitchen')

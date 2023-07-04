@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class FoodsRepo extends ChangeNotifier {
 
   List<String> selectedDocumentIds = [];
+  List<String> selectedKitchenDocumentIds = [];
   bool tapInKitchen = false;
 
   void toggleFoodSelection(food, inKitchen) {
@@ -14,14 +15,23 @@ class FoodsRepo extends ChangeNotifier {
       selectedDocumentIds.remove(documentId);
       if(inKitchen) {
         tapInKitchen = false;
+        selectedKitchenDocumentIds.remove(documentId);
       }
     } else {
       selectedDocumentIds.add(documentId);
       if(inKitchen) {
         tapInKitchen = true;
+        selectedKitchenDocumentIds.add(documentId);
       }
     }
 
+    notifyListeners();
+  }
+
+  void cancelTapInKitchen() {
+    tapInKitchen = false;
+    selectedDocumentIds.clear();
+    selectedKitchenDocumentIds.clear();
     notifyListeners();
   }
 
@@ -53,6 +63,17 @@ class FoodsRepo extends ChangeNotifier {
       selectedDocumentIds.clear();
     } catch (e) {
       print('Error: $e');
+    }
+    notifyListeners();
+  }
+
+  Future<void> deleteBatchFromKitchen() async {
+    try {
+      for(var docId in selectedKitchenDocumentIds) {
+        Constants.kitchenRef.doc(docId).delete();
+      }
+      selectedKitchenDocumentIds.clear();
+    }catch (e){
     }
     notifyListeners();
   }
