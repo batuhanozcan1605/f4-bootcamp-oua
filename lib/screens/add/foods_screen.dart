@@ -11,7 +11,6 @@ class FoodsScreen extends ConsumerWidget {
 
 
   bool isSelected = false;
-  List<String> _selectedDocumentIds = [];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +34,7 @@ class FoodsScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 DocumentSnapshot food = foods[index];
 
-                return FoodCard(food: food);
+                return FoodCard(food: food, inKitchen: false,);
               }
           );
         } else {

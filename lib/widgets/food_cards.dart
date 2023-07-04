@@ -5,11 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/constants.dart';
-import '../services/data_service.dart';
 
 class FoodCard extends ConsumerStatefulWidget {
   final food;
-  const FoodCard({super.key, required this.food});
+  final inKitchen;
+  const FoodCard({super.key, required this.food, required this.inKitchen});
 
   @override
   FoodCardState createState() => FoodCardState();
@@ -25,10 +25,10 @@ class FoodCardState extends ConsumerState<FoodCard> {
 
     return GestureDetector(
       onTap: () {
-        ref.read(foodsProvider).toggleFoodSelection(widget.food);
-        print("DOC ID: ${foodsRepo.selectedDocumentIds}");
+        ref.read(foodsProvider).toggleFoodSelection(widget.food, widget.inKitchen);
       },
       child: Card(
+        margin: const EdgeInsets.all(7),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

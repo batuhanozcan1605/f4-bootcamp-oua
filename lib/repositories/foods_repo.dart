@@ -2,20 +2,36 @@ import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../services/data_service.dart';
 
 class FoodsRepo extends ChangeNotifier {
 
   List<String> selectedDocumentIds = [];
+  List<String> selectedKitchenDocumentIds = [];
+  bool tapInKitchen = false;
 
-  void toggleFoodSelection(food) {
+  void toggleFoodSelection(food, inKitchen) {
     String documentId = food.id;
     if (selectedDocumentIds.contains(documentId)) {
       selectedDocumentIds.remove(documentId);
+      if(inKitchen) {
+        tapInKitchen = false;
+        selectedKitchenDocumentIds.remove(documentId);
+      }
     } else {
       selectedDocumentIds.add(documentId);
+      if(inKitchen) {
+        tapInKitchen = true;
+        selectedKitchenDocumentIds.add(documentId);
+      }
     }
 
+    notifyListeners();
+  }
+
+  void cancelTapInKitchen() {
+    tapInKitchen = false;
+    selectedDocumentIds.clear();
+    selectedKitchenDocumentIds.clear();
     notifyListeners();
   }
 
@@ -47,6 +63,17 @@ class FoodsRepo extends ChangeNotifier {
       selectedDocumentIds.clear();
     } catch (e) {
       print('Error: $e');
+    }
+    notifyListeners();
+  }
+
+  Future<void> deleteBatchFromKitchen() async {
+    try {
+      for(var docId in selectedKitchenDocumentIds) {
+        Constants.kitchenRef.doc(docId).delete();
+      }
+      selectedKitchenDocumentIds.clear();
+    }catch (e){
     }
     notifyListeners();
   }
@@ -85,7 +112,7 @@ class FoodsRepo extends ChangeNotifier {
 
 
   Future<bool> doesNameExists(String name) async {
-    final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('kitchen').get();
+    final querySnapshot = await Constants.kitchenRef.get();
 
     for (final doc in querySnapshot.docs) {
       final fieldValue = doc.data()['name'] as String?;
