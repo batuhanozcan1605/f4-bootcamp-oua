@@ -38,35 +38,33 @@ class FoodCardState extends ConsumerState<FoodCard> {
           fit: StackFit.expand,
           children: [
             CachedNetworkImage(
+                fit: BoxFit.fitHeight,
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 imageUrl: imageUrls[widget.food['image']]!),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 25,
-                width: 100,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
+              child: FractionallySizedBox(
+                widthFactor: 1.0,
+                heightFactor: 0.25,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    color: isSelected
+                        ? Constants.tselectedItemColor
+                        : Colors.white.withOpacity(0.7),
                   ),
-                  color: isSelected
-                      ? Constants.tselectedItemColor
-                      : Colors.white.withOpacity(0.7),
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Text(
-                      widget.food['name'],
-                      style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 12,
-                        color: Color(0xff013440),
-                        fontWeight: FontWeight.w600,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: Text(
+                        widget.food['name'],
+                        style: Constants.ProductTitle,
                       ),
                     ),
                   ),
