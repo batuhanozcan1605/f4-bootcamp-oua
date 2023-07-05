@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
+import 'package:bootcamp_oua_f4/widgets/changeplace_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -55,7 +56,10 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                     )),
                 IconButton(
                     onPressed: (){
-
+                      showDialog(
+                        context: context,
+                        builder: (context) => const ChangePlaceWidget(),
+                      );
                     },
                     icon: Icon(
                       Icons.swap_horiz_rounded,
@@ -82,3 +86,4 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
     );
   }
 }
+
