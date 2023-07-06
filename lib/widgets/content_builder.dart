@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
 import 'package:bootcamp_oua_f4/widgets/food_cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/constants.dart';
@@ -21,13 +22,14 @@ class ContentBuilderState extends ConsumerState<ContentBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     ref.listen<bool>(buttonTapProvider, (bool? previousState, bool newState) {
       setState(() {
       });
     });
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
-            .collection('users').doc(Constants.uid).collection('kitchen')
+            .collection('users').doc(uid).collection('kitchen')
             .where('categoryId', isEqualTo: widget.categoryId)
             .where('place', isEqualTo: widget.place)
             .get(),
