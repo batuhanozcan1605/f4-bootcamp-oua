@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'constants/constants.dart';
 
@@ -46,7 +47,6 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
   void initState() {
     super.initState();
     initializeFirebase();
-
   }
 
   Future<void> initializeFirebase() async {
@@ -65,6 +65,19 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const SplashScreen()));
   }
+  Future<void> _signInAnonymously() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInAnonymously();
+      // Handle the signed-in user
+      User? user = userCredential.user;
+      // Additional logic or navigation can be performed here
+      print('Signed in anonymously: ${user!.uid}');
+    } catch (e) {
+      // Handle any errors that occur during the sign-in process
+      print('Failed to sign in anonymously: $e');
+    }
+  }
 
 
   @override
@@ -79,20 +92,19 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
                 onPressed: () async {
 
                   await signInWithGoogle();
-                  
-                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).set({
+                  final uid = FirebaseAuth.instance.currentUser!.uid;
+                  await FirebaseFirestore.instance.collection('users').doc(uid).set({
                     'girisYaptiMi' : true,
                     'sonGirisTarihi' : FieldValue.serverTimestamp(),
                   },
                     SetOptions(merge: true),
                   );
 
-
-                  await Constants.kitchenRef.doc('first doc').set({
+                  await FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc('first doc').set({
                     'collection started' : true,
                   });
 
-                  await FirebaseFirestore.instance.collection('users').doc(Constants.uid).
+                  await FirebaseFirestore.instance.collection('users').doc(uid).
                   collection('shoppingCart').doc('first doc').set({
                     'collection started' : true,
                   });
@@ -103,7 +115,8 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await _signInAnonymously();
                     goToSplash();
                   },
                   child: const Text("Giriş Yapmadan Devam Et")),

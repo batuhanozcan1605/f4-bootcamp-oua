@@ -23,7 +23,6 @@ class DataService {
   }
 
   Future<List<Food>> getFoods(categoryId) async {
-
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
         'foods').where('categoryId', isEqualTo: categoryId).get();
 
@@ -37,7 +36,7 @@ class DataService {
   }
 
 
-    Future<String> getImageUrl(categoryImage) async {
+  Future<String> getImageUrl(categoryImage) async {
     try {
       final storageRef =
       FirebaseStorage.instance.ref().child("categories/${categoryImage}");
@@ -51,7 +50,6 @@ class DataService {
 
   Future<String> getFoodImageUrl(image) async {
     try {
-
       final storageRef =
       FirebaseStorage.instance.ref().child("foods/$image");
       final downloadUrl = await storageRef.getDownloadURL();
@@ -91,7 +89,7 @@ class DataService {
             .collection('users').doc(Constants.uid).collection('kitchen').doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
-        if(!exists) {
+        if (!exists) {
           await destinationRef.set(sourceDocument.data()!);
         }
         print('Document copied');
@@ -104,7 +102,6 @@ class DataService {
   }
 
   Future<void> undoAdd() async {
-
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users').doc(Constants.uid).collection('kitchen')
@@ -113,7 +110,6 @@ class DataService {
       DocumentSnapshot lastDocument = querySnapshot.docs.last;
 
       await lastDocument.reference.delete();
-
     } catch (e) {
       print('Error: $e');
     }
@@ -130,7 +126,7 @@ class DataService {
         DocumentReference destinationRef = Constants.kitchenRef.doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
-        if(!exists) {
+        if (!exists) {
           await destinationRef.set(sourceDocument.data()!);
         }
         print('Document copied');
@@ -144,14 +140,14 @@ class DataService {
 
   Future<void> deleteFoodFromCart(documentId) async {
     try {
-    await Constants.shoppingCartRef
-        .doc(documentId)
-        .delete();
-    } catch (e){
+      await Constants.shoppingCartRef
+          .doc(documentId)
+          .delete();
+    } catch (e) {
       print(e);
     }
   }
 
-}
 
+}
 final dataServiceProvider = Provider((ref) => DataService());

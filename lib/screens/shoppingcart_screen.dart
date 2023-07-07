@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,7 +16,7 @@ class ShoppingCardScreen extends StatefulWidget {
 class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
   @override
   Widget build(BuildContext context) {
-
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF4D818C),
@@ -42,7 +43,7 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
             child: Divider(thickness: 2.0,),
           ),
           FutureBuilder<QuerySnapshot>(
-            future: Constants.shoppingCartRef
+            future: FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart')
                 .where('name', isNull: false).get(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {

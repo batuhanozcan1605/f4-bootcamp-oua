@@ -1,4 +1,6 @@
+import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 Future<UserCredential> signInWithGoogle() async {
@@ -19,8 +21,16 @@ Future<UserCredential> signInWithGoogle() async {
 }
 
 Future <void> signOutWithGoogle() async {
+  final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && user.isAnonymous) {
+      await FirebaseAuth.instance.signOut();
+      await user.delete();
+    }
+
 
   await FirebaseAuth.instance.signOut();
-  await GoogleSignIn().signOut();
-}
+  final googleSignIn = GoogleSignIn();
+  await googleSignIn.signOut();
 
+}
