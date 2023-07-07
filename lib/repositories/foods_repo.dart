@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -109,7 +110,25 @@ class FoodsRepo extends ChangeNotifier {
     notifyListeners();
   }
 
-
+  Future<void> updatePlace(String field, dynamic value) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      for(var docId in selectedKitchenDocumentIds) {
+        DocumentReference documentReference = FirebaseFirestore.instance
+            .collection('users')
+            .doc(uid)
+            .collection('kitchen')
+            .doc(docId);
+        await documentReference.update({
+          field: value
+        });
+      }
+      selectedKitchenDocumentIds.clear();
+    } catch (e) {
+      print('Error: $e');
+    }
+    notifyListeners();
+  }
 
   Future<bool> doesNameExists(String name) async {
     final querySnapshot = await Constants.kitchenRef.get();
