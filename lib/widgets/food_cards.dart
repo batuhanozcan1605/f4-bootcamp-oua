@@ -32,8 +32,7 @@ class FoodCardState extends ConsumerState<FoodCard> {
     final imageUrlRepo = ref.watch(imageUrlProvider);
     final imageUrls = imageUrlRepo.imageUrls;
     bool isSelected = foodsRepo.selectedDocumentIds.contains(widget.food.id);
-
-
+    final imageUrl = imageUrls[widget.food['image']];
 
     return GestureDetector(
       onTap: () {
@@ -49,12 +48,12 @@ class FoodCardState extends ConsumerState<FoodCard> {
           clipBehavior: Clip.antiAlias,
           fit: StackFit.expand,
           children: [
-            CachedNetworkImage(
+            imageUrl != null ? CachedNetworkImage(
                 fit: BoxFit.fitHeight,
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
-                imageUrl: imageUrls[widget.food['image']]!),
+                imageUrl: imageUrl) : const Placeholder(),
             Align(
               alignment: Alignment.bottomCenter,
               child: FractionallySizedBox(
