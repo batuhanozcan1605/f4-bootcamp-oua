@@ -22,7 +22,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
     return Future.wait([
     ref.read(categoriesProvider).fetchCategories(),
     ref.read(imageUrlProvider).fetchImageUrls(),
-      Future.delayed(Duration(seconds: 10)),
+      Future.delayed(Duration(seconds: 0)),
     ]);
   }
 
