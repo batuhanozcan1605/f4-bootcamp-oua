@@ -52,7 +52,13 @@ class FoodsRepo extends ChangeNotifier {
         exists = await doesNameExists(sourceDocument['name']);
         if(!exists) {
           print(exists);
-          await destinationRef.set(sourceDocument.data()!);
+
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+          }
+          await destinationRef.set(documentData);
+
         }
 
 
@@ -110,11 +116,18 @@ class FoodsRepo extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setEnterDate(docRef) async {
+    docRef.set({
+      'enterDate' : DateTime.now()
+    });
+  }
+
   Future<void> updatePlace(String field, dynamic value) async {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     try {
       for(var docId in selectedKitchenDocumentIds) {
-        DocumentReference documentReference = FirebaseFirestore.instance
+        print("DOC ID: $docId");
+        DocumentReference documentReference = await FirebaseFirestore.instance
             .collection('users')
             .doc(uid)
             .collection('kitchen')
@@ -123,7 +136,7 @@ class FoodsRepo extends ChangeNotifier {
           field: value
         });
       }
-      selectedKitchenDocumentIds.clear();
+      //selectedKitchenDocumentIds.clear();
     } catch (e) {
       print('Error: $e');
     }
