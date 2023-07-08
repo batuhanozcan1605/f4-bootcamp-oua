@@ -8,6 +8,7 @@ class ImageUrlRepository extends ChangeNotifier {
 
   void updateImageUrl(String path, String url) {
     imageUrls[path] = url;
+    notifyListeners();
   }
 
   Future<void> fetchImageUrls() async {
@@ -29,7 +30,7 @@ class ImageUrlRepository extends ChangeNotifier {
     }catch(e){
 
     }
-    notifyListeners();
+    //notifyListeners();
   }
 }
 

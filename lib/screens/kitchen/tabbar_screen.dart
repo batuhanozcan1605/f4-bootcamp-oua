@@ -13,17 +13,17 @@ class TabBarScreen extends StatefulWidget {
 class _TabBarScreenState extends State<TabBarScreen> {
 
   TabBar get _tabBar => TabBar(
-    labelPadding: EdgeInsets.only(left: 0, right: 0, top: 10),
+    labelPadding: const EdgeInsets.only(left: 0, right: 0, top: 0),
 
     indicatorColor: Color(0xFF4D818C),
     indicator: UnderlineTabIndicator(
       borderRadius: BorderRadius.circular(60), // Creates border
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 15.0,
         color: Color(0xFF4D818C),
       ),
 
-      insets: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+      insets: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
     ),
 
     labelColor: Color(0xffffffff),
@@ -55,61 +55,46 @@ class _TabBarScreenState extends State<TabBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Column(
-          children: [
-            Container(
-              height: 50,
-              child: TextField(
-                onChanged: (value) => {},
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  filled: true,
-                  fillColor: Color(0xffffffff),
-                  labelText: 'Search',
-                  suffixIcon: Icon(Icons.search),
-                ),
+      body: Column(
+        children: [
+
+          Container(
+            height: 65.0,
+            alignment: Alignment.center,
+            child: _tabBar,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(0),
+                bottom: Radius.circular(30),
               ),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 1.0,
+                  offset:
+                  Offset(0, 0), // shadow direction: bottom right
+                )
+              ],
             ),
-            Container(
-              height: 45.0,
-              alignment: Alignment.center,
-              child: _tabBar,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(0),
-                  bottom: Radius.circular(30),
-                ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black,
-                    blurRadius: 1.0,
-                    offset:
-                    Offset(0, 0), // shadow direction: bottom right
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-                child: _tabBarView
-            ),
-            /*Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(0),
-                      bottom: Radius.circular(30),
-                    ),
-                    color: Colors.white,
-                    child: Container(
-                      height: 45.0,
-                      alignment: Alignment.center,
-                      child: _tabBar,
-                    ),
-                  ),*/
-          ],
-        ),
+          ),
+          Expanded(
+              child: _tabBarView
+          ),
+          /*Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(0),
+                    bottom: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                  child: Container(
+                    height: 45.0,
+                    alignment: Alignment.center,
+                    child: _tabBar,
+                  ),
+                ),*/
+        ],
       ),
     );
   }

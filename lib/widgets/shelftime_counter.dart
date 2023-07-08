@@ -13,18 +13,18 @@ class ShelfTimeCounter extends StatelessWidget {
     DateTime enterDate = timestamp!.toDate();
     DateTime expireDate = DateTime.now().add(Duration(days: shelfTime));
     Duration difference = expireDate.difference(enterDate);
-    int dayCount = difference.inDays.abs();
+    int dayCount = difference.inDays;
 
 
-    return Align(
+    return dayCount < 5 && food['place'] != 'd' ? Align(
       alignment: Alignment.topRight,
       child: FractionallySizedBox(
         widthFactor: 0.25,
         heightFactor: 0.25,
         child: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xffff9f00),
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: dayCount <= 0 ? Colors.red : const Color(0xffff9f00),
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(10.0),
               bottomLeft: Radius.circular(5.0),
             ),
@@ -35,7 +35,7 @@ class ShelfTimeCounter extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 12,
-                color: const Color(0xffffffff),
+                color: Color(0xffffffff),
                 fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
@@ -44,6 +44,6 @@ class ShelfTimeCounter extends StatelessWidget {
           ),
         ),
       ),
-    ) ;
+    ) : const Center();
   }
 }

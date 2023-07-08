@@ -10,16 +10,18 @@ import '../models/FoodModel.dart';
 class DataService {
 
   Future<List<Category>> getCategories() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
-        'categories').orderBy("categoryId").get();
 
-    List<Category> dataList = [];
-    snapshot.docs.forEach((doc) {
-      Category category = Category.fromSnapshot(doc);
-      dataList.add(category);
-    });
+      QuerySnapshot snapshot = await FirebaseFirestore.instance.collection(
+          'categories').orderBy("categoryId").get();
 
-    return dataList;
+      List<Category> dataList = [];
+      snapshot.docs.forEach((doc) {
+        Category category = Category.fromSnapshot(doc);
+        dataList.add(category);
+      });
+
+      return dataList;
+
   }
 
   Future<List<Food>> getFoods(categoryId) async {
