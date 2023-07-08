@@ -90,7 +90,11 @@ class DataService {
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
-          await destinationRef.set(sourceDocument.data()!);
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+          }
+          await destinationRef.set(documentData);
         }
         print('Document copied');
       } else {
@@ -127,7 +131,11 @@ class DataService {
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
-          await destinationRef.set(sourceDocument.data()!);
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+          }
+          await destinationRef.set(documentData);
         }
         print('Document copied');
       } else {

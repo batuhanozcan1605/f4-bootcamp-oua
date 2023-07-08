@@ -1,6 +1,8 @@
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
+import 'package:bootcamp_oua_f4/widgets/shelftime_counter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +18,22 @@ class FoodCard extends ConsumerStatefulWidget {
 }
 
 class FoodCardState extends ConsumerState<FoodCard> {
+
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final foodsRepo = ref.watch(foodsProvider);
     final imageUrlRepo = ref.watch(imageUrlProvider);
     final imageUrls = imageUrlRepo.imageUrls;
     bool isSelected = foodsRepo.selectedDocumentIds.contains(widget.food.id);
+
+
 
     return GestureDetector(
       onTap: () {
@@ -56,7 +68,7 @@ class FoodCardState extends ConsumerState<FoodCard> {
                     ),
                     color: isSelected
                         ? Constants.tselectedItemColor
-                        : Colors.white.withOpacity(0.7),
+                        : Colors.white,
                   ),
                   child: Align(
                     alignment: Alignment.center,
@@ -71,6 +83,7 @@ class FoodCardState extends ConsumerState<FoodCard> {
                 ),
               ),
             ),
+            widget.inKitchen ? ShelfTimeCounter(food: widget.food) : Center()
           ],
         ),
       ),

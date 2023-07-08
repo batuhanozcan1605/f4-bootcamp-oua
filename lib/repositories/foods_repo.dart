@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,7 +52,13 @@ class FoodsRepo extends ChangeNotifier {
         exists = await doesNameExists(sourceDocument['name']);
         if(!exists) {
           print(exists);
-          await destinationRef.set(sourceDocument.data()!);
+
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+          }
+          await destinationRef.set(documentData);
+
         }
 
 
@@ -109,7 +116,32 @@ class FoodsRepo extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> setEnterDate(docRef) async {
+    docRef.set({
+      'enterDate' : DateTime.now()
+    });
+  }
 
+  Future<void> updatePlace(String field, dynamic value) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      for(var docId in selectedKitchenDocumentIds) {
+        print("DOC ID: $docId");
+        DocumentReference documentReference = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(uid)
+            .collection('kitchen')
+            .doc(docId);
+        await documentReference.update({
+          field: value
+        });
+      }
+      //selectedKitchenDocumentIds.clear();
+    } catch (e) {
+      print('Error: $e');
+    }
+    notifyListeners();
+  }
 
   Future<bool> doesNameExists(String name) async {
     final querySnapshot = await Constants.kitchenRef.get();
