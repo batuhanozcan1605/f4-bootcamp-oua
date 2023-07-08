@@ -65,6 +65,7 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const SplashScreen()));
   }
+
   Future<void> _signInAnonymously() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance

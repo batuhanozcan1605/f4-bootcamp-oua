@@ -18,19 +18,11 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
         MaterialPageRoute(builder: (context) => const NavScreen()));
   }
 
-  Future<void> fetchData () async {
-
-    await ref.read(categoriesProvider).fetchCategories();
-
-    await ref.read(imageUrlProvider).fetchImageUrls();
-
-    await Future.delayed(Duration(seconds: 3));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData().whenComplete(() => goToNavScreen());
+  Future<List> fetchData (){
+    return Future.wait([
+    ref.read(categoriesProvider).fetchCategories(),
+    ref.read(imageUrlProvider).fetchImageUrls(),
+    ]);
   }
 
   @override
@@ -39,12 +31,10 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
       body: FutureBuilder(
         future: fetchData(),
         builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return const Center(
-              child: Text('Kitchen is Loading'),
-            );
-          } else {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
+          } else {
+            return NavScreen();
           }
         },
       ),
