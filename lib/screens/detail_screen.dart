@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import '../constants/constants.dart';
+import '../repositories/kitchen_state.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
   final food;
@@ -38,7 +39,10 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    ref.listen<bool>(buttonTapProvider, (bool? previousState, bool newState) {
+      setState(() {
+      });
+    });
     int shelfTime = widget.food['shelfTime'];
     Timestamp? timestamp = widget.food['enterDate'];
     Timestamp? newTimestamp = widget.food['newExpiryDate'];
@@ -155,8 +159,10 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    DataService().pickDateAndSave(context, widget.food.id);
+                  onPressed: () async {
+                    await DataService().pickDateAndSave(context, widget.food.id);
+                    final kitchenState = ref.watch(buttonTapProvider.notifier);
+                    kitchenState.setButtonTap();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

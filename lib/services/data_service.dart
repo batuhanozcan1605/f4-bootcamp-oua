@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/CategoryModel.dart';
 import '../models/FoodModel.dart';
+import '../repositories/kitchen_state.dart';
 
-class DataService {
+class DataService extends ChangeNotifier {
 
   Future<List<Category>> getCategories() async {
 
@@ -168,6 +169,7 @@ class DataService {
   }
 
   Future<void> pickDateAndSave(context, docId) async {
+
     // Show date picker
     final selectedDate = await showDatePicker(
       context: context,
@@ -177,8 +179,8 @@ class DataService {
     );
 
     if (selectedDate != null) {
-        await Constants.kitchenRef.doc(docId).update({'newExpiryDate': selectedDate});
-        //kitchenState.setButtonTap();
+      await Constants.kitchenRef.doc(docId).update({'newExpiryDate': selectedDate});
+
       }
     }
   }
