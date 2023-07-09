@@ -3,6 +3,7 @@ import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/CategoryModel.dart';
 import '../models/FoodModel.dart';
@@ -155,6 +156,29 @@ class DataService {
           .delete();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> deleteFromDetails(docId) async {
+    try{
+      Constants.kitchenRef.doc(docId).delete();
+    }catch(e){
+
+    }
+  }
+
+  Future<void> pickDateAndSave(context, docId) async {
+    // Show date picker
+    final selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (selectedDate != null) {
+      // Update the date field in Firestore document
+      await Constants.kitchenRef.doc(docId).update({'dateField': selectedDate});
     }
   }
 
