@@ -22,16 +22,26 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   bool switchUsed = false;
+  DateTime nullDate = DateTime(0);
+
+
 
   @override
   Widget build(BuildContext context) {
+
     int shelfTime = widget.food['shelfTime'];
     Timestamp? timestamp = widget.food['enterDate'];
+    Timestamp? newTimestamp = widget.food['newExpiryDate'];
     DateTime enterDate = timestamp!.toDate();
     DateTime expireDate = DateTime.now().add(Duration(days: shelfTime));
+    DateTime? newExpiryDate = newTimestamp != null ? newTimestamp.toDate() : nullDate;
+
     Duration difference = expireDate.difference(enterDate);
-    int dayCount = difference.inDays;
-    String formattedDate = DateFormat('dd.MM.yy').format(expireDate);
+    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : Duration(days: 0);
+
+    int dayCount = newTimestamp == null ? difference.inDays : newDifference.inDays;
+    String formattedDate = newTimestamp == null ? DateFormat('dd.MM.yy').format(expireDate) :
+    DateFormat('dd.MM.yy').format(newExpiryDate);
 
     return Scaffold(
       appBar: AppBar(
@@ -94,6 +104,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 value: switchUsed,
                 activeColor: Constants.tPrimaryColor,
                 onChanged: (bool value) {
+
                   // This is called when the user toggles the switch.
                   setState(() {
                     switchUsed = value;
@@ -111,7 +122,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Expire date',
+                      'Expiry date',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -120,11 +131,11 @@ class _DetailScreenState extends State<DetailScreen> {
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        Text(
+                         Text(
                           '${dayCount} days left',
                           style: TextStyle(fontSize: 18, color: Colors.green),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(height: 10,),
                         Text(
                           ' $formattedDate',
                           style: TextStyle(fontSize: 18),
@@ -134,7 +145,9 @@ class _DetailScreenState extends State<DetailScreen> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(

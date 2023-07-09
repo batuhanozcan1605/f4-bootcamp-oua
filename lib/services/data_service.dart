@@ -177,11 +177,10 @@ class DataService {
     );
 
     if (selectedDate != null) {
-      // Update the date field in Firestore document
-      await Constants.kitchenRef.doc(docId).update({'dateField': selectedDate});
+        await Constants.kitchenRef.doc(docId).update({'newExpiryDate': selectedDate});
+        //kitchenState.setButtonTap();
+      }
     }
   }
 
-
-}
 final dataServiceProvider = Provider((ref) => DataService());

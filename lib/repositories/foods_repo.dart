@@ -56,6 +56,7 @@ class FoodsRepo extends ChangeNotifier {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
           }
           await destinationRef.set(documentData);
 
