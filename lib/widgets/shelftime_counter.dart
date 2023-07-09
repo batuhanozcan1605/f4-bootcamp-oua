@@ -7,14 +7,19 @@ class ShelfTimeCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime nullDate = DateTime(0);
 
     int shelfTime = food['shelfTime'];
     Timestamp? timestamp = food['enterDate'];
     DateTime enterDate = timestamp!.toDate();
     DateTime expireDate = DateTime.now().add(Duration(days: shelfTime));
     Duration difference = expireDate.difference(enterDate);
-    int dayCount = difference.inDays;
 
+    Timestamp? newTimestamp = food['newExpiryDate'];
+    DateTime? newExpiryDate = newTimestamp != null ? newTimestamp.toDate() : nullDate;
+    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : Duration(days: 0);
+
+    int dayCount = newTimestamp == null ? difference.inDays : newDifference.inDays;
 
     return dayCount < 5 && food['place'] != 'd' ? Align(
       alignment: Alignment.topRight,
