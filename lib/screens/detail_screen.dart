@@ -25,15 +25,17 @@ class DetailScreen extends ConsumerStatefulWidget {
 class DetailScreenState extends ConsumerState<DetailScreen> {
   bool switchUsed = false;
   DateTime nullDate = DateTime(0);
+  late Timestamp? newTimestamp;
+  late DocumentReference documentReference;
 
   @override
   void initState() {
     super.initState();
-   if(widget.food['newExpiryDate'] != null) {
-    Timestamp? newTimestamp = widget.food['newExpiryDate'];
-    DateTime newExpiryDate = newTimestamp!.toDate();
+    setState(() {
+      newTimestamp = widget.food['newExpiryDate'];
+      documentReference = Constants.kitchenRef.doc(widget.food.id);
+    });
 
-   }
   }
 
 
@@ -45,10 +47,10 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     });
     int shelfTime = widget.food['shelfTime'];
     Timestamp? timestamp = widget.food['enterDate'];
-    Timestamp? newTimestamp = widget.food['newExpiryDate'];
+
     DateTime enterDate = timestamp!.toDate();
     DateTime expireDate = DateTime.now().add(Duration(days: shelfTime));
-    DateTime? newExpiryDate = newTimestamp != null ? newTimestamp.toDate() : nullDate;
+    DateTime? newExpiryDate = newTimestamp != null ? newTimestamp!.toDate() : nullDate;
 
     Duration difference = expireDate.difference(enterDate);
     Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : Duration(days: 0);
@@ -129,7 +131,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
+            child: switchUsed == false ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
@@ -160,9 +162,10 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await DataService().pickDateAndSave(context, widget.food.id);
+                    await pickDateAndSave(widget.food.id);
                     final kitchenState = ref.watch(buttonTapProvider.notifier);
                     kitchenState.setButtonTap();
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -182,7 +185,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   ),
                 ),
               ],
-            ),
+            ) : const Center(),
           ),
           const SizedBox(height: 20),
           Container(
@@ -234,11 +237,13 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                     child: const Text('Delete Food'),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        print("setstate");
-                      });
+                    onPressed: () async {
+                      if(switchUsed) {
 
+                      }
+                      setState(() {
+
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
@@ -255,5 +260,36 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
         ],
       ),
     );
+  }
+  Future<void> pickDateAndSave(docId) async {
+
+    // Show date picker
+    final selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (selectedDate != null) {
+      await documentReference.update({'newExpiryDate': selectedDate});
+      final snackBar = SnackBar(
+        action: SnackBarAction(
+            label: 'Refresh',
+            onPressed: ()  async {
+              final doc = await documentReference.get();
+              setState(() {
+                newTimestamp = doc['newExpiryDate'];
+              });
+            }),
+        content: Text("Expiry date updated.",
+          style: TextStyle(
+            color: Colors.white70,
+          ),
+        ),
+        backgroundColor: Color(0xFF013440),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
