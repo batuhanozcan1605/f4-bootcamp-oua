@@ -3,11 +3,12 @@ import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import '../constants/constants.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends ConsumerStatefulWidget {
   final food;
   final imageUrl;
 
@@ -17,13 +18,22 @@ class DetailScreen extends StatefulWidget {
   });
 
   @override
-  State<DetailScreen> createState() => _DetailScreenState();
+  DetailScreenState createState() => DetailScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class DetailScreenState extends ConsumerState<DetailScreen> {
   bool switchUsed = false;
   DateTime nullDate = DateTime(0);
 
+  @override
+  void initState() {
+    super.initState();
+   if(widget.food['newExpiryDate'] != null) {
+    Timestamp? newTimestamp = widget.food['newExpiryDate'];
+    DateTime newExpiryDate = newTimestamp!.toDate();
+
+   }
+  }
 
 
   @override
@@ -146,7 +156,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    
+                    DataService().pickDateAndSave(context, widget.food.id);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -218,7 +228,12 @@ class _DetailScreenState extends State<DetailScreen> {
                     child: const Text('Delete Food'),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        print("setstate");
+                      });
+
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
                       shape: RoundedRectangleBorder(
