@@ -56,22 +56,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
           children: [
-            Container(
-              height: 50,
-              child: TextField(
-                onChanged: (value) => {},
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  filled: true,
-                  fillColor: Color(0xffffffff),
-                  labelText: 'Search',
-                  suffixIcon: Icon(Icons.search),
-                ),
-              ),
-            ),
+
             Container(
               height: 45.0,
               alignment: Alignment.center,
@@ -95,19 +83,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
             Expanded(
                 child: _tabBarView
             ),
-            /*Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(0),
-                      bottom: Radius.circular(30),
-                    ),
-                    color: Colors.white,
-                    child: Container(
-                      height: 45.0,
-                      alignment: Alignment.center,
-                      child: _tabBar,
-                    ),
-                  ),*/
           ],
         ),
       ),
