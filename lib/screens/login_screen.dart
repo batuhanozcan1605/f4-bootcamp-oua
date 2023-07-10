@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../constants/constants.dart';
-import '../main.dart';
 import '../widgets/custom_form_field.dart';
 import 'nav_screen.dart';
 
@@ -25,7 +24,7 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: Get.height / 7,
+                height: Get.height / 5,
               ),
               Image.asset(
                 'assets/images/fridge.png',
@@ -94,8 +93,9 @@ class LoginPage extends StatelessWidget {
                 endColor: kGoogleBlue.withOpacity(0.4),
                 borderColor: Colors.teal.withOpacity(0.7),
                 height: 40,
+
                 stretch: false,
-                borderRadius: 30,
+                borderRadius: 8,
                 gradientOrientation: GradientOrientation.Horizontal,
                 onTap: (finish) {
                   Get.off(NavScreen());
@@ -165,22 +165,58 @@ class LoginPage extends StatelessWidget {
                           height: 36,
                         )),
                   ),
+
                 ],
               ),
-              Padding(
+
+              /*Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Image.asset(
-                      'assets/images/google.png',
+                      'assets/google.png',
                       height: 30,
                     ),
                   ],
                 ),
+              ),*/
+              Container(
+                height: 50,
+                width: 205,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: MaterialButton(
+
+                    color: Colors.white,
+                    elevation: 10,
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 30.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/images/google.png'),
+                                fit: BoxFit.cover),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text("Sign In with Google",style: TextStyle(color: Colors.black,
+                            fontFamily: 'VarelaRound',
+                            fontSize: 15),)
+                      ],
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
-                height: 15,
+                height: 25,
               ),
               RichText(
                 text: TextSpan(
@@ -194,7 +230,7 @@ class LoginPage extends StatelessWidget {
                       ..onTap = () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => FirebaseInitPhase()),
+                              builder: (context) => NavScreen()),
                         ),
                     children: <TextSpan>[
                       TextSpan(
