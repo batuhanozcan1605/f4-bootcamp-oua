@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/repositories/categories_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
+import 'package:bootcamp_oua_f4/screens/add/add_custom_food.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:bootcamp_oua_f4/widgets/category_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,38 +47,43 @@ class AddSecreenState extends ConsumerState<AddSecreen> {
                         const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: SizedBox(
                       height: 80,
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddCustomFood()));
+                        },
+                        child: Card(
+                          clipBehavior: Clip.antiAlias,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Stack(children: [
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                                child: SvgPicture.asset(
+                                    'assets/images/icon_ekle.svg')),
+                            const Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Add Custom Food',
+                                      style: TextStyle(
+                                        fontFamily: 'Segoe UI',
+                                        fontSize: 15,
+                                        color: Color(0xff013440),
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                  Text('(First, check it from the search bar.)',
+                                      style: TextStyle(
+                                        fontFamily: 'Segoe UI',
+                                        fontSize: 10,
+                                        color: Color(0xFF4D818C),
+                                      )),
+                                ],
+                              ),
+                            )
+                          ]),
                         ),
-                        child: Stack(children: [
-                          Align(
-                              alignment: Alignment.bottomLeft,
-                              child: SvgPicture.asset(
-                                  'assets/images/icon_ekle.svg')),
-                          const Align(
-                            alignment: Alignment.center,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Add Custom Food',
-                                    style: TextStyle(
-                                      fontFamily: 'Segoe UI',
-                                      fontSize: 15,
-                                      color: Color(0xff013440),
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                                Text('(First, check it from the search bar.)',
-                                    style: TextStyle(
-                                      fontFamily: 'Segoe UI',
-                                      fontSize: 10,
-                                      color: Color(0xFF4D818C),
-                                    )),
-                              ],
-                            ),
-                          )
-                        ]),
                       ),
                     ),
                   ),

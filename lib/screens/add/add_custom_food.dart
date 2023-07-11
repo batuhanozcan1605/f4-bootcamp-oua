@@ -1,5 +1,8 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 class AddCustomFood extends StatefulWidget {
   @override
@@ -12,7 +15,11 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   TextEditingController foodNameController = TextEditingController();
   int _defaultValue = 0;
   bool isSwitchOn = false;
-  int? selectedStorageOption;
+  String? selectedStorageOption;
+  DateTime? selectedExpireDate;
+  late int categoryId;
+  String formattedDate = 'a';
+
 
   @override
   void dispose() {
@@ -22,25 +29,13 @@ class _AddCustomFoodState extends State<AddCustomFood> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> categories = ['Category 1', 'Category 2', 'Category 3'];
+    List<String> categories = ['Fruits', 'Vegetables', 'Bakery', 'Dairy', 'Drinks', 'Meats', 'Snacks', 'Oils', 'Sea Food', 'Legumes', 'Spices', 'Sauces'];
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.tPrimaryColor,
-        title: Container(
-          padding: const EdgeInsets.all(30.0),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.wallet),
-              SizedBox(width: 5),
-              Text(
-                'cep mutfak',
-                style: TextStyle(fontFamily: 'VarelaRound', fontSize: 16),
-              ),
-            ],
-          ),
-        ),
+        backgroundColor: const Color(0xFF4D818C),
+        title: SvgPicture.asset('assets/images/appbar_logo.svg'),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -65,7 +60,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Column(
                   children: [
                     Row(
@@ -84,10 +79,10 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -110,13 +105,13 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                               value: selectedCategory,
                               items: categories.map((String category) {
                                 return DropdownMenuItem(
-                                  value: category,
+                                  value: categories.indexOf(category).toString(),
                                   child: Text(category),
                                 );
                               }).toList(),
                               onChanged: (value) {
                                 setState(() {
-                                  selectedCategory = value as String?;
+                                  selectedCategory = value as String;
                                 });
                               },
                             ),
@@ -124,78 +119,54 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Shelf Time',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const Text('(Day)', style: Constants.CategoryTitle),
-                              Switch(
-                                value: isSwitchOn,
-                                onChanged: (bool newValue) {
-                                  setState(() {
-                                    isSwitchOn = newValue;
-                                  });
-                                },
-                              ),
-                            ],
+                        Column(
+                          children: [
+                            Text("Set an expiry date", style: TextStyle(fontSize: 16,
+                      fontWeight: FontWeight.bold,)),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(formattedDate, style: TextStyle(
+                                  fontSize: 18,
+                                color: Constants.tselectedItemColor,
+                              ),),
+                            ),
+                          ],
+                        ),
+                        ElevatedButton(
+                            onPressed: () async {
+                              final selectedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                              );
+                              setState(() {
+                                selectedExpireDate = selectedDate;
+                                formattedDate = DateFormat('dd.MM.yy').format(selectedExpireDate!);
+                              });
+                        },
+                            style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            side: const BorderSide(color: Colors.teal),
                           ),
                         ),
-                        Visibility(
-                          visible: isSwitchOn,
-                          child: Expanded(
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.remove),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (_defaultValue > 0) {
-                                          _defaultValue--;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    '$_defaultValue',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  IconButton(
-                                    icon: Icon(Icons.add),
-                                    onPressed: () {
-                                      setState(() {
-                                        _defaultValue++;
-                                      });
-                                    },
-                                  ),
-                                ],
+                            child: const Text(
+                              'SET DATE',
+                              style: TextStyle(
+                                color: Colors.teal,
                               ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 5),
                             ),
-                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
-                    Row(
+                    const SizedBox(height: 30),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Where would you like to store the food?")
@@ -204,36 +175,37 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Radio<int>(
-                          value: 0,
+                        Radio<String>(
+                          value: 'b',
                           groupValue: selectedStorageOption,
-                          onChanged: (int? value) {
+                          onChanged: (String? value) {
                             setState(() {
                               selectedStorageOption = value;
                             });
                           },
                         ),
-                        Text('Fridge'),
-                        Radio<int>(
-                          value: 1,
+                        const Text('Fridge'),
+                        Radio<String>(
+                          value: 'k',
                           groupValue: selectedStorageOption,
-                          onChanged: (int? value) {
+                          onChanged: (String? value) {
                             setState(() {
                               selectedStorageOption = value;
                             });
                           },
                         ),
-                        Text('Freezer'),
-                        Radio<int>(
-                          value: 2,
+                        const Text('Pantry'),
+                        Radio<String>(
+                          value: 'd',
                           groupValue: selectedStorageOption,
-                          onChanged: (int? value) {
+                          onChanged: (String? value) {
                             setState(() {
                               selectedStorageOption = value;
                             });
                           },
                         ),
-                        Text('Pantry'),
+                        const Text('Freezer'),
+
                       ],
                     ),
                   ],
@@ -246,13 +218,38 @@ class _AddCustomFoodState extends State<AddCustomFood> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            addCustomFood();
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: Constants.tPrimaryColor,
           ),
-          child: Text('Add Custom Food'),
+          child: const Text('Add Custom Food'),
         ),
       ),
     );
   }
+
+  Future<void> addCustomFood() async {
+    if(selectedCategory == null) {
+      return;
+    }else{
+    categoryId = int.parse(selectedCategory!) + 1;
+    }
+
+    Duration difference = selectedExpireDate!.difference(DateTime.now());
+
+
+    Map<String, dynamic> data = {
+      'categoryId' : categoryId,
+      'name' : foodNameController.text,
+      'enterDate' : FieldValue.serverTimestamp(),
+      'newExpiryDate' : selectedExpireDate,
+      'place' : selectedStorageOption,
+      'image' : '$selectedCategory.png',
+      'shelftime' : difference.inDays
+    };
+    Constants.kitchenRef.doc().set(data);
+  }
+
 }

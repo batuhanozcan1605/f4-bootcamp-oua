@@ -188,30 +188,6 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
             ) : const Center(),
           ),
           const SizedBox(height: 20),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Quantity',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('kilo'),
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: Center(
               child: Row(
