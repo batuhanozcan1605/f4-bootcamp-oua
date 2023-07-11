@@ -22,7 +22,7 @@ class NavScreenState extends ConsumerState<NavScreen> {
   int currentindex = 0;
   final screens = [
     KitchenScreen(),
-    RecipeSecreen(),
+    RecipeScreen(),
     AddSecreen(),
     ShoppingCardScreen(),
   ];

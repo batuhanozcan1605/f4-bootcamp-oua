@@ -75,7 +75,7 @@ class _OnBoardingState extends State<OnBoardingPage> {
                     child: SlideAction(
                       animationDuration: Duration(milliseconds: 900),
                       submittedIcon: Icon(
-                        FontAwesomeIcons.kitchenSet,
+                        FontAwesomeIcons.house,
                         color: Colors.white,
                       ),
                       text: 'Let\'s get start',

@@ -44,9 +44,10 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_riverpod: ^2.3.6
   slide_to_act: ^2.0.1
-  font_awesome_flutter: ^10.4.0
+  font_awesome_flutter: ^10.5.0
   nice_buttons: ^0.0.2
-
+  http: ^0.13.4
+  url_launcher: ^6.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
