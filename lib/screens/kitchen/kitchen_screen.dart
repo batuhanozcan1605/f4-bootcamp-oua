@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../main.dart';
+import '../login_screen.dart';
 
 class KitchenScreen extends ConsumerStatefulWidget {
   const KitchenScreen({Key? key}) : super(key: key);
@@ -78,7 +79,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                   onPressed: () async {
                     await signOutWithGoogle();
                     Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const FirebaseInitPhase()));
+                        MaterialPageRoute(builder: (context) => LoginPage()));
                   }, icon: Icon(Icons.logout))
             ],
           ),

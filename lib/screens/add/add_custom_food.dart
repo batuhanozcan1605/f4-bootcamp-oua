@@ -18,7 +18,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   String? selectedStorageOption;
   DateTime? selectedExpireDate;
   late int categoryId;
-  String formattedDate = 'a';
+  String formattedDate = '';
 
 
   @override
@@ -54,7 +54,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                       width: 200,
                       height: 200,
                       child: Image.network(
-                        'https://nationaltoday.com/wp-content/uploads/2020/06/Soul-Food-1-1.jpg',
+                        'https://5.imimg.com/data5/SELLER/Default/2022/12/EB/KL/FW/31012184/5d3f90b6-2353-4c4b-9cfd-5ca5c5775ff4-500x500.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
