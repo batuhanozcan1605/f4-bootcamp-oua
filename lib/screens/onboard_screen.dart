@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
 import '../constants/constants.dart';
@@ -96,6 +97,7 @@ class _OnBoardingState extends State<OnBoardingPage> {
                       height: 50,
                       key: _key,
                       onSubmit: () {
+                        setFirstTime();
                         Get.off(LoginPage());
                       },
                     ),
@@ -143,5 +145,9 @@ class _OnBoardingState extends State<OnBoardingPage> {
         ),
       ),
     );
+  }
+  Future<void> setFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstTime', false);
   }
 }
