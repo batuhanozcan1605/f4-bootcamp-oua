@@ -1,4 +1,5 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -220,6 +221,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
         child: ElevatedButton(
           onPressed: () {
             addCustomFood();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AddCustomFood()));
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Constants.tPrimaryColor,
@@ -231,7 +233,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   }
 
   Future<void> addCustomFood() async {
-    if(selectedCategory == null) {
+    if(selectedCategory == null || selectedStorageOption == null) {
       return;
     }else{
     categoryId = int.parse(selectedCategory!) + 1;
@@ -250,6 +252,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
       'shelftime' : difference.inDays
     };
     Constants.kitchenRef.doc().set(data);
+    //Snackbar
   }
 
 }
