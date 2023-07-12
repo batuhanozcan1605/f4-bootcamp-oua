@@ -241,15 +241,15 @@ class _AddCustomFoodState extends State<AddCustomFood> {
 
     Duration difference = selectedExpireDate!.difference(DateTime.now());
 
-
     Map<String, dynamic> data = {
       'categoryId' : categoryId,
       'name' : foodNameController.text,
       'enterDate' : FieldValue.serverTimestamp(),
       'newExpiryDate' : selectedExpireDate,
       'place' : selectedStorageOption,
-      'image' : '$selectedCategory.png',
-      'shelftime' : difference.inDays
+      'image' : '$categoryId.png',
+      'shelfTime' : difference.inDays,
+      //'customFood' : true,
     };
     Constants.kitchenRef.doc().set(data);
     //Snackbar

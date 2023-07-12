@@ -13,6 +13,17 @@ class ImageUrlRepository extends ChangeNotifier {
 
   Future<void> fetchImageUrls() async {
     try{
+      //Fetch custom food category images
+      for(var i = 1; i <= 12; i++) {
+        print("DEBUG $i");
+        String index = i.toString();
+        final url = await FirebaseStorage.instance
+            .ref()
+            .child('foods/$index.png')
+            .getDownloadURL();
+        updateImageUrl('$index.png', url);
+      }
+
     FirebaseFirestore.instance
         .collection('foods')
         .get()
@@ -26,6 +37,8 @@ class ImageUrlRepository extends ChangeNotifier {
         updateImageUrl(path, url);
       }
     });
+
+
     // ignore: empty_catches
     }catch(e){
 

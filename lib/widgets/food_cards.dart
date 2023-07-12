@@ -15,15 +15,15 @@ class FoodCard extends ConsumerWidget {
   final inKitchen;
   const FoodCard({super.key, required this.food, required this.inKitchen});
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final foodsRepo = ref.watch(foodsProvider);
     final imageUrlRepo = ref.watch(imageUrlProvider);
-    final imageUrls = imageUrlRepo.imageUrls;
+    final imageUrl = imageUrlRepo.imageUrls[food['image']];
     bool isSelected = foodsRepo.selectedDocumentIds.contains(food.id);
-    final imageUrl = imageUrls[food['image']];
-
+    //final imageUrl = imageUrls[food['image']];
+    print("DEBUG2 $imageUrl");
+    print("DEBUG3 ${food['name']}");
     return GestureDetector(
       onTap: () {
         ref
