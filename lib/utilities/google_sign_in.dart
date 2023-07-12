@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
