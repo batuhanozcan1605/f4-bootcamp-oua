@@ -211,22 +211,22 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      addCustomFood();
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AddCustomFood()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Constants.tPrimaryColor,
+                    ),
+                    child: const Text('Add Custom Food'),
+                  ),
+                ),
               ],
             ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-        child: ElevatedButton(
-          onPressed: () {
-            addCustomFood();
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AddCustomFood()));
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Constants.tPrimaryColor,
-          ),
-          child: const Text('Add Custom Food'),
         ),
       ),
     );
@@ -236,7 +236,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
     if(selectedCategory == null || selectedStorageOption == null) {
       return;
     }else{
-    categoryId = int.parse(selectedCategory!) + 1;
+    categoryId = (int.parse(selectedCategory!) + 1);
     }
 
     Duration difference = selectedExpireDate!.difference(DateTime.now());
