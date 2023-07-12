@@ -75,33 +75,60 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                 child: Text('Tarif bulunamadı.'),
                             )
                                 : ListView.builder(
-
-                                itemCount: recipes.length,
+                                itemCount: 2,
                                 itemBuilder: (context, index) {
                                     return Padding(
-                                      padding: const EdgeInsets.only(top: 7.0,bottom: 7.0),
-                                      child: ListTile(
-
-                                          visualDensity: const VisualDensity(vertical: 1),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(10.0),
-                                              side: BorderSide(width: 2, color: Constants.tPrimaryColor),
-                                          ),
-                                          leading: CircleAvatar(child: const Icon(Icons.menu_book, size: 18,color: Colors.white,), backgroundColor: kGoogleBlue,),
-                                          title: Text(recipes[index], textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  fontFamily: 'VarelaRound',
-                                                  fontSize: 20,
-                                              ),),
-                                          trailing:  IconButton(
-                                              iconSize: 40,
-                                              icon: const Icon(
-                                                  Icons.arrow_right_sharp,
-                                                  color: kGoogleBlue,
-                                                  size: 40,
-                                              ),
-                                           onPressed: () { fetchRecipeDetails(recipes[index]); }),
-                                      ),
+                                        padding: const EdgeInsets.only(top: 7.0, bottom: 7.0),
+                                        child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            elevation: 10,
+                                            shadowColor: Colors.black,
+                                            child: ListTile(
+                                                tileColor: Colors.grey.shade100,
+                                                selectedTileColor: kGoogleBlue.withOpacity(0.5),
+                                                visualDensity: const VisualDensity(vertical: 1),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                ),
+                                                leading: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(10.0),
+                                                    child: Container(
+                                                        height: 40.0,
+                                                        width: 40.0,
+                                                        child: const Icon(
+                                                            Icons.restaurant_outlined,
+                                                            size: 18,
+                                                            color: Colors.white,
+                                                        ),
+                                                        color: kGoogleBlue,
+                                                    ),
+                                                ),
+                                                title: Text(
+                                                    recipes[index].toUpperCase(),
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontFamily: 'VarelaRound',
+                                                        //fontWeight: FontWeight.bold,
+                                                        fontSize: 18,
+                                                    ),
+                                                ),
+                                                /*trailing: IconButton(
+                                  iconSize: 40,
+                                  icon: const Icon(
+                                    Icons.arrow_right_sharp,
+                                    color: kGoogleBlue,
+                                    size: 40,
+                                  ),
+                                  onPressed: () {
+                                    fetchRecipeDetails(recipes[index]);
+                                  }),*/
+                                                onTap: () {
+                                                    fetchRecipeDetails(recipes[index]);
+                                                },
+                                            ),
+                                        ),
                                     );
                                 },
                             ),
@@ -174,44 +201,51 @@ class _RecipeScreenState extends State<RecipeScreen> {
             showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.grey.shade200,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(32.0))),
                     contentPadding: EdgeInsets.only(top: 10.0),
                     elevation: 40.0,
-                    title: Text(recipeTitle, textAlign: TextAlign.center,style: TextStyle(
-                        fontFamily: 'VarelaRound',
-                        color: Colors.grey,
-                        fontSize: 20,
-                    ),),
-
+                    title: Text(
+                        recipeTitle.toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'VarelaRound',
+                            color: Colors.black54,
+                            fontSize: 20,
+                        ),
+                    ),
                     content: SingleChildScrollView(
-
                         child: Column(
-
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                                 if (recipeImage != null)
                                     ClipOval(
-                                      child: SizedBox.fromSize(
-                                          size: Size.fromRadius(80),
-                                        child: Image.network(
-                                            recipeImage,
-                                            width: 200,
-                                            height: 200,
-                                            fit: BoxFit.fitHeight,
+                                        child: SizedBox.fromSize(
+                                            size: Size.fromRadius(80),
+                                            child: Image.network(
+                                                recipeImage,
+                                                width: 200,
+                                                height: 200,
+                                                fit: BoxFit.fitHeight,
+                                            ),
                                         ),
-                                      ),
                                     ),
                                 SizedBox(height: 10),
-                                Text('Recipe:' , style: TextStyle(
-                                fontFamily: 'VarelaRound',
-                                color: Colors.grey,
-                                fontSize: 17,
-                                ),),
+                                Text(
+                                    'Recipe:',
+                                    style: TextStyle(
+                                        fontFamily: 'VarelaRound',
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                    ),
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Text(recipeDetails['snippet'], textAlign: TextAlign.center,),
+                                    padding: const EdgeInsets.all(18.0),
+                                    child: Text(
+                                        recipeDetails['snippet'],
+                                        textAlign: TextAlign.center,
+                                    ),
                                 ),
                             ],
                         ),
