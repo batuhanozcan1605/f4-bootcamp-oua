@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+const kGoogleBlue = Color(0xff426d77);
 class Constants {
   //---COLOR---
   static final tPrimaryColor = Color(0xFF4D818C);
