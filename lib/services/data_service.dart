@@ -10,6 +10,7 @@ import '../models/FoodModel.dart';
 import '../repositories/kitchen_state.dart';
 
 class DataService extends ChangeNotifier {
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   Future<List<Category>> getCategories() async {
 
@@ -90,13 +91,14 @@ class DataService extends ChangeNotifier {
 
       if (sourceDocument.exists) {
         DocumentReference destinationRef = FirebaseFirestore.instance
-            .collection('users').doc(Constants.uid).collection('kitchen').doc();
+            .collection('users').doc(uid).collection('kitchen').doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
           }
           await destinationRef.set(documentData);
         }
@@ -112,7 +114,7 @@ class DataService extends ChangeNotifier {
   Future<void> undoAdd() async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users').doc(Constants.uid).collection('kitchen')
+          .collection('users').doc(uid).collection('kitchen')
           .get();
 
       DocumentSnapshot lastDocument = querySnapshot.docs.last;
@@ -126,18 +128,19 @@ class DataService extends ChangeNotifier {
   Future<void> addFoodFromCart(documentId) async {
     late bool exists;
     try {
-      DocumentSnapshot sourceDocument = await Constants.shoppingCartRef
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart')
           .doc(documentId)
           .get();
 
       if (sourceDocument.exists) {
-        DocumentReference destinationRef = Constants.kitchenRef.doc();
+        DocumentReference destinationRef = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
           }
           await destinationRef.set(documentData);
         }
@@ -152,7 +155,7 @@ class DataService extends ChangeNotifier {
 
   Future<void> deleteFoodFromCart(documentId) async {
     try {
-      await Constants.shoppingCartRef
+      await FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart')
           .doc(documentId)
           .delete();
     } catch (e) {
@@ -162,7 +165,7 @@ class DataService extends ChangeNotifier {
 
   Future<void> deleteFromDetails(docId) async {
     try{
-      Constants.kitchenRef.doc(docId).delete();
+      FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart').doc(docId).delete();
     }catch(e){
 
     }

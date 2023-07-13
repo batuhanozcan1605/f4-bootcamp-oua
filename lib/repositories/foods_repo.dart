@@ -97,7 +97,7 @@ class FoodsRepo extends ChangeNotifier {
 
 
         if (sourceDocument.exists) {
-          DocumentReference destinationRef = Constants.shoppingCartRef.doc();
+          DocumentReference destinationRef = FirebaseFirestore.instance.collection('users').doc(Constants.uid).collection('shoppingCart').doc();
 
           exists = await doesNameExistsInCart(sourceDocument['name']);
           if(!exists) {
