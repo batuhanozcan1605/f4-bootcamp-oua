@@ -3,6 +3,7 @@ import 'package:bootcamp_oua_f4/screens/register_screen.dart';
 import 'package:bootcamp_oua_f4/splash_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/authentication.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
+import 'package:bootcamp_oua_f4/widgets/sign_in_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -145,7 +146,11 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 10,
                     ),
-                    CustomFormField(
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      child: SignInForm(),
+                    ),
+                    /*CustomFormField(
                         hint: 'Email',
                         lines: 1,
                         type: TextInputType.emailAddress,
@@ -159,7 +164,9 @@ class _LoginPageState extends State<LoginPage> {
                       lines: 1,
                       type: TextInputType.name,
                       obscureText: true,
-                      onChanged: (input) {},
+                      onChanged: (input) {
+                        password = input;
+                      },
                       icon: Icons.password,
                     ),
                     SizedBox(
@@ -173,8 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                       stretch: false,
                       borderRadius: 8,
                       gradientOrientation: GradientOrientation.Horizontal,
-                      onTap: (finish) {
-                        Get.off(NavScreen());
+                      onTap: (finish) async {
+                        await signInWithEmailAndPassword(email, password);
+                        goToSplash();
                       },
                       child: Text(
                         'Sign In',
@@ -187,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(
                       height: 20,
-                    ),
+                    ),*/
                     RichText(
                       text: TextSpan(
                           text: 'Don\'t have an account yet?',
@@ -197,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 13),
                           children: <TextSpan>[
                             TextSpan(
-                                text: ' Create one.',
+                                text: ' \n              Create one.',
                                 style: TextStyle(
                                     color: kGoogleBlue,
                                     fontFamily: 'VarelaRound',
@@ -305,7 +313,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 15),
                             children: <TextSpan>[
                               TextSpan(
-                                text: ' to try app without Personalization',
+                                text: ' to try app without Authentication',
                                 style: TextStyle(
                                     color: Color(0xff474646),
                                     fontFamily: 'VarelaRound',

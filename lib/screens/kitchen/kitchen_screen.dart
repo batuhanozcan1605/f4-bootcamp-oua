@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
 import 'package:bootcamp_oua_f4/screens/detail_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
+import 'package:bootcamp_oua_f4/utilities/authentication.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:bootcamp_oua_f4/widgets/changeplace_popup.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
             actions: [
               IconButton(
                   onPressed: () async {
-                    await signOutWithGoogle();
+                    await signOut();
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   }, icon: Icon(Icons.logout))
