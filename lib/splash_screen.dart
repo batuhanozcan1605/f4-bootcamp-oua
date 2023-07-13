@@ -13,10 +13,10 @@ class SplashScreen extends ConsumerStatefulWidget {
 
 class SplashScreenState extends ConsumerState<SplashScreen> {
 
-  void goToNavScreen() {
+  /*void goToNavScreen() {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const NavScreen()));
-  }
+  }*/
 
   Future<List> fetchData (){
     return Future.wait([

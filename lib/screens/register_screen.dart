@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,8 @@ import 'package:nice_buttons/nice_buttons.dart';
 
 import '../constants/constants.dart';
 
+import '../splash_screen.dart';
+import '../utilities/authentication.dart';
 import '../widgets/custom_form_field.dart';
 import 'nav_screen.dart';
 
@@ -23,6 +26,8 @@ class RegisterController {
 class RegisterPage extends StatelessWidget {
   RegisterController registerController = RegisterController();
   bool agree = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,33 +68,6 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CustomFormField(
-              lines: 1,
-              type: TextInputType.name,
-              icon: Icons.person,
-              hint: 'Name',
-              obscureText: false,
-              onChanged: (input) {
-                registerController.name = input;
-                print(registerController.name);
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CustomFormField(
-              lines: 1,
-              type: TextInputType.emailAddress,
-              icon: Icons.person,
-              hint: 'Surname',
-              obscureText: false,
-              onChanged: (input) {
-                registerController.surname = input;
-              },
             ),
             SizedBox(
               height: 10,
@@ -182,8 +160,10 @@ class RegisterPage extends StatelessWidget {
                 stretch: false,
                 borderRadius: 30,
                 gradientOrientation: GradientOrientation.Horizontal,
-                onTap: (finish) {
-                  Get.off(NavScreen());
+                onTap: (finish) async {
+                  await registerWithEmailAndPassword(registerController.email, registerController.password);
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const SplashScreen()));
                 },
                 child: Text(
                   'Register',
@@ -211,9 +191,4 @@ class RegisterPage extends StatelessWidget {
         color: kGoogleBlue.withOpacity(0.5));
   }
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
 }

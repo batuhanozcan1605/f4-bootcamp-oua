@@ -22,8 +22,7 @@ class FoodCard extends ConsumerWidget {
     final imageUrl = imageUrlRepo.imageUrls[food['image']];
     bool isSelected = foodsRepo.selectedDocumentIds.contains(food.id);
     //final imageUrl = imageUrls[food['image']];
-    print("DEBUG2 $imageUrl");
-    print("DEBUG3 ${food['name']}");
+
     return GestureDetector(
       onTap: () {
         ref

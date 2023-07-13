@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bootcamp_oua_f4/screens/register_screen.dart';
 import 'package:bootcamp_oua_f4/splash_screen.dart';
+import 'package:bootcamp_oua_f4/utilities/authentication.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +26,10 @@ class LoginPage extends StatefulWidget {
 bool isFirebaseInitialized = false;
 
 class _LoginPageState extends State<LoginPage> {
+
+  String email = '';
+  String password = '';
+
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
     setState(() {
@@ -145,7 +150,9 @@ class _LoginPageState extends State<LoginPage> {
                         lines: 1,
                         type: TextInputType.emailAddress,
                         obscureText: false,
-                        onChanged: (input) {},
+                        onChanged: (input) {
+                          email = input;
+                        },
                         icon: FontAwesomeIcons.user),
                     CustomFormField(
                       hint: 'Password*',
@@ -238,19 +245,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-
-                    /*Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.asset(
-                      'assets/google.png',
-                      height: 30,
-                    ),
-                  ],
-                ),
-              ),*/
                     Container(
                       height: 50,
                       width: 205,
@@ -279,12 +273,14 @@ class _LoginPageState extends State<LoginPage> {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                "Sign In with Google",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'VarelaRound',
-                                    fontSize: 15),
+                              const Flexible(
+                                child: Text(
+                                  "Sign In with Google",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'VarelaRound',
+                                      fontSize: 13),
+                                ),
                               )
                             ],
                           ),
@@ -294,29 +290,29 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 25,
                     ),
-                    RichText(
-                      text: TextSpan(
-                          text: 'Skip',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: kGoogleBlue,
-                              fontFamily: 'VarelaRound',
-                              fontSize: 15),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => NavScreen()),
-                                ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ' to try app without Personalization',
-                              style: TextStyle(
-                                  color: Color(0xff474646),
-                                  fontFamily: 'VarelaRound',
-                                  fontSize: 13),
-                            )
-                          ]),
+                    GestureDetector(
+                      onTap: () async {
+                        await signInWithEmailAndPassword(email, password);
+                        goToSplash();
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                            text: 'Skip',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: kGoogleBlue,
+                                fontFamily: 'VarelaRound',
+                                fontSize: 15),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: ' to try app without Personalization',
+                                style: TextStyle(
+                                    color: Color(0xff474646),
+                                    fontFamily: 'VarelaRound',
+                                    fontSize: 13),
+                              )
+                            ]),
+                      ),
                     ),
                   ],
                 ),

@@ -29,7 +29,6 @@ Future <void> signOutWithGoogle() async {
       await user.delete();
     }
 
-
   await FirebaseAuth.instance.signOut();
   final googleSignIn = GoogleSignIn();
   await googleSignIn.signOut();

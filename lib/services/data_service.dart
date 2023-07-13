@@ -169,6 +169,7 @@ class DataService extends ChangeNotifier {
   }
 
 
-  }
+
+}
 
 final dataServiceProvider = Provider((ref) => DataService());
