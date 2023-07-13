@@ -1,6 +1,7 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   DateTime? selectedExpireDate;
   late int categoryId;
   String formattedDate = '';
-
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void dispose() {
@@ -251,7 +252,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
       'shelfTime' : difference.inDays,
       //'customFood' : true,
     };
-    Constants.kitchenRef.doc().set(data);
+    FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc().set(data);
     //Snackbar
   }
 

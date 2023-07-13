@@ -2,6 +2,7 @@ import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,13 +28,14 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
   DateTime nullDate = DateTime(0);
   late Timestamp? newTimestamp;
   late DocumentReference documentReference;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   void initState() {
     super.initState();
     setState(() {
       newTimestamp = widget.food['newExpiryDate'];
-      documentReference = Constants.kitchenRef.doc(widget.food.id);
+      documentReference = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc(widget.food.id);
     });
 
   }

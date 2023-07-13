@@ -111,10 +111,54 @@ class DataService extends ChangeNotifier {
     }
   }
 
+  Future<void> addSingleFoodToCart(documentId) async {
+    late bool exists;
+    try {
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
+          .collection('foods')
+          .doc(documentId)
+          .get();
+
+      if (sourceDocument.exists) {
+        DocumentReference destinationRef = FirebaseFirestore.instance
+            .collection('users').doc(uid).collection('shoppingCart').doc();
+
+        exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
+        if (!exists) {
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
+          }
+          await destinationRef.set(documentData);
+        }
+        print('Document copied');
+      } else {
+        print('No Source document');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   Future<void> undoAdd() async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users').doc(uid).collection('kitchen')
+          .get();
+
+      DocumentSnapshot lastDocument = querySnapshot.docs.last;
+
+      await lastDocument.reference.delete();
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> undoAddToCart() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users').doc(uid).collection('shoppingCart')
           .get();
 
       DocumentSnapshot lastDocument = querySnapshot.docs.last;
