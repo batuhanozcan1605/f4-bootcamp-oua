@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -77,9 +78,11 @@ Future<void> registerWithEmailAndPassword(String email, String password) async {
 
 Future<void> signOut() async {
   try {
-    await _auth.signOut();
+    await FirebaseAuth.instance.signOut();
+    signOutWithGoogle();
     print('User signed out');
   } catch (e) {
     print('Sign out error: $e');
   }
 }
+
