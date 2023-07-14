@@ -190,6 +190,27 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
             ) : const Center(),
           ),
           const SizedBox(height: 20),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 18.0),
+              child: Text(
+                'Added to Kitchen in',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              DateFormat('dd.MM.yy').format(enterDate),
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
           Expanded(
             child: Center(
               child: Row(
@@ -215,13 +236,16 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                     child: const Text('Delete Food'),
                   ),
                   ElevatedButton(
-                    onPressed: () async {
-                      if(switchUsed) {
+                    onPressed: ()  {
 
-                      }
-                      setState(() {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                          const KitchenScreen(),
+                        ),
+                      );
 
-                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,

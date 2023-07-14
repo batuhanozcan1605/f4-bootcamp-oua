@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
+import 'package:bootcamp_oua_f4/screens/add/foods_bodyscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,11 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   late int categoryId;
   String formattedDate = '';
   final uid = FirebaseAuth.instance.currentUser!.uid;
+  var snackBar = const SnackBar(content: Text("Custom Food Added", style: TextStyle(
+    color: Colors.white70,
+  ),
+  ),
+    backgroundColor: Color(0xFF013440),);
 
   @override
   void dispose() {
@@ -215,9 +221,10 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
                   child: ElevatedButton(
-                    onPressed: () {
-                      addCustomFood();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AddCustomFood()));
+                    onPressed: () async {
+                      await addCustomFood();
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Constants.tPrimaryColor,

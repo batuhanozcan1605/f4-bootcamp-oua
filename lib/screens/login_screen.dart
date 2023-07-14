@@ -83,6 +83,22 @@ class _LoginPageState extends State<LoginPage> {
     goToSplash();
   }
 
+  Future<void> signInAnonymously() async {
+    try {
+
+      UserCredential userCredential =
+      await FirebaseAuth.instance.signInAnonymously();
+      // Handle the signed-in user
+      User? user = userCredential.user;
+      // Additional logic or navigation can be performed here
+      print('Signed in anonymously: ${user!.uid}');
+      goToSplash();
+    } catch (e) {
+      // Handle any errors that occur during the sign-in process
+      print('Failed to sign in anonymously: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -295,16 +311,15 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     GestureDetector(
-                      onTap: () async {
-                        await signInWithEmailAndPassword(email, password);
-                        goToSplash();
+                      onTap: () {
+                        signInAnonymously();
                       },
                       child: RichText(
-                        text: TextSpan(
+                        text: const TextSpan(
                             text: 'Skip',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,

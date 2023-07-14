@@ -76,8 +76,24 @@ Future<void> registerWithEmailAndPassword(String email, String password) async {
 
 }
 
+Future<void> signOutAnonymousUser() async {
+  try {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && user.isAnonymous) {
+      await user.delete();
+      print('Anonymous user signed out');
+    } else {
+      print('No anonymous user signed in');
+    }
+  } catch (e) {
+    print('Sign out error: $e');
+  }
+}
+
 Future<void> signOut() async {
   try {
+    await signOutAnonymousUser();
     await FirebaseAuth.instance.signOut();
     signOutWithGoogle();
     print('User signed out');
