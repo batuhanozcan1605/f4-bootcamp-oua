@@ -21,7 +21,7 @@ class ShelfTimeCounter extends StatelessWidget {
 
     int dayCount = newTimestamp == null ? difference.inDays : newDifference.inDays;
 
-    return dayCount < 5 && food['place'] != 'd' ? Align(
+    return dayCount < 5 && food['place'] != 'd' && food['dontUseExpiryDate'] == false ? Align(
       alignment: Alignment.topRight,
       child: FractionallySizedBox(
         widthFactor: 0.25,

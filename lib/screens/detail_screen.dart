@@ -36,6 +36,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     setState(() {
       newTimestamp = widget.food['newExpiryDate'];
       documentReference = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc(widget.food.id);
+      switchUsed = widget.food['dontUseExpiryDate'] == false ? false : true;
     });
 
   }
@@ -47,6 +48,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
       setState(() {
       });
     });
+
     int shelfTime = widget.food['shelfTime'];
     Timestamp? timestamp = widget.food['enterDate'];
 
@@ -118,12 +120,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   fontWeight: FontWeight.bold,)),
               ),
               Switch(
-                // This bool value toggles the switch.
                 value: switchUsed,
                 activeColor: Constants.tPrimaryColor,
                 onChanged: (bool value) {
-
-                  // This is called when the user toggles the switch.
+                  print(value);
+                  print(switchUsed);
                   setState(() {
                     switchUsed = value;
                   });
@@ -164,7 +165,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    await pickDateAndSave(widget.food.id);
+                    await pickDateAndSave();
                     final kitchenState = ref.watch(buttonTapProvider.notifier);
                     kitchenState.setButtonTap();
 
@@ -179,7 +180,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      'Edit',
+                      'Edit and Save',
                       style: TextStyle(
                         color: Colors.teal,
                       ),
@@ -237,7 +238,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                   ),
                   ElevatedButton(
                     onPressed: ()  {
-
+                        saveDetails();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -263,7 +264,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
       ),
     );
   }
-  Future<void> pickDateAndSave(docId) async {
+  Future<void> pickDateAndSave() async {
 
     // Show date picker
     final selectedDate = await showDatePicker(
@@ -293,5 +294,11 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  }
+
+  Future<void> saveDetails() async {
+    print(switchUsed);
+      await documentReference.update({'dontUseExpiryDate': switchUsed});
+
   }
 }

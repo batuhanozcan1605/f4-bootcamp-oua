@@ -99,6 +99,7 @@ class DataService extends ChangeNotifier {
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
             documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
         }
@@ -129,6 +130,7 @@ class DataService extends ChangeNotifier {
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
             documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
         }
@@ -185,6 +187,7 @@ class DataService extends ChangeNotifier {
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
             documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
         }

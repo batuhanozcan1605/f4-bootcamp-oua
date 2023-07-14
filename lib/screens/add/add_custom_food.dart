@@ -223,8 +223,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                   child: ElevatedButton(
                     onPressed: () async {
                       await addCustomFood();
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Constants.tPrimaryColor,
@@ -257,10 +256,11 @@ class _AddCustomFoodState extends State<AddCustomFood> {
       'place' : selectedStorageOption,
       'image' : '$categoryId.png',
       'shelfTime' : difference.inDays,
+      'dontUseExpiryDate' : false,
       //'customFood' : true,
     };
     FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc().set(data);
-    //Snackbar
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-
 }
