@@ -124,7 +124,7 @@ class DataService extends ChangeNotifier {
         DocumentReference destinationRef = FirebaseFirestore.instance
             .collection('users').doc(uid).collection('shoppingCart').doc();
 
-        exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
+        exists = await FoodsRepo().doesNameExistsInCart(sourceDocument['name']);
         if (!exists) {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
