@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 
 class SliderPage extends StatelessWidget {
   final String title;
@@ -12,7 +11,6 @@ class SliderPage extends StatelessWidget {
     required this.image,
     required this.title,
   });
-  final GlobalKey<SlideActionState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {

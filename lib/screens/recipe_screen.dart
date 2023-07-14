@@ -178,6 +178,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
   }
 
   Future<void> fetchRecipeDetails(String recipeTitle) async {
+    final screenHeight = MediaQuery.of(context).size.height;
     final apiKey =
         '4644d9a5b8133608bbbbd0deefe949e77014aee240970af20c2c72e9e4f79c93'; // SerpApi API anahtarını buraya ekleyin
 
@@ -208,31 +209,21 @@ class _RecipeScreenState extends State<RecipeScreen> {
           insetPadding: EdgeInsets.all(30),
           elevation: 40.0,
           content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+            child:
                 Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.center,
                   children: <Widget>[
                     if (recipeImage != null)
-                      Container(
-                          width: double.infinity,
-                          height: 300,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey.shade200),
-                          padding: EdgeInsets.fromLTRB(20, 80, 20, 30),
-                          child: Text(
-                            recipeTitle.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'VarelaRound',
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
+                       Container(
+                            width: double.infinity,
+                            height: screenHeight *0.4,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.grey.shade200),
+                            padding: EdgeInsets.fromLTRB(20, 80, 20, 100),
                             ),
-                          )),
+
                     Positioned(
                       top: -100,
                       child: ClipOval(
@@ -246,31 +237,48 @@ class _RecipeScreenState extends State<RecipeScreen> {
                             )),
                       ),
                     ),
-                    Text(
-                      'Recipe:',
-                      style: TextStyle(
-                        fontFamily: 'VarelaRound',
-                        color: Colors.black38,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
                     Padding(
-                      padding:
-                      const EdgeInsets.only(right: 20.0, left: 20.0, top: 135.0),
-                      child: Text(
-                        recipeDetails['snippet'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'VarelaRound',
-                        ),
+                      padding: const EdgeInsets.only(top: 60.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            recipeTitle.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'VarelaRound',
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                            ),
+                          ),
+                          SizedBox(height: 5,),
+                          Text(
+                            'Recipe:',
+                            style: TextStyle(
+                              fontFamily: 'VarelaRound',
+                              color: Colors.black38,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+
+                          Text(
+                              recipeDetails['snippet'],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'VarelaRound',
+                                fontSize: 20,
+                              ),
+                            ),
+
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+
+
           ),
           actions: [
             TextButton(

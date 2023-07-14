@@ -1,6 +1,8 @@
 import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
+import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/screens/onboard_screen.dart';
+import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/splash_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: FirebaseInitPhase(),
+      home: OnBoardingPage(),
     );
   }
 }
