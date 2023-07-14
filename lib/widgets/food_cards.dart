@@ -3,8 +3,6 @@ import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
 import 'package:bootcamp_oua_f4/screens/detail_screen.dart';
 import 'package:bootcamp_oua_f4/widgets/shelftime_counter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -12,7 +10,7 @@ import '../constants/constants.dart';
 
 class FoodCard extends ConsumerWidget {
   final food;
-  final inKitchen;
+  final bool inKitchen;
   const FoodCard({super.key, required this.food, required this.inKitchen});
 
   @override
@@ -21,7 +19,6 @@ class FoodCard extends ConsumerWidget {
     final imageUrlRepo = ref.watch(imageUrlProvider);
     final imageUrl = imageUrlRepo.imageUrls[food['image']];
     bool isSelected = foodsRepo.selectedDocumentIds.contains(food.id);
-    //final imageUrl = imageUrls[food['image']];
 
     return GestureDetector(
       onTap: () {
@@ -74,7 +71,13 @@ class FoodCard extends ConsumerWidget {
                     alignment: Alignment.center,
                     child: FittedBox(
                       fit: BoxFit.fitHeight,
-                      child: Text(
+                      child: imageUrlRepo.customFoodImageNames.contains(food['image']) ? Text(food['name'], style: const TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 12,
+                        color: Color(0xffd07d14),
+                        fontWeight: FontWeight.w600,
+                      ),)
+                          : Text(
                         food['name'],
                         style: Constants.ProductTitle,
                       ),
@@ -83,10 +86,16 @@ class FoodCard extends ConsumerWidget {
                 ),
               ),
             ),
-           inKitchen ? ShelfTimeCounter(food: food) : Center()
+           inKitchen ? ShelfTimeCounter(food: food) : const Center()
           ],
         ),
       ),
     );
+  }
+  bool isNumeric(String value) {
+    if (double.tryParse(value) == null) {
+      return false;
+    }
+    return double.tryParse(value) != null;
   }
 }
