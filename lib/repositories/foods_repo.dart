@@ -130,16 +130,17 @@ class FoodsRepo extends ChangeNotifier {
     try {
       for(var docId in selectedKitchenDocumentIds) {
         print("DOC ID: $docId");
-        DocumentReference documentReference = await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('users')
             .doc(uid)
             .collection('kitchen')
-            .doc(docId);
-        await documentReference.update({
+            .doc(docId).update({
           field: value
         });
+
       }
-      //selectedKitchenDocumentIds.clear();
+      print("DEBUG update: $selectedKitchenDocumentIds");
+      selectedKitchenDocumentIds.clear();
     } catch (e) {
       print('Error: $e');
     }

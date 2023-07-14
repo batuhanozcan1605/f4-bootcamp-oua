@@ -16,7 +16,6 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   List<String> foodNames = [];
   String? selectedCategory;
   TextEditingController foodNameController = TextEditingController();
-  int _defaultValue = 0;
   bool isSwitchOn = false;
   String? selectedStorageOption;
   DateTime? selectedExpireDate;

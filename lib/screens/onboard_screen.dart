@@ -28,7 +28,7 @@ class _OnBoardingState extends State<OnBoardingPage> {
       title: 'Kitchen in Pocket!',
     ),
     SliderPage(
-      description: 'Receive alerts when your products are set to expire',
+      description: 'See when your food are close to expire',
       image: "assets/images/11.jpg",
       title: 'More Saving, Less Wastage',
     ),
