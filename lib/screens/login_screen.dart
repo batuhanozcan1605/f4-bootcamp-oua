@@ -9,15 +9,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-
 import '../constants/constants.dart';
-import '../widgets/custom_form_field.dart';
-import 'nav_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -166,28 +160,6 @@ class _LoginPageState extends State<LoginPage> {
                       padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       child: SignInForm(),
                     ),
-                    /*CustomFormField(
-                        hint: 'Email',
-                        lines: 1,
-                        type: TextInputType.emailAddress,
-                        obscureText: false,
-                        onChanged: (input) {
-                          email = input;
-                        },
-                        icon: FontAwesomeIcons.user),
-                    CustomFormField(
-                      hint: 'Password*',
-                      lines: 1,
-                      type: TextInputType.name,
-                      obscureText: true,
-                      onChanged: (input) {
-                        password = input;
-                      },
-                      icon: Icons.password,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     NiceButtons(
                       startColor: kGoogleBlue,
                       endColor: kGoogleBlue.withOpacity(0.4),
@@ -197,43 +169,20 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: 8,
                       gradientOrientation: GradientOrientation.Horizontal,
                       onTap: (finish) async {
-                        await signInWithEmailAndPassword(email, password);
-                        goToSplash();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) =>
+                            RegisterPage()));
                       },
                       child: Text(
-                        'Sign In',
+                        'Create Account',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 17,
                           fontFamily: 'VarelaRound',
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),*/
-                    RichText(
-                      text: TextSpan(
-                          text: 'Don\'t have an account yet?',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'VarelaRound',
-                              fontSize: 13),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: ' \n              Create one.',
-                                style: TextStyle(
-                                    color: kGoogleBlue,
-                                    fontFamily: 'VarelaRound',
-                                    fontSize: 13),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                RegisterPage()),
-                                      ))
-                          ]),
                     ),
                     SizedBox(
                       height: 15,
