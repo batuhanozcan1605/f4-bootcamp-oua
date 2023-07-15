@@ -92,8 +92,7 @@ class FoodsRepo extends ChangeNotifier {
     late bool exists;
     try {
       for(var docId in selectedDocumentIds) {
-        DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
-            .collection('foods')
+        DocumentSnapshot sourceDocument = await FirebaseFirestore.instance.collection('foods')
             .doc(docId)
             .get();
 

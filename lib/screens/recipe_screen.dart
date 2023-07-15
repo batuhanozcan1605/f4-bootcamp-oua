@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -15,15 +17,18 @@ class RecipeScreen extends StatefulWidget {
 class _RecipeScreenState extends State<RecipeScreen> {
   //3 adet ürün olacak
   List<String> ingredients = [
-    'tomato',
-    'milk',
-    "potato",
+
   ]; // Malzemeleri tutacak liste
   List<String> recipes = []; // Tarifleri tutacak liste
   @override
   void initState() {
     super.initState();
-    fetchRecipes(); // Tarifleri getiren fonksiyon
+    Future.wait([
+      fetchNames(),
+      fetchRecipes(), // Tarifleri getiren fonksiyon
+      Future.delayed(const Duration(seconds: 0)),
+    ]);
+
   }
 
   @override
@@ -119,7 +124,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
 
   Future<void> fetchRecipes() async {
     final apiKey =
-        'c09738cb0fe4473784dafda3b321f2dd'; // Spoonacular API anahtarı
+        '0444ff2bef2f4a949766be8b9b6343bc'; // Spoonacular API anahtarı
 
     List<String> combinedIngredients = [];
 
@@ -129,11 +134,12 @@ class _RecipeScreenState extends State<RecipeScreen> {
         combinedIngredients.add('${ingredients[i]},${ingredients[j]}');
       }
     }
-
+    var responseCount = combinedIngredients.length < 10 ? combinedIngredients.length : 10;
     List<String> newRecipes = [];
 
+
     // Kombine edilmiş malzemelerle sorguları yap ve tarifleri al
-    for (int i = 0; i < combinedIngredients.length; i++) {
+    for (int i = 0; i < responseCount; i++) {
       final url = Uri.parse(
           'https://api.spoonacular.com/recipes/findByIngredients?apiKey=$apiKey&ingredients=${combinedIngredients[i]}&number=5');
       final response = await http.get(url);
@@ -289,6 +295,24 @@ class _RecipeScreenState extends State<RecipeScreen> {
       );
     } else {
       throw Exception('Tarif detayları alınırken bir hata oluştu');
+    }
+  }
+
+  Future<void> fetchNames() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    try{
+      FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen')
+        .get()
+        .then((QuerySnapshot querySnapshot) async {
+      for (DocumentSnapshot doc in querySnapshot.docs) {
+        final foodName = doc['name'] as String;
+        setState(() {
+          ingredients.add(foodName);
+        });
+      }
+    });
+  } catch(e) {
+
     }
   }
 }
