@@ -24,17 +24,17 @@ class _OnBoardingState extends State<OnBoardingPage> {
   List<Widget> _pages = [
     SliderPage(
       description: 'Welcome to the Kitchen in your pocket!',
-      image: "assets/images/8.jpg",
+      image: "assets/images/8.png",
       title: 'Kitchen in Pocket!',
     ),
     SliderPage(
       description: 'See when your food are close to expire',
-      image: "assets/images/11.jpg",
+      image: "assets/images/11.png",
       title: 'More Saving, Less Wastage',
     ),
     SliderPage(
       description: 'Get recipe ideas based on what\'s already in your kitchen',
-      image: "assets/images/14.jpg",
+      image: "assets/images/14.png",
       title: 'More Variety, Less Work!',
     ),
   ];
