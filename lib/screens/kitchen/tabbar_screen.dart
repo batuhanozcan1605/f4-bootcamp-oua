@@ -19,11 +19,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
     indicator: UnderlineTabIndicator(
       borderRadius: BorderRadius.circular(60), // Creates border
       borderSide: const BorderSide(
-        width: 15.0,
+        width: 20.0,
         color: Color(0xFF4D818C),
       ),
 
-      insets: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+      insets: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
     ),
 
     labelColor: Color(0xffffffff),
@@ -54,12 +54,13 @@ class _TabBarScreenState extends State<TabBarScreen> {
   );
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
         children: [
 
           Container(
-            height: 65.0,
+            height: screenHeight/13,
             alignment: Alignment.center,
             child: _tabBar,
             decoration: const BoxDecoration(
