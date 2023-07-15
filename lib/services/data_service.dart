@@ -212,7 +212,7 @@ class DataService extends ChangeNotifier {
 
   Future<void> deleteFromDetails(docId) async {
     try{
-      FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart').doc(docId).delete();
+      FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc(docId).delete();
     }catch(e){
 
     }
