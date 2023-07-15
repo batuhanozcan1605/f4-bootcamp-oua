@@ -18,7 +18,7 @@ class ImageUrlRepository extends ChangeNotifier {
     try{
       //Fetch custom food category images
       for(var i = 1; i <= 12; i++) {
-        print("DEBUG $i");
+
         String index = i.toString();
         final url = await FirebaseStorage.instance
             .ref()

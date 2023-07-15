@@ -1,38 +1,40 @@
 import 'dart:convert';
 import 'package:bootcamp_oua_f4/constants/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bootcamp_oua_f4/repositories/recipe_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
-class RecipeScreen extends StatefulWidget {
+class RecipeScreen extends ConsumerStatefulWidget {
   const RecipeScreen({Key? key}) : super(key: key);
 
   @override
-  _RecipeScreenState createState() => _RecipeScreenState();
+  RecipeScreenState createState() => RecipeScreenState();
 }
 
-class _RecipeScreenState extends State<RecipeScreen> {
-  //3 adet ürün olacak
-  List<String> ingredients = [
+class RecipeScreenState extends ConsumerState<RecipeScreen> {
 
-  ]; // Malzemeleri tutacak liste
-  List<String> recipes = []; // Tarifleri tutacak liste
+  //List<String> ingredients = [ ]; // Malzemeleri tutacak liste
+  //List<String> recipes = []; // Tarifleri tutacak liste
   @override
   void initState() {
     super.initState();
-    Future.wait([
-      fetchNames(),
-      fetchRecipes(), // Tarifleri getiren fonksiyon
+    ref.read(recipeProvider).fetchRecipes();
+  }
+
+  Future<List> fetchData (){
+    return Future.wait([
+
+      //ref.read(recipeProvider).fetchRecipes(),
       Future.delayed(const Duration(seconds: 0)),
     ]);
-
   }
 
   @override
   Widget build(BuildContext context) {
+    final recipeRepo = ref.watch(recipeProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF4D818C),
@@ -45,84 +47,91 @@ class _RecipeScreenState extends State<RecipeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 16),
-            Text(
-              'Recipes:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Recipes',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(onPressed: (){
+                  setState(() {
+
+                  });
+                }, icon: Icon(Icons.refresh)),
+              ],
             ),
+            SizedBox(height: 12,),
             Expanded(
-              child: recipes.isEmpty
+              child: recipeRepo.recipeTitles.isEmpty
                   ? Center(
-                      child: Text('Tarif bulunamadı.'),
+                      child: Text('Recipes are Loading.'),
                     )
                   : ListView.builder(
-                      itemCount: recipes.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 7.0, bottom: 7.0),
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            elevation: 10,
-                            shadowColor: Colors.black,
-                            child: ListTile(
-                              tileColor: Colors.grey.shade100,
-                              selectedTileColor: kGoogleBlue.withOpacity(0.5),
-                              visualDensity: const VisualDensity(vertical: 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              leading: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Container(
-                                  height: 40.0,
-                                  width: 40.0,
-                                  child: const Icon(
-                                    Icons.restaurant_outlined,
-                                    size: 18,
-                                    color: Colors.white,
+                            itemCount: recipeRepo.recipeTitles.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 7.0, bottom: 7.0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  color: kGoogleBlue,
-                                ),
-                              ),
-                              title: Text(
-                                recipes[index].toUpperCase(),
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontFamily: 'VarelaRound',
-                                  //fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              /*trailing: IconButton(
-                                  iconSize: 40,
-                                  icon: const Icon(
-                                    Icons.arrow_right_sharp,
-                                    color: kGoogleBlue,
-                                    size: 40,
+                                  elevation: 10,
+                                  shadowColor: Colors.black,
+                                  child: ListTile(
+                                    tileColor: Colors.grey.shade100,
+                                    selectedTileColor:
+                                        kGoogleBlue.withOpacity(0.5),
+                                    visualDensity:
+                                        const VisualDensity(vertical: 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: Container(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        color: kGoogleBlue,
+                                        child: const Icon(
+                                          Icons.restaurant_outlined,
+                                          size: 18,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    title: Text(
+                                      recipeRepo.recipeTitles[index]
+                                          .toUpperCase(),
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                        fontFamily: 'VarelaRound',
+                                        //fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      fetchRecipeDetails(
+                                          recipeRepo.recipeTitles[index]);
+                                    },
                                   ),
-                                  onPressed: () {
-                                    fetchRecipeDetails(recipes[index]);
-                                  }),*/
-                              onTap: () {
-                                fetchRecipeDetails(recipes[index]);
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-            ),
+
+                      ),
           ],
         ),
       ),
     );
   }
 
-  Future<void> fetchRecipes() async {
+  /*Future<void> fetchRecipes() async {
     final apiKey =
         '0444ff2bef2f4a949766be8b9b6343bc'; // Spoonacular API anahtarı
 
@@ -159,7 +168,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
     setState(() {
       recipes = newRecipes;
     });
-  }
+  }*/
 
   Future<void> fetchRecipeDetails(String recipeTitle) async {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -297,7 +306,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
       throw Exception('Tarif detayları alınırken bir hata oluştu');
     }
   }
-
+/*
   Future<void> fetchNames() async {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     try{
@@ -314,5 +323,5 @@ class _RecipeScreenState extends State<RecipeScreen> {
   } catch(e) {
 
     }
-  }
+  }*/
 }
