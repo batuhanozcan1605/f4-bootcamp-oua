@@ -4,7 +4,6 @@ Takım F4
 
 - [Batuhan Özcan: Product Owner/Developer](https://www.linkedin.com/in/batuhan-özcan-abb2a4163/)
 - [İrem Pekkıyak: Scrum Master/Developer](https://www.linkedin.com/in/irempekkiyak/)
-- [Melisa Ceyda Şen: Developer](https://www.linkedin.com/in/melissa-ceyda-%C5%9F-a4214b24a/)
 - [Emirhan Can: Developer](https://www.linkedin.com/in/emirhncann/)
 - [Alperen Çelebi: Developer](https://www.linkedin.com/in/alperen-çelebi-aaa710258/)
 # Projemiz
@@ -57,7 +56,7 @@ Backlog ortaya çıktıktan sonra hiç Sprint 3 görevi yazmadık ve bütün gö
 Bu yüzden de ilk Sprinte biraz fazla yüklenmiştik ve burndown chart'ın gerisinde kalmak biraz beklenen bir durumdu. Ancak arayüzde her sayfa UI'daki gibi hazır görünmüyor. Bunun sebebi, local dummy data yazmakla harcanacak emeği, Firebase üzerinde dummy data oluşturarak ve backend üzerinde çalışmalar yaparak harcayabiliriz diye düşünmemizdi.
 
 
-**Toplamda proje boyunca tamamlanması gereken puan** 340 Puan
+**Toplamda proje boyunca tamamlanması gereken puan** 380 Puan
 **Sprint 1 için tamamlanması tahmin edilen puan**: 85 Puan
 
 ### Sprint puanlama mantığı:
@@ -117,7 +116,7 @@ Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviye
 - Firebase'den dataları direkt çekip uygulama içinde modele uygun objelere dönüştürerek gösteriyorduk. Daha sonra özellikle imageUrl'leri her seferinde indirip yükleme verimsizliğini de ortadan kaldırmak için ve dataları cok daha rahat şekilde koleksiyonlar içinde gezdirebilmek için objeye dönüştürmeden döküman olarak getirip kullanmayı daha makul bulduk. Bir splash screen kurup dataları orada Riverpod provider kullanan repository'ye fetch'ledik, daha sonra kullandık.
 - Recipe için kapsamlı araştırmalar yaptık ve uygulamamızda kullanıma uygun görünen API'ları not aldık. Daha sonra bu API'ların özelliklerini daha detaylı bir şekilde inceleyerek, ne kadar kapsamlı olduklarına ve ihtiyaçlarımızın ne kadarını karşıladığına odaklandık. Bir test uygulaması oluşturarak, bize yapabileceğimiz yemeklerin önerilerini sunmalarını denedik. Ancak bazı sorunlarla karşılaştık ve bu sorunlara çözüm üretmeye çalışıyoruz. Bu sorunlardan ilki dolabımızdaki tüm ürünleri tek bir tarifte arıyor ve sonuç bulunamıyor olmasıydı. İkinci kısmı ise bize önerdiği tariflerde eksik malzemelerin de gözükmesiydi. İki farklı API kullanarak sorunun bir kısmını çözebiliyoruz. İlk API bize yapabileceğimiz yemeklerin bir listesini oluşturacak, ikinci API ise bu listedeki yemeklerin tariflerini listeleyecektir.
 
-**Sprint 2 için tamamlanması tahmin edilen puan**: 168 Puan
+**Sprint 2 için tamamlanması tahmin edilen puan**: 165 Puan
 
 ### Sprint puanlama mantığı:
 Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 165 puanlık bir iş bitmesi gerekiyordu ve 110'u tamamlandı.
@@ -163,3 +162,57 @@ Görevleri ve puanları dağıtırken Sprint 2 için kendimizi çok zorlamaya ç
 <img width="250" src ="https://cdn.discordapp.com/attachments/1123726106709737542/1125130134496751636/Screenshot_20230702_212509.jpg">
 
 
+
+## *Sprint 3*
+**Sprint 3 notları**: 
+- Bu sprintte amacımız uygulamayı başarılı bir şekilde tamamlamaktı. Planlandığı gibi tüm methodlar gerektiğinde hem Firebase hem de Riverpod ile çalışacak şekilde yazıldı.
+Böylece ürünlerle ilgili kullanıcının gerçekleştirebileceği tüm manipülasyonları kodlamış ve buradaki sorunları tespit edip çözmüş olduk
+
+- Firebase'e data girişlerini bu sprint'in başlarında tamamladık. Data girişleri için ekibin rahat çalışması ve tüm datanın hızlıca görülmesi ve düzenlenmesini sağlayan rowy'yi kullandık.
+
+- Uygulamamızın son güncellemesiyle birlikte, yeni arayüzler geliştirdik. Mevcut arayüzleri güçlendirdik. Uygulamamız modern ve şık bir görünüm sunarken, kullanıcılar için daha sezgisel ve kullanımı kolay bir deneyim sağlamak üzere özenle tasarladık. 
+
+
+**Sprint 3 için tamamlanması tahmin edilen puan**: 130 Puan
+
+### Sprint puanlama mantığı:
+Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 130 puanlık bir iş bitmesi gerekiyordu ve bütün görevler tamamlandı.
+
+**Daily Scrum**: Daily Scrum toplantılarını Whatsapp üzerinden veya Discord üzerinden gerçekleştirdik.
+[**Sprint 3 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%202/daily%20scrum)
+
+## Sprint Review:
+
+Recipe ekranına tarifleri, Firebase'deki mutfaktan aldığımız ürün isimlerini kullanarak gösterdik. Repository içindeki listeye data fetch edip onu build etmek biraz zaman aldı çünkü Recipe ekranı açılırken bu işlemi gerçekleştirmeliydik. Aksi takdirde güncel mutfağı kullanamazdık. Bu Sprintte öğrendiğimiz bir diğer şey ise ugulama verimliliğinin, nasıl data fetch ettiğine göre çok şey değişmesi... Eminim çok daha verimli yöntemler vardır ancak elimizdeki görsel boyutunu sınırlandırıp, verimliliği optimum bir yerde tutmaya çalıştık.
+
+**Sprint Review Katılımcıları**: Batuhan Özcan, İrem Pekkıyak, Emirhan Can, Alperen Çelebi
+
+## Sprint Retrospective:
+Diğer Sprint'lerden edindiğimiz tecrübe ve ekibin artık birbirinin yetkinliklerini tanımaya başlaması sebebiyle de en uyumlu geçen sprint buydu. Son Sprint olmasının verdiği hafif stresi şu ana kadar iyi yönetebildik. Sadece 1 Sprint daha olsa uygulamayı çok başka noktaya taşıyabileceğimizi hissediyoruz.
+
+
+### Product Backlog URL
+
+[Notion Backlog Board Sprint 3](https://www.notion.so/23a26b90fab04ffabb13d3ebbcc1acaf?v=7da549c0c0ab4c1e8830e88d225d3391)
+
+### Sprint Board Screenshots
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1129877800845844583/1130113150767861823/Screenshot_2023-07-16_at_15.25.27.png)
+
+![App Screenshot](https://cdn.discordapp.com/attachments/1129877800845844583/1130113150436515880/Screenshot_2023-07-16_at_15.25.44.png)
+
+
+
+### Ürün Durumu:
+
+
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113668055568384/Screenshot_20230716_150345.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113667648725022/Screenshot_20230716_150354.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113667279634463/Screenshot_20230716_150402.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113666910523483/Screenshot_20230716_150410.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113869612859433/Screenshot_20230715_155852.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113869361188864/Screenshot_20230715_155910.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113821218963588/Screenshot_20230716_145703.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113819293794364/Screenshot_20230716_150002.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113669280317440/Screenshot_20230716_150150.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113868799168563/Screenshot_20230716_145523.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113868409094214/Screenshot_20230716_145600.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113821609050273/Screenshot_20230716_145616.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113820896014446/Screenshot_20230716_145718.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113668797960283/Screenshot_20230716_150244.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113668407902318/Screenshot_20230716_150258.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113820564668487/Screenshot_20230716_145726.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113819650306100/Screenshot_20230716_145944.png">
