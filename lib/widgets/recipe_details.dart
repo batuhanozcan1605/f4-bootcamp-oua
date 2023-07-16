@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -55,7 +56,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                   ),
                 ),
               if (recipeImage != null)
-                Positioned(
+                /*Positioned(
                   top: -100,
                   child: ClipOval(
                     child: SizedBox.fromSize(
@@ -68,7 +69,29 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                       ),
                     ),
                   ),
+                ),*/
+              Positioned(
+                top: -100,
+                child: ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(80),
+                    child: CachedNetworkImage(
+                      imageUrl: recipeImage,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                              colorFilter:
+                              ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                        ),
+                      ),
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  ),
                 ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 60.0),
                 child: Column(
