@@ -31,9 +31,14 @@ class _OnBoardingState extends State<OnBoardingPage> {
       title: 'More Saving, Less Wastage',
     ),
     SliderPage(
+        description: 'Then, add what you get to your Kitchen.',
+        image: "assets/images/shoppingcart.png",
+        title: 'Fill Your Shopping Cart'
+    ),
+    SliderPage(
       description: 'Get recipe ideas based on what\'s already in your kitchen',
       image: "assets/images/14.png",
-      title: 'More Variety, Less Work!',
+      title: 'Show Your Cook Side!',
     ),
   ];
 

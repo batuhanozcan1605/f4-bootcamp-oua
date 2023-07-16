@@ -37,11 +37,11 @@ class RecipeScreenState extends ConsumerState<RecipeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Recipes',
                   style: TextStyle(
                     fontSize: 18,
@@ -52,14 +52,20 @@ class RecipeScreenState extends ConsumerState<RecipeScreen> {
                   setState(() {
 
                   });
-                }, icon: Icon(Icons.refresh)),
+                }, icon: const Icon(Icons.refresh)),
               ],
             ),
-            SizedBox(height: 12,),
+            const SizedBox(height: 12,),
             Expanded(
               child: recipeRepo.recipeTitles.isEmpty
-                  ? Center(
-                      child: Text('Recipes are Loading...'),
+                  ? const Center(
+                      child: Column(
+                        children: [
+                          Text('Recipes are Loading...'),
+                          SizedBox(height: 16,),
+                          CircularProgressIndicator(),
+                        ],
+                      ),
                     )
                   : ListView.builder(
                             itemCount: recipeRepo.recipeTitles.length,

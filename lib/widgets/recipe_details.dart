@@ -29,10 +29,10 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey.shade200,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0)),
         ),
-        insetPadding: EdgeInsets.all(30),
+        insetPadding: const EdgeInsets.all(30),
         elevation: 40.0,
         content: SingleChildScrollView(
           child: Stack(
@@ -44,7 +44,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                   top: -100,
                   child: ClipOval(
                     child: SizedBox.fromSize(
-                      size: Size.fromRadius(80),
+                      size: const Size.fromRadius(80),
                       child: Image.asset(
                         "8.jpg",
                         width: 150,
@@ -59,7 +59,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                   top: -100,
                   child: ClipOval(
                     child: SizedBox.fromSize(
-                      size: Size.fromRadius(80),
+                      size: const Size.fromRadius(80),
                       child: Image.network(
                         recipeImage,
                         width: 150,
@@ -76,17 +76,17 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                     Text(
                       recipeTitle.toUpperCase(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'VarelaRound',
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       'Recipe:',
                       style: TextStyle(
                         fontFamily: 'VarelaRound',
@@ -95,13 +95,13 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       recipeDetails['snippet'],
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'VarelaRound',
                         fontSize: 20,
                       ),
@@ -117,7 +117,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text(
+            child: const Text(
               'Close',
               style: TextStyle(fontSize: 20),
             ),
@@ -127,7 +127,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
               launch(recipeLink);
               // Open the recipe link in the browser
             },
-            child: Text(
+            child: const Text(
               'Link',
               style: TextStyle(fontSize: 20),
             ),

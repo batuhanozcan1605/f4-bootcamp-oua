@@ -37,15 +37,15 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
         length: 3,
         child: Scaffold(
           appBar: foodsRepo.tapInKitchen ? AppBar(
-              backgroundColor: Color(0xFF013440),
-              title: Center(),
+              backgroundColor: const Color(0xFF013440),
+              title: const Center(),
               leading: Builder(
                 builder: (BuildContext context) {
                   return IconButton(
                       onPressed: (){
                         ref.read(foodsProvider).cancelTapInKitchen();
                       },
-                      icon: Icon(Icons.cancel_outlined));
+                      icon: const Icon(Icons.cancel_outlined));
                 },
               ),
               actions: [
@@ -55,8 +55,8 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                       await foodsRepo.deleteBatchFromKitchen();
                       kitchenState.setButtonTap();
                     },
-                    icon: Icon(
-                      Icons.delete,
+                    icon: const Icon(
+                      Icons.cleaning_services_rounded,
                     )),
                 IconButton(
                     onPressed: (){
@@ -65,13 +65,13 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                         builder: (context) => const ChangePlaceWidget(),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.swap_horiz_rounded,
                     )),
               ],
           ) :
           AppBar(
-            backgroundColor: Color(0xFF4D818C),
+            backgroundColor: const Color(0xFF4D818C),
             title: SvgPicture.asset('assets/images/appbar_logo.svg'),
             centerTitle: true,
             // geçici log out butonu
@@ -81,7 +81,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
                     await signOut();
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => LoginPage()));
-                  }, icon: Icon(Icons.logout))
+                  }, icon: const Icon(Icons.logout))
             ],
           ),
           body: const TabBarScreen(),
