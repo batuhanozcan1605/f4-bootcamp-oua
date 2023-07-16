@@ -24,9 +24,9 @@ class ChangePlaceWidget extends ConsumerWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.kitchen_outlined, color: Constants.tselectedItemColor,),
-                  onPressed: () {
+                  onPressed: () async {
                     foodsRepo.tapInKitchen = false;
-                    ref.read(foodsProvider).updatePlace('place', 'b');
+                    await ref.read(foodsProvider).updatePlace('place', 'b');
                     kitchenState.setButtonTap();
                     ref.read(foodsProvider).cancelTapInKitchen();
                     Navigator.pop(context);
@@ -47,9 +47,9 @@ class ChangePlaceWidget extends ConsumerWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.dashboard_outlined,color: Constants.tselectedItemColor),
-                  onPressed: () {
+                  onPressed: () async {
                     foodsRepo.tapInKitchen = false;
-                    ref.read(foodsProvider).updatePlace('place', 'k');
+                    await ref.read(foodsProvider).updatePlace('place', 'k');
                     kitchenState.setButtonTap();
                     ref.read(foodsProvider).cancelTapInKitchen();
                     Navigator.pop(context);
@@ -70,9 +70,9 @@ class ChangePlaceWidget extends ConsumerWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.icecream_outlined, color: Constants.tselectedItemColor,),
-                  onPressed: () {
+                  onPressed: () async {
                     foodsRepo.tapInKitchen = false;
-                    ref.read(foodsProvider).updatePlace('place', 'd');
+                    await ref.read(foodsProvider).updatePlace('place', 'd');
                     kitchenState.setButtonTap();
                     ref.read(foodsProvider).cancelTapInKitchen();
                     Navigator.pop(context);

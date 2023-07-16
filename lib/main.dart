@@ -1,8 +1,7 @@
 import 'package:bootcamp_oua_f4/repositories/imageurl_repo.dart';
-import 'package:bootcamp_oua_f4/screens/kitchen/kitchen_screen.dart';
+import 'package:bootcamp_oua_f4/screens/login_screen.dart';
 import 'package:bootcamp_oua_f4/screens/nav_screen.dart';
 import 'package:bootcamp_oua_f4/screens/onboard_screen.dart';
-import 'package:bootcamp_oua_f4/screens/recipe_screen.dart';
 import 'package:bootcamp_oua_f4/splash_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'constants/constants.dart';
 
 void main() {
@@ -24,15 +24,43 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'New App',
+      title: 'Kitchen in Pocket',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: OnBoardingPage(),
+      home: const StartApp(),
     );
   }
 }
 
+class StartApp extends StatelessWidget {
+  const StartApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<bool>(
+      future: checkIfFirstTime(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Show loading indicator or splash screen
+          return CircularProgressIndicator();
+        } else if (snapshot.hasData && snapshot.data!) {
+          // Show onboarding screen
+          return OnBoardingPage();
+        } else {
+          // Show main content
+          return LoginPage();
+        }
+      },
+    );
+  }
+}
+
+Future<bool> checkIfFirstTime() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+  return isFirstTime;
+}
 
 class FirebaseInitPhase extends ConsumerStatefulWidget {
   const FirebaseInitPhase({Key? key}) : super(key: key);
@@ -42,7 +70,6 @@ class FirebaseInitPhase extends ConsumerStatefulWidget {
 }
 
 class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
-
   bool isFirebaseInitialized = false;
 
   @override
@@ -57,10 +84,9 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
       isFirebaseInitialized = true;
     });
 
-    if(FirebaseAuth.instance.currentUser != null) {
+    if (FirebaseAuth.instance.currentUser != null) {
       goToSplash();
     }
-
   }
 
   void goToSplash() {
@@ -70,8 +96,8 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
 
   Future<void> _signInAnonymously() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInAnonymously();
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInAnonymously();
       // Handle the signed-in user
       User? user = userCredential.user;
       // Additional logic or navigation can be performed here
@@ -82,55 +108,63 @@ class FirebaseInitPhaseState extends ConsumerState<FirebaseInitPhase> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: isFirebaseInitialized ?
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () async {
+        child: isFirebaseInitialized
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        await signInWithGoogle();
+                        final uid = FirebaseAuth.instance.currentUser!.uid;
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .set(
+                          {
+                            'girisYaptiMi': true,
+                            'sonGirisTarihi': FieldValue.serverTimestamp(),
+                          },
+                          SetOptions(merge: true),
+                        );
 
-                  await signInWithGoogle();
-                  final uid = FirebaseAuth.instance.currentUser!.uid;
-                  await FirebaseFirestore.instance.collection('users').doc(uid).set({
-                    'girisYaptiMi' : true,
-                    'sonGirisTarihi' : FieldValue.serverTimestamp(),
-                  },
-                    SetOptions(merge: true),
-                  );
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .collection('kitchen')
+                            .doc('first doc')
+                            .set({
+                          'collection started': true,
+                        });
 
-                  await FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc('first doc').set({
-                    'collection started' : true,
-                  });
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .collection('shoppingCart')
+                            .doc('first doc')
+                            .set({
+                          'collection started': true,
+                        });
 
-                  await FirebaseFirestore.instance.collection('users').doc(uid).
-                  collection('shoppingCart').doc('first doc').set({
-                    'collection started' : true,
-                  });
-
-                  goToSplash();
-                },
-                child: const Text("Google Sign In")),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: ElevatedButton(
-                  onPressed: () async {
-                    await _signInAnonymously();
-                    goToSplash();
-                  },
-                  child: const Text("Giriş Yapmadan Devam Et")),
-            ),
-          ],
-        )
+                        goToSplash();
+                      },
+                      child: const Text("Google Sign In")),
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          await _signInAnonymously();
+                          goToSplash();
+                        },
+                        child: const Text("Giriş Yapmadan Devam Et")),
+                  ),
+                ],
+              )
             : const CircularProgressIndicator(),
       ),
     );
   }
-
 }
-
-

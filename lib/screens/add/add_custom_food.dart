@@ -1,5 +1,8 @@
 import 'package:bootcamp_oua_f4/constants/constants.dart';
+import 'package:bootcamp_oua_f4/screens/add/add_screen.dart';
+import 'package:bootcamp_oua_f4/screens/add/foods_bodyscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -13,13 +16,17 @@ class _AddCustomFoodState extends State<AddCustomFood> {
   List<String> foodNames = [];
   String? selectedCategory;
   TextEditingController foodNameController = TextEditingController();
-  int _defaultValue = 0;
   bool isSwitchOn = false;
   String? selectedStorageOption;
   DateTime? selectedExpireDate;
   late int categoryId;
-  String formattedDate = 'a';
-
+  String formattedDate = '';
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+  var snackBar = const SnackBar(content: Text("Custom Food Added", style: TextStyle(
+    color: Colors.white70,
+  ),
+  ),
+    backgroundColor: Color(0xFF013440),);
 
   @override
   void dispose() {
@@ -54,7 +61,7 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                       width: 200,
                       height: 200,
                       child: Image.network(
-                        'https://nationaltoday.com/wp-content/uploads/2020/06/Soul-Food-1-1.jpg',
+                        'https://5.imimg.com/data5/SELLER/Default/2022/12/EB/KL/FW/31012184/5d3f90b6-2353-4c4b-9cfd-5ca5c5775ff4-500x500.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -210,35 +217,35 @@ class _AddCustomFoodState extends State<AddCustomFood> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await addCustomFood();
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Constants.tPrimaryColor,
+                    ),
+                    child: const Text('Add Custom Food'),
+                  ),
+                ),
               ],
             ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-        child: ElevatedButton(
-          onPressed: () {
-            addCustomFood();
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Constants.tPrimaryColor,
-          ),
-          child: const Text('Add Custom Food'),
         ),
       ),
     );
   }
 
   Future<void> addCustomFood() async {
-    if(selectedCategory == null) {
+    if(selectedCategory == null || selectedStorageOption == null) {
       return;
     }else{
-    categoryId = int.parse(selectedCategory!) + 1;
+    categoryId = (int.parse(selectedCategory!) + 1);
     }
 
     Duration difference = selectedExpireDate!.difference(DateTime.now());
-
 
     Map<String, dynamic> data = {
       'categoryId' : categoryId,
@@ -246,10 +253,13 @@ class _AddCustomFoodState extends State<AddCustomFood> {
       'enterDate' : FieldValue.serverTimestamp(),
       'newExpiryDate' : selectedExpireDate,
       'place' : selectedStorageOption,
-      'image' : '$selectedCategory.png',
-      'shelftime' : difference.inDays
+      'image' : '$categoryId.png',
+      'shelfTime' : difference.inDays,
+      'dontUseExpiryDate' : false,
+      //'customFood' : true,
     };
-    Constants.kitchenRef.doc().set(data);
+    FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc().set(data);
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
-
 }

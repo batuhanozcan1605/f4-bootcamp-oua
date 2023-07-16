@@ -1,11 +1,11 @@
-import 'package:bootcamp_oua_f4/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slide_to_act_reborn/slide_to_act_reborn.dart';
 import '../constants/constants.dart';
 import '../widgets/slider.dart';
 import 'login_screen.dart';
-
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -15,23 +15,29 @@ class OnBoardingPage extends StatefulWidget {
 class _OnBoardingState extends State<OnBoardingPage> {
   int _currentPage = 0;
   PageController _controller = PageController();
+  final GlobalKey<SlideActionState> _key = GlobalKey();
 
   // ignore: prefer_final_fields
   List<Widget> _pages = [
     SliderPage(
       description: 'Welcome to the Kitchen in your pocket!',
-      image: "assets/images/8.jpg",
+      image: "assets/images/8.png",
       title: 'Kitchen in Pocket!',
     ),
     SliderPage(
-      description: 'Receive alerts when your products are set to expire',
-      image: "assets/images/11.jpg",
+      description: 'See when your food are close to expire',
+      image: "assets/images/11.png",
       title: 'More Saving, Less Wastage',
     ),
     SliderPage(
+        description: 'Then, add what you get to your Kitchen.',
+        image: "assets/images/shoppingcart.png",
+        title: 'Fill Your Shopping Cart'
+    ),
+    SliderPage(
       description: 'Get recipe ideas based on what\'s already in your kitchen',
-      image: "assets/images/14.jpg",
-      title: 'More Variety, Less Work!',
+      image: "assets/images/14.png",
+      title: 'Show Your Cook Side!',
     ),
   ];
 
@@ -69,19 +75,33 @@ class _OnBoardingState extends State<OnBoardingPage> {
                       ? Padding(
                     padding: const EdgeInsets.only(
                         top: 64, right: 32, left: 32),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 64, right: 32, left: 32),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.done,
-                          size: 30,
-                          color: Color(0xFF4D818C),
-                        ),
-                        onPressed: () {
-                          Get.off(LoginPage());
-                        },
+                    child: SlideAction(
+                      animationDuration: Duration(milliseconds: 900),
+                      submittedIcon: Icon(
+                        FontAwesomeIcons.house,
+                        color: Colors.white,
                       ),
+                      text: 'Let\'s get start',
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'VarelaRound',
+                        fontSize: 18,
+                      ),
+                      elevation: 1,
+                      sliderButtonIcon: FaIcon(
+                        Icons.arrow_forward,
+                        size: 22,
+                        color: Color(0xFF4D818C),
+                      ),
+                      sliderButtonIconPadding: 10,
+                      outerColor: Color(0xFF4D818C).withOpacity(0.8),
+                      sliderButtonIconSize: 14,
+                      height: 50,
+                      key: _key,
+                      onSubmit: () {
+                        setFirstTime();
+                        Get.off(LoginPage());
+                      },
                     ),
                   )
                       : IconButton(
@@ -127,5 +147,9 @@ class _OnBoardingState extends State<OnBoardingPage> {
         ),
       ),
     );
+  }
+  Future<void> setFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstTime', false);
   }
 }

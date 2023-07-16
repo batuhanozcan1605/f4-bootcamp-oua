@@ -10,6 +10,7 @@ class FoodsRepo extends ChangeNotifier {
   List<String> selectedKitchenDocumentIds = [];
   bool tapInKitchen = false;
 
+
   void toggleFoodSelection(food, inKitchen) {
     String documentId = food.id;
     if (selectedDocumentIds.contains(documentId)) {
@@ -47,7 +48,7 @@ class FoodsRepo extends ChangeNotifier {
 
       if (sourceDocument.exists) {
         DocumentReference destinationRef = FirebaseFirestore.instance
-            .collection('users').doc(Constants.uid).collection('kitchen').doc();
+            .collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('kitchen').doc();
 
         exists = await doesNameExists(sourceDocument['name']);
         if(!exists) {
@@ -57,6 +58,7 @@ class FoodsRepo extends ChangeNotifier {
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
             documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
 
@@ -78,7 +80,7 @@ class FoodsRepo extends ChangeNotifier {
   Future<void> deleteBatchFromKitchen() async {
     try {
       for(var docId in selectedKitchenDocumentIds) {
-        Constants.kitchenRef.doc(docId).delete();
+        FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('kitchen').doc(docId).delete();
       }
       selectedKitchenDocumentIds.clear();
     }catch (e){
@@ -90,14 +92,13 @@ class FoodsRepo extends ChangeNotifier {
     late bool exists;
     try {
       for(var docId in selectedDocumentIds) {
-        DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
-            .collection('foods')
+        DocumentSnapshot sourceDocument = await FirebaseFirestore.instance.collection('foods')
             .doc(docId)
             .get();
 
 
         if (sourceDocument.exists) {
-          DocumentReference destinationRef = Constants.shoppingCartRef.doc();
+          DocumentReference destinationRef = FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('shoppingCart').doc();
 
           exists = await doesNameExistsInCart(sourceDocument['name']);
           if(!exists) {
@@ -128,16 +129,17 @@ class FoodsRepo extends ChangeNotifier {
     try {
       for(var docId in selectedKitchenDocumentIds) {
         print("DOC ID: $docId");
-        DocumentReference documentReference = await FirebaseFirestore.instance
+        await FirebaseFirestore.instance
             .collection('users')
             .doc(uid)
             .collection('kitchen')
-            .doc(docId);
-        await documentReference.update({
+            .doc(docId).update({
           field: value
         });
+
       }
-      //selectedKitchenDocumentIds.clear();
+      print("DEBUG update: $selectedKitchenDocumentIds");
+      selectedKitchenDocumentIds.clear();
     } catch (e) {
       print('Error: $e');
     }
@@ -145,7 +147,7 @@ class FoodsRepo extends ChangeNotifier {
   }
 
   Future<bool> doesNameExists(String name) async {
-    final querySnapshot = await Constants.kitchenRef.get();
+    final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('kitchen').get();
 
     for (final doc in querySnapshot.docs) {
       final fieldValue = doc.data()['name'] as String?;
@@ -158,7 +160,7 @@ class FoodsRepo extends ChangeNotifier {
   }
 
   Future<bool> doesNameExistsInCart(String name) async {
-    final querySnapshot = await Constants.shoppingCartRef.get();
+    final querySnapshot = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('shoppingCart').get();
 
     for (final doc in querySnapshot.docs) {
       final fieldValue = doc.data()['name'] as String?;

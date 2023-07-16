@@ -10,6 +10,7 @@ import '../models/FoodModel.dart';
 import '../repositories/kitchen_state.dart';
 
 class DataService extends ChangeNotifier {
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   Future<List<Category>> getCategories() async {
 
@@ -90,13 +91,46 @@ class DataService extends ChangeNotifier {
 
       if (sourceDocument.exists) {
         DocumentReference destinationRef = FirebaseFirestore.instance
-            .collection('users').doc(Constants.uid).collection('kitchen').doc();
+            .collection('users').doc(uid).collection('kitchen').doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
+          }
+          await destinationRef.set(documentData);
+        }
+        print('Document copied');
+      } else {
+        print('No Source document');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> addSingleFoodToCart(documentId) async {
+    late bool exists;
+    try {
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance
+          .collection('foods')
+          .doc(documentId)
+          .get();
+
+      if (sourceDocument.exists) {
+        DocumentReference destinationRef = FirebaseFirestore.instance
+            .collection('users').doc(uid).collection('shoppingCart').doc();
+
+        exists = await FoodsRepo().doesNameExistsInCart(sourceDocument['name']);
+        if (!exists) {
+          Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
+          if (documentData != null) {
+            documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
         }
@@ -112,7 +146,21 @@ class DataService extends ChangeNotifier {
   Future<void> undoAdd() async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('users').doc(Constants.uid).collection('kitchen')
+          .collection('users').doc(uid).collection('kitchen')
+          .get();
+
+      DocumentSnapshot lastDocument = querySnapshot.docs.last;
+
+      await lastDocument.reference.delete();
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> undoAddToCart() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users').doc(uid).collection('shoppingCart')
           .get();
 
       DocumentSnapshot lastDocument = querySnapshot.docs.last;
@@ -126,18 +174,20 @@ class DataService extends ChangeNotifier {
   Future<void> addFoodFromCart(documentId) async {
     late bool exists;
     try {
-      DocumentSnapshot sourceDocument = await Constants.shoppingCartRef
+      DocumentSnapshot sourceDocument = await FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart')
           .doc(documentId)
           .get();
 
       if (sourceDocument.exists) {
-        DocumentReference destinationRef = Constants.kitchenRef.doc();
+        DocumentReference destinationRef = FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc();
 
         exists = await FoodsRepo().doesNameExists(sourceDocument['name']);
         if (!exists) {
           Map<String, dynamic>? documentData = sourceDocument.data() as Map<String, dynamic>?;
           if (documentData != null) {
             documentData['enterDate'] = FieldValue.serverTimestamp();
+            documentData['newExpiryDate'] = null;
+            documentData['dontUseExpiryDate'] = false;
           }
           await destinationRef.set(documentData);
         }
@@ -152,7 +202,7 @@ class DataService extends ChangeNotifier {
 
   Future<void> deleteFoodFromCart(documentId) async {
     try {
-      await Constants.shoppingCartRef
+      await FirebaseFirestore.instance.collection('users').doc(uid).collection('shoppingCart')
           .doc(documentId)
           .delete();
     } catch (e) {
@@ -162,13 +212,14 @@ class DataService extends ChangeNotifier {
 
   Future<void> deleteFromDetails(docId) async {
     try{
-      Constants.kitchenRef.doc(docId).delete();
+      FirebaseFirestore.instance.collection('users').doc(uid).collection('kitchen').doc(docId).delete();
     }catch(e){
 
     }
   }
 
 
-  }
+
+}
 
 final dataServiceProvider = Provider((ref) => DataService());

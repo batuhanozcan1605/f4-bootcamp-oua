@@ -22,13 +22,6 @@ Future<UserCredential> signInWithGoogle() async {
 }
 
 Future <void> signOutWithGoogle() async {
-  final user = FirebaseAuth.instance.currentUser;
-
-    if (user != null && user.isAnonymous) {
-      await FirebaseAuth.instance.signOut();
-      await user.delete();
-    }
-
 
   await FirebaseAuth.instance.signOut();
   final googleSignIn = GoogleSignIn();
