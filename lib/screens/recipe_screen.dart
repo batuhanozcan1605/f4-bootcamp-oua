@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:bootcamp_oua_f4/repositories/recipe_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart' as http;
-import 'package:url_launcher/url_launcher.dart';
-
 import '../widgets/recipe_details.dart';
 
 class RecipeScreen extends ConsumerStatefulWidget {

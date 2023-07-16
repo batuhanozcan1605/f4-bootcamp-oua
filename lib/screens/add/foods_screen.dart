@@ -14,11 +14,11 @@ class FoodsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final foodsRepo = ref.watch(foodsProvider);
+
 
     return FutureBuilder<QuerySnapshot>(
       future: FirebaseFirestore.instance.collection('foods').where(
-          'categoryId', isEqualTo: categoryId).get(),
+          'categoryId', isEqualTo: categoryId).orderBy('name').get(),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
           List<QueryDocumentSnapshot> foods = snapshot.data!.docs;
