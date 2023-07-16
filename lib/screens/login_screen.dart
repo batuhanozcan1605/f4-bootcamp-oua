@@ -101,196 +101,197 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
+    return  Scaffold(
         body: isFirebaseInitialized
-            ? SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+            ? Container(
+                width: double.infinity,
+          decoration: BoxDecoration(
+            color: kGoogleBlue,
+          ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: Get.height / 5,
-                    ),
-                    Image.asset(
-                      'assets/images/fridge.png',
-                      width: 100,
-                      height: 100,
-                      color: kGoogleBlue,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Kitchen ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'VarelaRound',
-                            fontSize: 23,
-                            color: kGoogleBlue,
-                          ),
-                        ),
-                        Text(
-                          'In ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'VarelaRound',
-                            fontSize: 23,
-                            color: Colors.teal,
-                          ),
-                        ),
-                        Text(
-                          'Pocket',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'VarelaRound',
-                            fontSize: 23,
-                            color: kGoogleBlue,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
+                      height: Get.height / 15,
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      child: SignInForm(),
-                    ),
-                    NiceButtons(
-                      startColor: kGoogleBlue,
-                      endColor: kGoogleBlue.withOpacity(0.4),
-                      borderColor: Colors.teal.withOpacity(0.7),
-                      height: 40,
-                      stretch: false,
-                      borderRadius: 8,
-                      gradientOrientation: GradientOrientation.Horizontal,
-                      onTap: (finish) async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (context) =>
-                            RegisterPage()));
-                      },
-                      child: Text(
-                        'Create Account',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontFamily: 'VarelaRound',
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: new Container(
-                              margin: const EdgeInsets.only(
-                                  left: 10.0, right: 20.0),
-                              child: Divider(
-                                color: Color(0xff5f5e5e),
-                                height: 36,
-                              )),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Or sign in with',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'VarelaRound',
-                                fontSize: 13),
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/images/fridge.png',
+                            height: Get.height / 6,
+                            color: Colors.white,
                           ),
-                        ),
-                        Expanded(
-                          child: new Container(
-                              margin: const EdgeInsets.only(
-                                  left: 20.0, right: 10.0),
-                              child: Divider(
-                                color: Color(0xff5f5e5e),
-                                height: 36,
-                              )),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 50,
-                      width: 205,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: MaterialButton(
-                          color: Colors.white,
-                          elevation: 10,
-                          onPressed: () {
-                            googleSignInButton();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                height: 30.0,
-                                width: 30.0,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/google.png'),
-                                      fit: BoxFit.cover),
-                                  shape: BoxShape.circle,
+                              Text(
+                                'Kitchen ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'VarelaRound',
+                                  fontSize: 23,
+                                  color: Colors.white,
                                 ),
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              const Flexible(
-                                child: Text(
-                                  "Sign In with Google",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'VarelaRound',
-                                      fontSize: 13),
+                              Text(
+                                'In ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'VarelaRound',
+                                  fontSize: 23,
+                                  color: Color(0xff98d7d1),
                                 ),
-                              )
+                              ),
+                              Text(
+                                'Pocket',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'VarelaRound',
+                                  fontSize: 23,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ],
                           ),
+                        ],
+                      ),
+                    ),
+
+
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(60),
+                                topRight: Radius.circular(60))),
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: EdgeInsets.all(30),
+                            child: Column(
+
+                              children: [
+                                SizedBox(height: 30,),
+                                SignInForm(),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: new Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 10.0, right: 20.0),
+                                          child: Divider(
+                                            color: Color(0xff5f5e5e),
+                                            height: 40,
+                                          )),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'OR',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'VarelaRound',
+                                            fontSize: 13),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: new Container(
+                                          margin: const EdgeInsets.only(
+                                              left: 20.0, right: 10.0),
+                                          child: Divider(
+                                            color: Color(0xff5f5e5e),
+                                            height: 40,
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 40,
+                                  width: 170,
+                                  child: MaterialButton(
+                                    color: Colors.white,
+                                    elevation: 10,
+                                    onPressed: () {
+                                      googleSignInButton();
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 25.0,
+                                          width: 25.0,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage('assets/images/google.png'),
+                                                fit: BoxFit.cover),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "Sign In with Google",
+                                          style: TextStyle(
+                                              color: Colors.black38,
+                                              fontFamily: 'VarelaRound',
+                                              fontSize: 12),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    signInAnonymously();
+                                  },
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Skip',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: kGoogleBlue,
+                                            fontFamily: 'VarelaRound',
+                                            fontSize: 15),
+
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: ' to try app without Personalization',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'VarelaRound',
+                                                fontSize: 13),
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        signInAnonymously();
-                      },
-                      child: RichText(
-                        text: const TextSpan(
-                            text: 'Skip',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: kGoogleBlue,
-                                fontFamily: 'VarelaRound',
-                                fontSize: 15),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: ' to try app without Authentication',
-                                style: TextStyle(
-                                    color: Color(0xff474646),
-                                    fontFamily: 'VarelaRound',
-                                    fontSize: 13),
-                              )
-                            ]),
-                      ),
-                    ),
+
+
                   ],
                 ),
               )
             : const Center(child: CircularProgressIndicator()),
-      ),
+
     );
   }
 }

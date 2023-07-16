@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nice_buttons/nice_buttons.dart';
 
 import '../constants/constants.dart';
+import '../screens/register_screen.dart';
 import '../splash_screen.dart';
 
 class SignInForm extends StatefulWidget {
@@ -161,7 +162,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
             validator: _validatePassword,
           ),
-          SizedBox(height: 16.0),
+          SizedBox(height: 20.0),
           NiceButtons(
             startColor: kGoogleBlue,
             endColor: kGoogleBlue.withOpacity(0.4),
@@ -186,6 +187,34 @@ class _SignInFormState extends State<SignInForm> {
               ),
             ),
           ),
+          SizedBox(height: 10,),
+          NiceButtons(
+            startColor: kGoogleBlue,
+            endColor: kGoogleBlue.withOpacity(0.4),
+            borderColor: Colors.teal.withOpacity(0.7),
+            height: 40,
+            stretch: false,
+            borderRadius: 8,
+            gradientOrientation: GradientOrientation.Horizontal,
+            onTap: (finish) async {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          RegisterPage()));
+            },
+            child: Text(
+              'Create Account',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontFamily: 'VarelaRound',
+              ),
+
+            ),
+
+          ),
+          SizedBox(height: 10,),
         ],
       ),
     );
