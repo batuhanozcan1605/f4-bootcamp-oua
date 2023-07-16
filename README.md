@@ -7,7 +7,7 @@ Takım F4
 - [Emirhan Can: Developer](https://www.linkedin.com/in/emirhncann/)
 - [Alperen Çelebi: Developer](https://www.linkedin.com/in/alperen-çelebi-aaa710258/)
 # Projemiz
-
+### Ürün İsmi:  **Kithen In Pocket**
 ## Ürün Açıklaması
 
 Bir mutfak takip - yemek tarifi uygulaması yapıyoruz.
@@ -179,7 +179,7 @@ Böylece ürünlerle ilgili kullanıcının gerçekleştirebileceği tüm manip�
 Fibonacci sayı dizimini kullanarak her göreve 1-13 arasında bir zorluk seviyesi yükledik. Bu Sprintte toplamda 130 puanlık bir iş bitmesi gerekiyordu ve bütün görevler tamamlandı.
 
 **Daily Scrum**: Daily Scrum toplantılarını Whatsapp üzerinden veya Discord üzerinden gerçekleştirdik.
-[**Sprint 3 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%202/daily%20scrum)
+[**Sprint 3 Daily Scrum**](https://github.com/batuhanozcan1605/f4-bootcamp-oua/tree/master/Proje%20Y%C3%B6netimi/Sprint%203/daily%20scrum)
 
 ## Sprint Review:
 
@@ -197,9 +197,9 @@ Diğer Sprint'lerden edindiğimiz tecrübe ve ekibin artık birbirinin yetkinlik
 
 ### Sprint Board Screenshots
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1129877800845844583/1130113150767861823/Screenshot_2023-07-16_at_15.25.27.png)
+![App Screenshot](https://github.com/batuhanozcan1605/f4-bootcamp-oua/blob/master/Proje%20Y%C3%B6netimi/Sprint%203/Screenshot_2023-07-16_at_15.25.27.png)
 
-![App Screenshot](https://cdn.discordapp.com/attachments/1129877800845844583/1130113150436515880/Screenshot_2023-07-16_at_15.25.44.png)
+![App Screenshot](https://github.com/batuhanozcan1605/f4-bootcamp-oua/blob/master/Proje%20Y%C3%B6netimi/Sprint%203/Screenshot_2023-07-16_at_15.25.44.png)
 
 
 
@@ -211,8 +211,6 @@ Diğer Sprint'lerden edindiğimiz tecrübe ve ekibin artık birbirinin yetkinlik
 <img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113666910523483/Screenshot_20230716_150410.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113869612859433/Screenshot_20230715_155852.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113869361188864/Screenshot_20230715_155910.png">
-<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113821218963588/Screenshot_20230716_145703.png">
-<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113819293794364/Screenshot_20230716_150002.png">
-<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113669280317440/Screenshot_20230716_150150.png">
+<img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113821218963588/Screenshot_20230716_145703.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113819293794364/Screenshot_20230716_150002.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113669280317440/Screenshot_20230716_150150.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113868799168563/Screenshot_20230716_145523.png">
 <img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113868409094214/Screenshot_20230716_145600.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113821609050273/Screenshot_20230716_145616.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113820896014446/Screenshot_20230716_145718.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113668797960283/Screenshot_20230716_150244.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113668407902318/Screenshot_20230716_150258.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113820564668487/Screenshot_20230716_145726.png"><img width="250" src ="https://cdn.discordapp.com/attachments/1129877800845844583/1130113819650306100/Screenshot_20230716_145944.png">
