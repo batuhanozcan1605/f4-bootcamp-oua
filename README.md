@@ -7,7 +7,7 @@ Takım F4
 - [Emirhan Can: Developer](https://www.linkedin.com/in/emirhncann/)
 - [Alperen Çelebi: Developer](https://www.linkedin.com/in/alperen-çelebi-aaa710258/)
 # Projemiz
-
+### Ürün İsmi:  **Kithen In Pocket**
 ## Ürün Açıklaması
 
 Bir mutfak takip - yemek tarifi uygulaması yapıyoruz.
