@@ -128,7 +128,7 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
               // Open the recipe link in the browser
             },
             child: const Text(
-              'Link',
+              'Go to Recipe',
               style: TextStyle(fontSize: 20),
             ),
           ),

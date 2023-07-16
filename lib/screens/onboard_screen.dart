@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:slide_to_act/slide_to_act.dart';
+import 'package:slide_to_act_reborn/slide_to_act_reborn.dart';
 import '../constants/constants.dart';
 import '../widgets/slider.dart';
 import 'login_screen.dart';
-
 
 class OnBoardingPage extends StatefulWidget {
   @override
