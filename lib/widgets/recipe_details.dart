@@ -1,12 +1,12 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> fetchRecipeDetails(String recipeTitle, context) async {
-
   final apiKey =
-      '4644d9a5b8133608bbbbd0deefe949e77014aee240970af20c2c72e9e4f79c93'; // SerpApi API anahtarı
+      'f94e3f44a4d7c1caf9fa227706e733c3b79936afd959079d93c7b1c1a798cfb1'; // SerpApi API anahtarı
 
   final url = Uri.parse(
       'https://serpapi.com/search?q=$recipeTitle&hl=tr&gl=tr&api_key=$apiKey');
@@ -60,12 +60,16 @@ Future<void> fetchRecipeDetails(String recipeTitle, context) async {
                   child: ClipOval(
                     child: SizedBox.fromSize(
                       size: const Size.fromRadius(80),
-                      child: Image.network(
-                        recipeImage,
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.fitHeight,
-                      ),
+                      child: CachedNetworkImage(
+                          imageUrl: recipeImage,
+                          imageBuilder: (context, imageProvider) => Container(
+                                  decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                    colorFilter: const ColorFilter.mode(
+                                        Colors.red, BlendMode.colorBurn)),
+                              ))),
                     ),
                   ),
                 ),
