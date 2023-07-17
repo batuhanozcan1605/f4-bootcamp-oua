@@ -10,7 +10,7 @@ class RecipeRepo extends ChangeNotifier {
   List<String> recipeTitles = [];
 
 
-  final apiKey = '64bfa68ffcf04e3cb7b203a3f94bddbc'; // Spoonacular API anahtarı
+  final apiKey = '0444ff2bef2f4a949766be8b9b6343bc'; // Spoonacular API anahtarı
 
   Future<void> fetchRecipes() async {
     print("fetch recipe");
@@ -24,13 +24,13 @@ class RecipeRepo extends ChangeNotifier {
       }
     }
     print("combined: $combinedIngredients");
-    var responseCount = combinedIngredients.length < 4 ? combinedIngredients.length : 4;
+    var responseCount = combinedIngredients.length < 10 ? combinedIngredients.length : 10;
 
 
     // Kombine edilmiş malzemelerle sorguları yap ve tarifleri al
     for (int i = 0; i < responseCount; i++) {
       final url = Uri.parse(
-          'https://api.spoonacular.com/recipes/findByIngredients?apiKey=$apiKey&ingredients=${combinedIngredients[i]}&number=5');
+          'https://api.spoonacular.com/recipes/findByIngredients?apiKey=$apiKey&ingredients=${combinedIngredients[i]}&number=10');
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -43,7 +43,7 @@ class RecipeRepo extends ChangeNotifier {
         throw ('Tarifler alınırken bir hata oluştu');
       }
     }
-
+    notifyListeners();
   }
 
   Future<void> fetchNames() async {
@@ -63,6 +63,7 @@ class RecipeRepo extends ChangeNotifier {
           }
         }
         ingredients = foodNameList;
+        notifyListeners();
       });
     } catch(e) {
 
