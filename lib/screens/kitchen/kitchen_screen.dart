@@ -1,5 +1,6 @@
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/repositories/kitchen_state.dart';
+import 'package:bootcamp_oua_f4/repositories/recipe_repo.dart';
 import 'package:bootcamp_oua_f4/screens/detail_screen.dart';
 import 'package:bootcamp_oua_f4/screens/kitchen/tabbar_screen.dart';
 import 'package:bootcamp_oua_f4/utilities/authentication.dart';
@@ -79,6 +80,7 @@ class KitchenScreenState extends ConsumerState<KitchenScreen> {
               IconButton(
                   onPressed: () async {
                     await signOut();
+                    ref.read(recipeProvider).resetData();
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   }, icon: const Icon(Icons.logout))

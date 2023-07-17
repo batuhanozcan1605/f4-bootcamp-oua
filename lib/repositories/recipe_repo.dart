@@ -10,7 +10,7 @@ class RecipeRepo extends ChangeNotifier {
   List<String> recipeTitles = [];
 
 
-  final apiKey = '818c4965b55443c19ff14518ea33fad0'; // Spoonacular API anahtarı
+  final apiKey = '64bfa68ffcf04e3cb7b203a3f94bddbc'; // Spoonacular API anahtarı
 
   Future<void> fetchRecipes() async {
     print("fetch recipe");
@@ -55,9 +55,12 @@ class RecipeRepo extends ChangeNotifier {
           .get()
           .then((QuerySnapshot querySnapshot) async {
         for (DocumentSnapshot doc in querySnapshot.docs) {
-          final foodName = doc['name'] as String;
-          print("object food name $foodName");
+          final data = doc.data() as Map<String, dynamic>; // Explicitly cast to Map
+          if (data.containsKey('name')) {
+            final foodName = data['name'] as String;
+            print("object food name $foodName");
             foodNameList.add(foodName);
+          }
         }
         ingredients = foodNameList;
       });
@@ -68,6 +71,12 @@ class RecipeRepo extends ChangeNotifier {
     print("food name list $foodNameList");
 
 
+  }
+
+  void resetData() {
+    ingredients = [];
+    recipeTitles = [];
+    notifyListeners();
   }
 
 }
