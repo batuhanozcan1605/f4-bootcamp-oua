@@ -24,7 +24,7 @@ class RecipeRepo extends ChangeNotifier {
       }
     }
     print("combined: $combinedIngredients");
-    var responseCount = combinedIngredients.length < 10 ? combinedIngredients.length : 10;
+    var responseCount = combinedIngredients.length < 4 ? combinedIngredients.length : 4;
 
 
     // Kombine edilmiş malzemelerle sorguları yap ve tarifleri al
