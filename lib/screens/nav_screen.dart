@@ -21,9 +21,9 @@ class NavScreenState extends ConsumerState<NavScreen> {
 
   int currentindex = 0;
   final screens = [
-    KitchenScreen(),
-    RecipeScreen(),
-    AddSecreen(),
+    const KitchenScreen(),
+    const RecipeScreen(),
+    const AddSecreen(),
     ShoppingCardScreen(),
   ];
 
@@ -39,7 +39,7 @@ class NavScreenState extends ConsumerState<NavScreen> {
       body: screens[currentindex],
       bottomNavigationBar: Container(
         height: 80,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: Colors.black26,
@@ -48,15 +48,15 @@ class NavScreenState extends ConsumerState<NavScreen> {
             ]
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(25.0),
             topRight: Radius.circular(25.0),
           ),
           child: BottomNavigationBar(
             elevation: 10,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Color(0xFF4D818C),
-            unselectedItemColor: Color(0xFF4D818C).withOpacity(0.5),
+            selectedItemColor: const Color(0xFF4D818C),
+            unselectedItemColor: const Color(0xFF4D818C).withOpacity(0.5),
             currentIndex: currentindex,
             onTap: (index) => setState(() => currentindex = index),
             items: const [

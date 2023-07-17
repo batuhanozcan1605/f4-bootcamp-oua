@@ -23,25 +23,25 @@ class SliderPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: 300,
               height: 300,
               child: Image.asset(image),
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'VarelaRound',
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Padding(
@@ -49,14 +49,14 @@ class SliderPage extends StatelessWidget {
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'VarelaRound',
               color: Colors.grey,
               fontSize: 17,
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 80,
         ),
       ],

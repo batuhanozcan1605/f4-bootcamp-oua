@@ -52,7 +52,7 @@ class _OnBoardingState extends State<OnBoardingPage> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: const Color(0xffffffff),
         body: Stack(
           children: <Widget>[
             PageView.builder(
@@ -64,37 +64,37 @@ class _OnBoardingState extends State<OnBoardingPage> {
                 return _pages[index];
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Column(
               children: <Widget>[
-                Spacer(),
+                const Spacer(),
                 Container(
                   child: (_currentPage == (_pages.length - 1))
                       ? Padding(
                     padding: const EdgeInsets.only(
                         top: 64, right: 32, left: 32),
                     child: SlideAction(
-                      animationDuration: Duration(milliseconds: 900),
-                      submittedIcon: Icon(
+                      animationDuration: const Duration(milliseconds: 900),
+                      submittedIcon: const Icon(
                         FontAwesomeIcons.house,
                         color: Colors.white,
                       ),
                       text: 'Let\'s get start',
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'VarelaRound',
                         fontSize: 18,
                       ),
                       elevation: 1,
-                      sliderButtonIcon: FaIcon(
+                      sliderButtonIcon: const FaIcon(
                         Icons.arrow_forward,
                         size: 22,
                         color: Color(0xFF4D818C),
                       ),
                       sliderButtonIconPadding: 10,
-                      outerColor: Color(0xFF4D818C).withOpacity(0.8),
+                      outerColor: const Color(0xFF4D818C).withOpacity(0.8),
                       sliderButtonIconSize: 14,
                       height: 50,
                       key: _key,
@@ -105,19 +105,19 @@ class _OnBoardingState extends State<OnBoardingPage> {
                     ),
                   )
                       : IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.navigate_next,
                       size: 30,
                       color: Color(0xFF4D818C),
                     ),
                     onPressed: () {
                       _controller.nextPage(
-                          duration: Duration(milliseconds: 800),
+                          duration: const Duration(milliseconds: 800),
                           curve: Curves.easeInOutQuint);
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Row(
@@ -126,11 +126,11 @@ class _OnBoardingState extends State<OnBoardingPage> {
                     _pages.length,
                         (int index) {
                       return AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         height: 5,
                         width: (index == _currentPage) ? 20 : 10,
                         margin:
-                        EdgeInsets.symmetric(horizontal: 5, vertical: 30),
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: (index == _currentPage)

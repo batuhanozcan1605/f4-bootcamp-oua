@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'package:bootcamp_oua_f4/screens/register_screen.dart';
 import 'package:bootcamp_oua_f4/splash_screen.dart';
-import 'package:bootcamp_oua_f4/utilities/authentication.dart';
 import 'package:bootcamp_oua_f4/utilities/google_sign_in.dart';
 import 'package:bootcamp_oua_f4/widgets/sign_in_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
@@ -30,9 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       isFirebaseInitialized = true;
     });
-    print("DEBUG: ${FirebaseAuth.instance.currentUser}");
     if (FirebaseAuth.instance.currentUser != null) {
-      print("GİRDİ DEBUG: ${FirebaseAuth.instance.currentUser}");
       goToSplash();
     }
   }
@@ -85,11 +81,9 @@ class _LoginPageState extends State<LoginPage> {
       // Handle the signed-in user
       User? user = userCredential.user;
       // Additional logic or navigation can be performed here
-      print('Signed in anonymously: ${user!.uid}');
       goToSplash();
     } catch (e) {
       // Handle any errors that occur during the sign-in process
-      print('Failed to sign in anonymously: $e');
     }
   }
 
@@ -192,10 +186,10 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: 8,
                           gradientOrientation: GradientOrientation.Horizontal,
                           onTap: (finish) async {
-                            Navigator.of(context).pushReplacement(
+                            Navigator.of(context).push(
                                 MaterialPageRoute(builder: (context) => RegisterPage()));
                           },
-                          child: Text(
+                          child: const Text(
                             'Create Account',
                             style: TextStyle(
                               color: Colors.white,
@@ -210,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           children: [
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 10.0, right: 20.0),
                                   child: const Divider(
@@ -228,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 20.0, right: 10.0),
                                   child: const Divider(
@@ -322,7 +316,7 @@ class _LoginPageState extends State<LoginPage> {
 
 class CustomTextField extends StatelessWidget {
   late String hint;
-  CustomTextField({required this.hint});
+  CustomTextField({super.key, required this.hint});
 
   @override
   Widget build(BuildContext context) {

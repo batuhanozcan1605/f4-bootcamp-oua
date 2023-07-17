@@ -57,7 +57,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     DateTime? newExpiryDate = newTimestamp != null ? newTimestamp!.toDate() : nullDate;
 
     Duration difference = expireDate.difference(enterDate);
-    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : Duration(days: 0);
+    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : const Duration(days: 0);
 
     int dayCount = newTimestamp == null ? difference.inDays : newDifference.inDays;
     String formattedDate = newTimestamp == null ? DateFormat('dd.MM.yy').format(expireDate) :
@@ -66,7 +66,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF4D818C),
-        title: Text("Food Detail"),
+        title: const Text("Food Detail"),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -104,7 +104,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
             alignment: Alignment.center,
             child: Text(
               widget.food['name'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -114,8 +114,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 18.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 18.0),
                 child: Text('Do not use expiry date', style: TextStyle(fontSize: 16,
                   fontWeight: FontWeight.bold,)),
               ),
@@ -123,8 +123,6 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 value: switchUsed,
                 activeColor: Constants.tPrimaryColor,
                 onChanged: (bool value) {
-                  print(value);
-                  print(switchUsed);
                   setState(() {
                     switchUsed = value;
                   });
@@ -151,13 +149,13 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                     Row(
                       children: [
                          Text(
-                          '${dayCount} days left',
-                          style: TextStyle(fontSize: 18, color: Colors.green),
+                          '$dayCount days left',
+                          style: const TextStyle(fontSize: 18, color: Colors.green),
                         ),
                         const SizedBox(height: 10,),
                         Text(
                           ' $formattedDate',
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ],
                     ),
@@ -193,8 +191,8 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
           const SizedBox(height: 20),
         Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 18.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 18.0),
               child: Text(
                 'Added to Kitchen in',
                 style: TextStyle(
@@ -206,7 +204,7 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
             const SizedBox(width: 12),
             Text(
               DateFormat('dd.MM.yy').format(enterDate),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
               ),
             ),
@@ -285,19 +283,18 @@ class DetailScreenState extends ConsumerState<DetailScreen> {
                 newTimestamp = doc['newExpiryDate'];
               });
             }),
-        content: Text("Expiry date updated.",
+        content: const Text("Expiry date updated.",
           style: TextStyle(
             color: Colors.white70,
           ),
         ),
-        backgroundColor: Color(0xFF013440),
+        backgroundColor: const Color(0xFF013440),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
   Future<void> saveDetails() async {
-    print(switchUsed);
       await documentReference.update({'dontUseExpiryDate': switchUsed});
 
   }

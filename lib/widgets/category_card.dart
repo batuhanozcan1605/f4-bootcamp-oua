@@ -34,7 +34,7 @@ Widget categoryCard(category) => Card(
                         }
                       }))),
           Align(
-            alignment: Alignment(0.509, 0.0),
+            alignment: const Alignment(0.509, 0.0),
             child: Text(
               category.categoryName,
               style: const TextStyle(

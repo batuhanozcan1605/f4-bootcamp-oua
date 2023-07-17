@@ -82,17 +82,17 @@ class _SignInFormState extends State<SignInForm> {
             obscureText: false,
             controller: _emailController,
             autofocus: false,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.normal,
               color: Colors.black,
               fontSize: 14,
               fontFamily: 'VarelaRound',
             ),
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: kGoogleBlue),
-              floatingLabelStyle: TextStyle(color: kGoogleBlue),
+              labelStyle: const TextStyle(color: kGoogleBlue),
+              floatingLabelStyle: const TextStyle(color: kGoogleBlue),
               focusColor: kGoogleBlue,
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.email,
                 color: Colors.grey,
                 size: 16,
@@ -100,42 +100,42 @@ class _SignInFormState extends State<SignInForm> {
               fillColor: kGoogleBlue,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                   width: 2.0,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: kGoogleBlue, width: 2.0),
+                borderSide: const BorderSide(color: kGoogleBlue, width: 2.0),
                 borderRadius: BorderRadius.circular(25.0),
               ),
               hintText: 'E-mail',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
-              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
+              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(32.0),
               ),
             ),
             validator: _validateEmail,
           ),
-          SizedBox(height: 16,),
+          const SizedBox(height: 16,),
           TextFormField(
             maxLines: 1,
             keyboardType: TextInputType.name,
             obscureText: true,
             controller: _passwordController,
             autofocus: false,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.normal,
               color: Colors.black,
               fontSize: 14,
               fontFamily: 'VarelaRound',
             ),
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: kGoogleBlue),
-              floatingLabelStyle: TextStyle(color: kGoogleBlue),
+              labelStyle: const TextStyle(color: kGoogleBlue),
+              floatingLabelStyle: const TextStyle(color: kGoogleBlue),
               focusColor: kGoogleBlue,
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.password,
                 color: Colors.grey,
                 size: 16,
@@ -143,25 +143,25 @@ class _SignInFormState extends State<SignInForm> {
               fillColor: kGoogleBlue,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                   width: 2.0,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: kGoogleBlue, width: 2.0),
+                borderSide: const BorderSide(color: kGoogleBlue, width: 2.0),
                 borderRadius: BorderRadius.circular(25.0),
               ),
               hintText: 'Password*',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
-              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              hintStyle: const TextStyle(color: Colors.grey, fontSize: 13),
+              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(32.0),
               ),
             ),
             validator: _validatePassword,
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           NiceButtons(
             startColor: kGoogleBlue,
             endColor: kGoogleBlue.withOpacity(0.4),
@@ -177,7 +177,7 @@ class _SignInFormState extends State<SignInForm> {
                 signInWithEmailAndPassword(email, password);
               }
             },
-            child: Text(
+            child: const Text(
               'Sign In',
               style: TextStyle(
                 color: Colors.white,

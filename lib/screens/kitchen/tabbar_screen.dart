@@ -15,7 +15,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   TabBar get _tabBar => TabBar(
     labelPadding: const EdgeInsets.only(left: 0, right: 0, top: 0),
 
-    indicatorColor: Color(0xFF4D818C),
+    indicatorColor: const Color(0xFF4D818C),
     indicator: UnderlineTabIndicator(
       borderRadius: BorderRadius.circular(60), // Creates border
       borderSide: const BorderSide(
@@ -26,11 +26,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
       insets: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
     ),
 
-    labelColor: Color(0xffffffff),
+    labelColor: const Color(0xffffffff),
     //<-- selected text color
-    unselectedLabelColor: Color(0xFF4D818C),
+    unselectedLabelColor: const Color(0xFF4D818C),
 
-    tabs: [
+    tabs: const [
       Tab(
           child: Text(
             "Fridge",
@@ -49,7 +49,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ],
   );
 
-  TabBarView get _tabBarView => TabBarView(
+  TabBarView get _tabBarView => const TabBarView(
     children: [FridgeScreen(), PantryScreen(), FreezerScreen()],
   );
   @override

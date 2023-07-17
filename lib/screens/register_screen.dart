@@ -1,18 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:bootcamp_oua_f4/services/data_service.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-
 import '../constants/constants.dart';
-
 import '../splash_screen.dart';
 import '../utilities/authentication.dart';
 import '../widgets/custom_form_field.dart';
-import 'nav_screen.dart';
 
 class RegisterController {
   late String name;
@@ -38,7 +33,7 @@ class RegisterPage extends StatelessWidget {
           backgroundColor: kGoogleBlue,
           leading: GestureDetector(
             child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new_outlined,
                   size: 20,
                   color: Colors.white,
@@ -49,7 +44,7 @@ class RegisterPage extends StatelessWidget {
           )),
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: kGoogleBlue),
+        decoration: const BoxDecoration(color: kGoogleBlue),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,8 +52,8 @@ class RegisterPage extends StatelessWidget {
             SizedBox(
               height: Get.height / 80,
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -81,7 +76,7 @@ class RegisterPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(60),
@@ -91,7 +86,7 @@ class RegisterPage extends StatelessWidget {
                     padding: const EdgeInsets.all(30.0),
                     child: Column(
                       children: [
-                        SizedBox(height: 30,),
+                        const SizedBox(height: 30,),
                         Column(
                           children: [
                             CustomFormField(
@@ -104,7 +99,7 @@ class RegisterPage extends StatelessWidget {
                                 registerController.email = input;
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             CustomFormField(
@@ -133,14 +128,14 @@ class RegisterPage extends StatelessWidget {
                                 child: RichText(
                                   text: TextSpan(
                                     text: 'I have read and accept the ',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontFamily: 'VarelaRound',
                                         fontSize: 15),
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: 'Terms',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: kGoogleBlue,
                                               fontFamily: 'VarelaRound',
                                               fontSize: 16,
@@ -152,17 +147,17 @@ class RegisterPage extends StatelessWidget {
                                                   builder: ((context) {
                                                     return AlertDialog(
                                                       backgroundColor: Colors.grey.shade200,
-                                                      shape: RoundedRectangleBorder(
+                                                      shape: const RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.all(Radius.circular(32.0))),
                                                       //contentPadding: EdgeInsets.only(top: 20.0, bottom: 25),
-                                                      insetPadding: EdgeInsets.all(30),
+                                                      insetPadding: const EdgeInsets.all(30),
                                                       elevation: 40.0,
                                                       title:
-                                                      Text('Legal Consent', style: TextStyle(
+                                                      const Text('Legal Consent', style: TextStyle(
                                                           decoration: TextDecoration.underline,
                                                           fontSize: 25),),
                                                       content: RichText(
-                                                        text: TextSpan(
+                                                        text: const TextSpan(
                                                           text: 'Ownership and Intellectual Property: All content on our website, including text, graphics, logos, images, and software, is the property of Kitchen in Pocket and is protected by intellectual property laws. You are prohibited from using, reproducing, distributing, or modifying any content without our prior written consent.',
                                                           style: TextStyle(color: Colors.black, fontSize: 18.0,),
                                                           children: <TextSpan>[
@@ -180,7 +175,7 @@ class RegisterPage extends StatelessWidget {
                                                           onPressed: () {
                                                             Navigator.pop(context);
                                                           },
-                                                          child: Text('Agree',style: TextStyle(fontSize: 20),),
+                                                          child: const Text('Agree',style: TextStyle(fontSize: 20),),
                                                         ),
 
                                                       ],
@@ -192,7 +187,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                               ),
                               Checkbox(
-                                side: BorderSide(
+                                side: const BorderSide(
                                   width: 2,
                                   color: kGoogleBlue,
                                 ),
@@ -217,7 +212,7 @@ class RegisterPage extends StatelessWidget {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(builder: (context) => const SplashScreen()));
                             },
-                            child: Text(
+                            child: const Text(
                               'Register',
                               style: TextStyle(
                                 color: Colors.white,

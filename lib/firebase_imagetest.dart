@@ -18,7 +18,7 @@ class _ImageTestState extends State<ImageTest> {
           future: getImageUrls('categories/'),
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
 
             if (snapshot.hasError) {
@@ -30,7 +30,7 @@ class _ImageTestState extends State<ImageTest> {
             }
 
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Adjust the number of columns as needed
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
@@ -40,8 +40,8 @@ class _ImageTestState extends State<ImageTest> {
                 String imageUrl = snapshot.data![index];
                 return CachedNetworkImage(
                   imageUrl: imageUrl,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 );
               },
             );

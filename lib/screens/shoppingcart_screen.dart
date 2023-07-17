@@ -93,14 +93,14 @@ class _ShoppingCardScreenState extends State<ShoppingCardScreen> {
                                             });
                                             _showSnackBar(context, food);
                                     },
-                                        icon: Icon(Icons.add_box_outlined, size: 30,color: Color(0xFF4D818C))), // icon-1
+                                        icon: const Icon(Icons.add_box_outlined, size: 30,color: Color(0xFF4D818C))), // icon-1
                                     IconButton(
                                         onPressed: (){
                                           setState(() {
                                             DataService().deleteFoodFromCart(food.id);
                                           });
                                     },
-                                        icon: Icon(Icons.delete,size: 30,color: Color(0xFF4D818C),)), // icon-2
+                                        icon: const Icon(Icons.delete,size: 30,color: Color(0xFF4D818C),)), // icon-2
                                   ],
                                 ),
 

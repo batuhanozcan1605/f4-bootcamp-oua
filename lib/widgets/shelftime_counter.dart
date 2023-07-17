@@ -17,7 +17,7 @@ class ShelfTimeCounter extends StatelessWidget {
 
     Timestamp? newTimestamp = food['newExpiryDate'];
     DateTime? newExpiryDate = newTimestamp != null ? newTimestamp.toDate() : nullDate;
-    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : Duration(days: 0);
+    Duration newDifference = newExpiryDate != nullDate ? newExpiryDate.difference(enterDate) : const Duration(days: 0);
 
     int dayCount = newTimestamp == null ? difference.inDays : newDifference.inDays;
 
@@ -37,13 +37,13 @@ class ShelfTimeCounter extends StatelessWidget {
           child: Center(
             child: Text(
               "${dayCount}d",
-              style: TextStyle(
+              textAlign: TextAlign.center,
+              style: const TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 12,
                 color: Color(0xffffffff),
                 fontWeight: FontWeight.w600,
               ),
-              textAlign: TextAlign.center,
               softWrap: false,
             ),
           ),
