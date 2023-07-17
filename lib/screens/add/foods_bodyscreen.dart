@@ -1,3 +1,4 @@
+import 'package:bootcamp_oua_f4/constants/constants.dart';
 import 'package:bootcamp_oua_f4/models/CategoryModel.dart';
 import 'package:bootcamp_oua_f4/repositories/foods_repo.dart';
 import 'package:bootcamp_oua_f4/screens/add/foods_screen.dart';
@@ -79,6 +80,8 @@ class FoodsBodyScreenState extends ConsumerState<FoodsBodyScreen> with TickerPro
                   SizedBox(
                     width: screenWidth * (17 / 36),
                     child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Constants.tselectedItemColor),
                         onPressed: () async {
                           ref.read(foodsProvider).addBatchToKitchen();
                         },
@@ -87,6 +90,8 @@ class FoodsBodyScreenState extends ConsumerState<FoodsBodyScreen> with TickerPro
                   SizedBox(
                     width: screenWidth * (17 / 36),
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Constants.tselectedItemColor),
                         onPressed: () async {
                           ref.read(foodsProvider).addBatchToCart();
                         },
