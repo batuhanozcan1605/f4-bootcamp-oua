@@ -10,7 +10,7 @@ class RecipeRepo extends ChangeNotifier {
   List<String> recipeTitles = [];
 
 
-  final apiKey = '818c4965b55443c19ff14518ea33fad0'; // Spoonacular API anahtarı
+  final apiKey = '64bfa68ffcf04e3cb7b203a3f94bddbc'; // Spoonacular API anahtarı
 
   Future<void> fetchRecipes() async {
     print("fetch recipe");
