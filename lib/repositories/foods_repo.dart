@@ -16,8 +16,10 @@ class FoodsRepo extends ChangeNotifier {
     if (selectedDocumentIds.contains(documentId)) {
       selectedDocumentIds.remove(documentId);
       if(inKitchen) {
-        tapInKitchen = false;
         selectedKitchenDocumentIds.remove(documentId);
+        if(selectedKitchenDocumentIds.isEmpty){
+          tapInKitchen = false;
+        }
       }
     } else {
       selectedDocumentIds.add(documentId);
